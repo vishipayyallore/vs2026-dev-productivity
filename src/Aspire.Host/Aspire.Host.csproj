@@ -15,8 +15,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Aspire.MinimalApi\Aspire.MinimalApi.csproj" />
-		<ProjectReference Include="..\Aspire.ApiGateway\Aspire.ApiGateway.csproj" />
-		<ProjectReference Include="..\Aspire.BlazorApp\Aspire.BlazorApp.csproj" />
 	</ItemGroup>
 
 </Project>
