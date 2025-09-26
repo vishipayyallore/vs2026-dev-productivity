@@ -30,17 +30,21 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 // Swagger has been removed; user prefers Scalar UI instead
 
-// Serve static files (including our placeholder Scalar UI)
+// Serve static files (including optional static assets)
 app.UseStaticFiles();
 
-// Map a quick route to the scalar UI
-// Configure Scalar UI at /scalar/v1
-app.MapScalarApiReference(options =>
+// Register Scalar UI only in Development and when enabled in configuration
+var scalarConfig = builder.Configuration.GetSection("Scalar");
+if (app.Environment.IsDevelopment() && scalarConfig.GetValue<bool>("Enabled"))
 {
-    options.WithTitle("TraceMind RCA API")
-           .WithTheme(ScalarTheme.BluePlanet)
-           .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
-});
+    // Configure Scalar UI at /scalar/v1
+    app.MapScalarApiReference(options =>
+    {
+        options.WithTitle(scalarConfig.GetValue<string>("Title") ?? "TraceMind RCA API")
+               .WithTheme(ScalarTheme.BluePlanet)
+               .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+    });
+}
 
 // Use problem details middleware for better error handling
 app.UseExceptionHandler();

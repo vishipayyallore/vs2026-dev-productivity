@@ -18,10 +18,9 @@ Currently, no authentication is implemented. This is a starter template.
 **GET** `/api/products`
 
 Query Parameters:
-- `page` (optional): Page number (default: 1)
-- `pageSize` (optional): Items per page (default: 10, max: 100)
 
 **Response:**
+
 ```json
 {
   "products": [
@@ -47,6 +46,7 @@ Query Parameters:
 **GET** `/api/products/{id}`
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -60,6 +60,7 @@ Query Parameters:
 ```
 
 **Error Response (404):**
+
 ```json
 {
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
@@ -74,6 +75,7 @@ Query Parameters:
 **POST** `/api/products`
 
 **Request Body:**
+
 ```json
 {
   "name": "New Product",
@@ -84,6 +86,7 @@ Query Parameters:
 ```
 
 **Response (201 Created):**
+
 ```json
 {
   "id": 3,
@@ -103,6 +106,7 @@ Query Parameters:
 **GET** `/api/weather`
 
 **Response:**
+
 ```json
 [
   {
@@ -127,6 +131,7 @@ Query Parameters:
 **GET** `/health`
 
 **Response:**
+
 ```json
 {
   "status": "Healthy",
@@ -144,6 +149,7 @@ Query Parameters:
 **GET** `/`
 
 **Response:**
+
 ```json
 {
   "service": "Aspire.MinimalApi",
@@ -155,12 +161,6 @@ Query Parameters:
 ## Error Handling
 
 All APIs use standard HTTP status codes:
-
-- `200 OK` - Success
-- `201 Created` - Resource created successfully
-- `400 Bad Request` - Invalid request data
-- `404 Not Found` - Resource not found
-- `500 Internal Server Error` - Server error
 
 Error responses follow RFC 7807 Problem Details format:
 
@@ -176,14 +176,12 @@ Error responses follow RFC 7807 Problem Details format:
 ## Rate Limiting
 
 Currently no rate limiting is implemented. Consider adding:
-- Request throttling
-- IP-based limiting
-- API key authentication
 
-## Swagger/OpenAPI
+## API Explorer (Scalar)
 
-Interactive API documentation is available at:
-- **Development**: `https://localhost:5001/swagger`
+Interactive API documentation is available via the integrated Scalar UI at:
+
+- **Development**: `https://localhost:5001/scalar/v1` (when Scalar is enabled in configuration)
 
 ## Example Requests
 
