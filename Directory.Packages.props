@@ -27,5 +27,7 @@
     <!-- Misc -->
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="9.0.4" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
+    <!-- Analyzers -->
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.0.0" />
   </ItemGroup>
 </Project>
