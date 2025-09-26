@@ -9,13 +9,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="Aspire.Hosting.AppHost" />
-		<!-- SonarAnalyzer was removed because it's provided by the Aspire SDK to avoid duplicate PackageReference warnings -->
+		<PackageReference Include="Aspire.Hosting.PostgreSQL" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\AspireApp.ApiGateway\AspireApp.ApiGateway.csproj" />
-	  <ProjectReference Include="..\AspireApp.BlazorWeb\AspireApp.BlazorWeb.csproj" />
-	  <ProjectReference Include="..\AspireApp.MinimalApi\AspireApp.MinimalApi.csproj" />
+		<ProjectReference Include="..\AspireApp.ApiGateway\AspireApp.ApiGateway.csproj" />
+		<ProjectReference Include="..\AspireApp.BlazorWeb\AspireApp.BlazorWeb.csproj" />
+		<ProjectReference Include="..\AspireApp.MinimalApi\AspireApp.MinimalApi.csproj" />
 	</ItemGroup>
 
 </Project>
