@@ -1,0 +1,26 @@
+<Project>
+  <ItemGroup>
+    <!-- Aspire packages -->
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="8.2.2" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="8.2.2" />
+    <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.2.2" />
+
+    <!-- Microsoft / framework packages -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.10.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="8.2.2" />
+  <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+
+    <!-- OpenTelemetry -->
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
+
+    <!-- Misc -->
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="9.0.4" />
+    <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
+  </ItemGroup>
+</Project>
