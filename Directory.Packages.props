@@ -25,5 +25,7 @@
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
     <!-- Analyzers -->
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.15.0.120848" />
+  <!-- Scalar UI -->
+  <PackageVersion Include="Scalar.AspNetCore" Version="2.8.6" />
   </ItemGroup>
 </Project>

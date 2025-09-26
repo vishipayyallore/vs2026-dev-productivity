@@ -4,6 +4,8 @@ using Aspire.MinimalApi.Endpoints;
 using AspireApp.SharedLib.Extensions;
 using AspireApp.ServiceDefaults;
 using AspireApp.SharedLib.Models;
+using Microsoft.AspNetCore.Http;
+using Scalar.AspNetCore;
 using Aspire.MinimalApi; // for DemoHelpers
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,6 @@ builder.AddNpgsqlDbContext<ApplicationDbContext>("productdb");
 
 // Add services to the container
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 // Add shared services
 builder.Services.AddSharedServices();
@@ -27,11 +28,19 @@ builder.Services.AddProblemDetails();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+// Swagger has been removed; user prefers Scalar UI instead
+
+// Serve static files (including our placeholder Scalar UI)
+app.UseStaticFiles();
+
+// Map a quick route to the scalar UI
+// Configure Scalar UI at /scalar/v1
+app.MapScalarApiReference(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.WithTitle("TraceMind RCA API")
+           .WithTheme(ScalarTheme.BluePlanet)
+           .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+});
 
 // Use problem details middleware for better error handling
 app.UseExceptionHandler();
