@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-
 # VS 2026 Developer Productivity Samples 🚀
 
-This repo showcases **.NET Aspire + Visual Studio 2026 Insiders features** to maximize developer productivity.
+This repo showcases **.NET Aspire + Visual Studio 2026 Insiders features** to maximize developer productivity. Comprehensive .NET Aspire starter project and samples demonstrating Visual Studio 2026 Insiders features for building microservice-based cloud-native applications.
 
 ## 📂 Contents
 
@@ -25,12 +23,6 @@ git clone https://github.com/<your-org>/vs2026-dev-productivity.git
 cd samples/aspire-minimal-api
 dotnet run
 ```
-
-=======
-
-# vs2026-dev-productivity
-
-This repository showcases **.NET Aspire + Visual Studio 2026 Insiders features** to maximize developer productivity.
 
 ## 🚀 .NET Aspire Starter Project
 
@@ -70,11 +62,6 @@ src/
 git clone https://github.com/vishipayyallore/vs2026-dev-productivity.git
 cd vs2026-dev-productivity
 ```
-
-# vs2026-dev-productivity
-
-Comprehensive .NET Aspire starter project and samples demonstrating Visual Studio 2026 Insiders features
-for building microservice-based cloud-native applications.
 
 ## What this repo contains
 
@@ -139,8 +126,3 @@ Default service URLs (local):
 ## License
 
 MIT — see the `LICENSE` file.
-
----
-
-If you'd like, I can now finish the merge commit locally and run a build to validate. Tell me to proceed and I'll commit the resolved README and run `dotnet build` on the solution.
-    "description": "A sample product for testing",
