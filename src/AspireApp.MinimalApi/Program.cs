@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
-using Aspire.Shared.Extensions;
+using AspireApp.SharedLib.Extensions;
+using AspireApp.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,7 @@ app.MapGet("/", () => new {
 app.MapGet("/api/weather", () =>
 {
     var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast(
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -73,15 +75,7 @@ if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await context.Database.EnsureCreatedAsync();
+    await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
 }
 
-app.Run();
-
-/// <summary>
-/// Weather forecast data model
-/// </summary>
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+await app.RunAsync().ConfigureAwait(false);

@@ -1,12 +1,12 @@
-namespace AspireApp.MinimalApi;
-
-public class WeatherForecast
+using Microsoft.EntityFrameworkCore;
+using Aspire.MinimalApi.Data;
+using Aspire.MinimalApi.Endpoints;
+using AspireApp.SharedLib.Extensions;
+using AspireApp.ServiceDefaults;
+/// <summary>
+/// Weather forecast data model
+/// </summary>
+record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
-    public DateOnly Date { get; set; }
-
-    public int TemperatureC { get; set; }
-
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-    public string? Summary { get; set; }
 }

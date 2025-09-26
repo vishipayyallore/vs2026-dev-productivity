@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Aspire.Shared.Models;
+using AspireApp.SharedLib.Models;
 
 namespace Aspire.MinimalApi.Data;
 
@@ -20,6 +20,8 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        ArgumentNullException.ThrowIfNull(modelBuilder);
+
         base.OnModelCreating(modelBuilder);
 
         // Configure Product entity
