@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11018.127 d18.0
+VisualStudioVersion = 18.0.11018.127
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
@@ -25,12 +25,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{B96C39
 		docs\images\.gitkeep = docs\images\.gitkeep
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireApp.AppHost", "src\AspireApp.AppHost\AspireApp.AppHost.csproj", "{F8394078-E883-4F56-AA36-AB0D803A539D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireApp.ServiceDefaults", "src\AspireApp.ServiceDefaults\AspireApp.ServiceDefaults.csproj", "{C2307AD8-48E1-32C0-70AC-DAC131D3041F}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8394078-E883-4F56-AA36-AB0D803A539D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8394078-E883-4F56-AA36-AB0D803A539D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8394078-E883-4F56-AA36-AB0D803A539D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8394078-E883-4F56-AA36-AB0D803A539D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2307AD8-48E1-32C0-70AC-DAC131D3041F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2307AD8-48E1-32C0-70AC-DAC131D3041F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2307AD8-48E1-32C0-70AC-DAC131D3041F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2307AD8-48E1-32C0-70AC-DAC131D3041F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B96C39A2-528A-4AFF-95AE-76CB7239E6AB} = {4A1974BF-69D5-4714-B5E7-93BEFF8FC2AC}
+		{F8394078-E883-4F56-AA36-AB0D803A539D} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{C2307AD8-48E1-32C0-70AC-DAC131D3041F} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1835D3A2-5ED1-4261-A502-4AE056427BC7}
