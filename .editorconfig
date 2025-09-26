@@ -4,3 +4,7 @@
 # Naming rules
 
 dotnet_naming_rule.interface_should_be_begins_with_i.severity = suggestion
+
+# Suppress CA1515 (types that are part of an application's internal API can be internal)
+# The MinimalApi projects intentionally expose types for local endpoints; lower the severity.
+dotnet_diagnostic.CA1515.severity = none

@@ -4,6 +4,7 @@ using Aspire.MinimalApi.Endpoints;
 using AspireApp.SharedLib.Extensions;
 using AspireApp.ServiceDefaults;
 using AspireApp.SharedLib.Models;
+using Aspire.MinimalApi; // for DemoHelpers
 
 var builder = WebApplication.CreateBuilder(args);
 

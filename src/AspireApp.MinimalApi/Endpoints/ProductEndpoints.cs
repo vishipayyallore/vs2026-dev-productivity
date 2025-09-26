@@ -16,8 +16,7 @@ public static class ProductEndpoints
     public static void MapProductEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/api/products")
-                      .WithTags("Products")
-                      .WithOpenApi();
+                  .WithTags("Products");
 
         // GET /api/products
         group.MapGet("", GetProducts)
@@ -46,33 +45,26 @@ public static class ProductEndpoints
         int page = 1,
         int pageSize = 10)
     {
-        try
+        var skip = (page - 1) * pageSize;
+        var products = await context.Products
+            .OrderBy(p => p.Id)
+            .Skip(skip)
+            .Take(pageSize)
+            .Select(p => new ProductDto(p.Id, p.Name, p.Description, p.Price, p.Stock, p.CreatedAt, p.UpdatedAt))
+            .ToListAsync().ConfigureAwait(false);
+
+        var totalCount = await context.Products.CountAsync().ConfigureAwait(false);
+
+        var result = new
         {
-            var skip = (page - 1) * pageSize;
-            var products = await context.Products
-                .OrderBy(p => p.Id)
-                .Skip(skip)
-                .Take(pageSize)
-                .Select(p => new ProductDto(p.Id, p.Name, p.Description, p.Price, p.Stock, p.CreatedAt, p.UpdatedAt))
-                .ToListAsync();
+            Products = products,
+            Page = page,
+            PageSize = pageSize,
+            TotalCount = totalCount,
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+        };
 
-            var totalCount = await context.Products.CountAsync();
-
-            var result = new
-            {
-                Products = products,
-                Page = page,
-                PageSize = pageSize,
-                TotalCount = totalCount,
-                TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
-            };
-
-            return Results.Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return Results.Problem($"Error retrieving products: {ex.Message}");
-        }
+        return Results.Ok(result);
     }
 
     /// <summary>
@@ -80,30 +72,23 @@ public static class ProductEndpoints
     /// </summary>
     private static async Task<IResult> GetProduct(ApplicationDbContext context, int id)
     {
-        try
+        var product = await context.Products.FindAsync(id).AsTask().ConfigureAwait(false);
+
+        if (product == null)
         {
-            var product = await context.Products.FindAsync(id);
-
-            if (product == null)
-            {
-                return Results.NotFound($"Product with ID {id} not found");
-            }
-
-            var productDto = new ProductDto(
-                product.Id, 
-                product.Name, 
-                product.Description, 
-                product.Price, 
-                product.Stock, 
-                product.CreatedAt, 
-                product.UpdatedAt);
-
-            return Results.Ok(productDto);
+            return Results.NotFound($"Product with ID {id} not found");
         }
-        catch (Exception ex)
-        {
-            return Results.Problem($"Error retrieving product: {ex.Message}");
-        }
+
+        var productDto = new ProductDto(
+            product.Id,
+            product.Name,
+            product.Description,
+            product.Price,
+            product.Stock,
+            product.CreatedAt,
+            product.UpdatedAt);
+
+        return Results.Ok(productDto);
     }
 
     /// <summary>
@@ -111,34 +96,35 @@ public static class ProductEndpoints
     /// </summary>
     private static async Task<IResult> CreateProduct(ApplicationDbContext context, CreateProductDto createProductDto)
     {
+        var product = new Product
+        {
+            Name = createProductDto.Name,
+            Description = createProductDto.Description,
+            Price = createProductDto.Price,
+            Stock = createProductDto.Stock,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        context.Products.Add(product);
         try
         {
-            var product = new Product
-            {
-                Name = createProductDto.Name,
-                Description = createProductDto.Description,
-                Price = createProductDto.Price,
-                Stock = createProductDto.Stock,
-                CreatedAt = DateTime.UtcNow
-            };
-
-            context.Products.Add(product);
-            await context.SaveChangesAsync();
-
-            var productDto = new ProductDto(
-                product.Id, 
-                product.Name, 
-                product.Description, 
-                product.Price, 
-                product.Stock, 
-                product.CreatedAt, 
-                product.UpdatedAt);
-
-            return Results.Created($"/api/products/{product.Id}", productDto);
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
-        catch (Exception ex)
+        catch (DbUpdateException dbEx)
         {
-            return Results.Problem($"Error creating product: {ex.Message}");
+            // Database-specific error; return a problem response with info
+            return Results.Problem($"Error creating product: {dbEx.Message}");
         }
+
+        var productDto = new ProductDto(
+            product.Id,
+            product.Name,
+            product.Description,
+            product.Price,
+            product.Stock,
+            product.CreatedAt,
+            product.UpdatedAt);
+
+        return Results.Created($"/api/products/{product.Id}", productDto);
     }
 }
