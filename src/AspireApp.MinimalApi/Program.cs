@@ -30,6 +30,65 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 // Swagger has been removed; user prefers Scalar UI instead
 
+// Log the resolved productdb connection string in Development (masked)
+if (app.Environment.IsDevelopment())
+{
+    try
+    {
+        var config = app.Configuration;
+        var conn = config.GetConnectionString("productdb");
+        if (!string.IsNullOrEmpty(conn))
+        {
+            // Mask password-ish parts for safe logging
+            string Mask(string s)
+            {
+                if (string.IsNullOrEmpty(s)) return s;
+                if (s.Length <= 8) return new string('*', s.Length);
+                return s.Substring(0, 4) + new string('*', Math.Min(8, s.Length - 8)) + s.Substring(s.Length - 4);
+            }
+
+            // Attempt to mask the password parameter if present
+            var masked = conn;
+            try
+            {
+                var parts = conn.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    var p = parts[i];
+                    var idx = p.IndexOf('=');
+                    if (idx > 0)
+                    {
+                        var key = p.Substring(0, idx).Trim();
+                        var val = p.Substring(idx + 1);
+                        if (key.Equals("Password", StringComparison.OrdinalIgnoreCase) || key.Equals("Pwd", StringComparison.OrdinalIgnoreCase))
+                        {
+                            parts[i] = key + "=" + Mask(val);
+                        }
+                    }
+                }
+                masked = string.Join(';', parts);
+            }
+            catch
+            {
+                masked = Mask(conn);
+            }
+
+            var logger = app.Services.GetService<ILogger<Program>>();
+            logger?.LogInformation("[DevOnly] Resolved ConnectionStrings:productdb = {Conn}", masked);
+        }
+        else
+        {
+            var logger = app.Services.GetService<ILogger<Program>>();
+            logger?.LogInformation("[DevOnly] No ConnectionStrings:productdb found in configuration");
+        }
+    }
+    catch (Exception ex)
+    {
+        var logger = app.Services.GetService<ILogger<Program>>();
+        logger?.LogWarning(ex, "[DevOnly] Failed to resolve/mask productdb connection string");
+    }
+}
+
 // Serve static files (including optional static assets)
 app.UseStaticFiles();
 
