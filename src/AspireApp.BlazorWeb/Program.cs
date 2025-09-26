@@ -1,5 +1,5 @@
-using Aspire.BlazorApp.Components;
-using Microsoft.Extensions.Hosting;
+using AspireApp.BlazorWeb.Components;
+using AspireApp.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +19,7 @@ builder.Services.AddHttpClient("ApiGateway", client =>
 });
 
 // Add the default HttpClient to use the ApiGateway
-builder.Services.AddScoped(provider => 
+builder.Services.AddScoped(provider =>
     provider.GetRequiredService<IHttpClientFactory>().CreateClient("ApiGateway"));
 
 var app = builder.Build();
@@ -41,4 +41,4 @@ app.UseStaticFiles();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.Run();
+await app.RunAsync().ConfigureAwait(false);

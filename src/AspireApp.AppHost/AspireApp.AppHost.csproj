@@ -12,4 +12,8 @@
 		<!-- SonarAnalyzer was removed because it's provided by the Aspire SDK to avoid duplicate PackageReference warnings -->
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\AspireApp.BlazorWeb\AspireApp.BlazorWeb.csproj" />
+	</ItemGroup>
+
 </Project>
