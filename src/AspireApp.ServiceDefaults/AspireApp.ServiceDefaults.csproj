@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net10.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<IsAspireSharedProject>true</IsAspireSharedProject>
 	</PropertyGroup>
 
@@ -16,6 +13,7 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore"  />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Http"  />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime"  />
+		<!-- SonarAnalyzer was removed because it's provided by the Aspire shared SDK to avoid duplicate PackageReference warnings -->
 	</ItemGroup>
 
 </Project>
