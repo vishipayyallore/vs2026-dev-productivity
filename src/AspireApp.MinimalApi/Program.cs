@@ -1,29 +1,87 @@
-using AspireApp.ServiceDefaults;
+using Microsoft.EntityFrameworkCore;
+using Aspire.MinimalApi.Data;
+using Aspire.MinimalApi.Endpoints;
+using Aspire.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Aspire service defaults (logging, metrics, health checks, etc.)
 builder.AddServiceDefaults();
 
-// Add services to the container.
+// Add PostgreSQL with Entity Framework Core
+builder.AddNpgsqlDbContext<ApplicationDbContext>("productdb");
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// Add services to the container
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Add shared services
+builder.Services.AddSharedServices();
+
+// Add problem details for better error handling
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
-
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+// Use problem details middleware for better error handling
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// Map Aspire default endpoints (health checks, etc.)
+app.MapDefaultEndpoints();
 
-app.MapControllers();
+// Map product endpoints
+app.MapProductEndpoints();
 
-await app.RunAsync().ConfigureAwait(false);
+// Simple health check endpoint
+app.MapGet("/", () => new { 
+    Service = "Aspire.MinimalApi", 
+    Status = "Running", 
+    Timestamp = DateTime.UtcNow 
+})
+.WithName("GetApiStatus")
+.WithSummary("Get API status")
+.WithTags("Status");
+
+// Weather forecast endpoint (keep as example)
+app.MapGet("/api/weather", () =>
+{
+    var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+    var forecast = Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast(
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
+    return forecast;
+})
+.WithName("GetWeatherForecast")
+.WithSummary("Get weather forecast")
+.WithTags("Weather");
+
+// Apply database migrations on startup in development
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await context.Database.EnsureCreatedAsync();
+}
+
+app.Run();
+
+/// <summary>
+/// Weather forecast data model
+/// </summary>
+record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
