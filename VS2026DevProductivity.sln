@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11018.127 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
@@ -16,6 +16,24 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.ApiGateway", "src\Aspire.ApiGateway\Aspire.ApiGateway.csproj", "{1C07AD60-513D-4D9A-96E5-633424505FCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.ServiceDefaults", "src\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj", "{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2790C74B-FED8-4D81-A20E-E743A8F40FE4}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{4A1974BF-69D5-4714-B5E7-93BEFF8FC2AC}"
+	ProjectSection(SolutionItems) = preProject
+		docs\API.md = docs\API.md
+		docs\SETUP.md = docs\SETUP.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{B96C39A2-528A-4AFF-95AE-76CB7239E6AB}"
+	ProjectSection(SolutionItems) = preProject
+		docs\images\.gitkeep = docs\images\.gitkeep
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,5 +128,6 @@ Global
 		{57BEA9D3-A204-44F6-A852-F017BEB4A1E7} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{1C07AD60-513D-4D9A-96E5-633424505FCC} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{B96C39A2-528A-4AFF-95AE-76CB7239E6AB} = {4A1974BF-69D5-4714-B5E7-93BEFF8FC2AC}
 	EndGlobalSection
 EndGlobal
