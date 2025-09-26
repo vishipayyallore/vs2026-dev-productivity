@@ -40,8 +40,8 @@ public class ApplicationDbContext : DbContext
 
         // Seed some initial data
         modelBuilder.Entity<Product>().HasData(
-            new Product { Id = 1, Name = "Sample Product 1", Description = "A sample product for testing", Price = 29.99m, Stock = 100 },
-            new Product { Id = 2, Name = "Sample Product 2", Description = "Another sample product", Price = 49.99m, Stock = 50 }
+            new Product { Id = 1, Name = "Sample Product 1", Description = "A sample product for testing", Price = 29.99m, Stock = 100, CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new Product { Id = 2, Name = "Sample Product 2", Description = "Another sample product", Price = 49.99m, Stock = 50, CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
         );
     }
 }
