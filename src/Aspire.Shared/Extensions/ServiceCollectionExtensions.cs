@@ -1,6 +1,6 @@
-namespace Aspire.Shared.Extensions;
-
 using Microsoft.Extensions.DependencyInjection;
+
+namespace Aspire.Shared.Extensions;
 
 /// <summary>
 /// Extensions for configuring shared services

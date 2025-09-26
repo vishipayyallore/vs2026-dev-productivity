@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.BlazorApp", "src\Asp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.ApiGateway", "src\Aspire.ApiGateway\Aspire.ApiGateway.csproj", "{1C07AD60-513D-4D9A-96E5-633424505FCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.ServiceDefaults", "src\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj", "{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,18 @@ Global
 		{1C07AD60-513D-4D9A-96E5-633424505FCC}.Release|x64.Build.0 = Release|Any CPU
 		{1C07AD60-513D-4D9A-96E5-633424505FCC}.Release|x86.ActiveCfg = Release|Any CPU
 		{1C07AD60-513D-4D9A-96E5-633424505FCC}.Release|x86.Build.0 = Release|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Debug|x64.Build.0 = Debug|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Debug|x86.Build.0 = Debug|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Release|x64.ActiveCfg = Release|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Release|x64.Build.0 = Release|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Release|x86.ActiveCfg = Release|Any CPU
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,5 +109,6 @@ Global
 		{68F060DC-18B0-459C-9A5F-AED9AA57144B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{57BEA9D3-A204-44F6-A852-F017BEB4A1E7} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{1C07AD60-513D-4D9A-96E5-633424505FCC} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{23F241FB-1FF0-47DC-89A0-7E47DA94EDDE} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

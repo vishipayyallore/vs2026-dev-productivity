@@ -1,0 +1,147 @@
+@page "/products"
+@using Aspire.Shared.DTOs
+@using System.Text.Json
+@inject HttpClient HttpClient
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+
+<PageTitle>Products</PageTitle>
+
+<h1>Product Management</h1>
+
+<p>This component demonstrates managing products through the API Gateway.</p>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (products.Count == 0)
+{
+    <p><em>No products found.</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in products)
+                    {
+                        <tr>
+                            <td>@product.Id</td>
+                            <td>@product.Name</td>
+                            <td>@product.Description</td>
+                            <td>@product.Price.ToString("C")</td>
+                            <td>@product.Stock</td>
+                            <td>@product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    @if (pagination != null)
+    {
+        <nav aria-label="Product pagination">
+            <ul class="pagination">
+                <li class="page-item @(pagination.Page <= 1 ? "disabled" : "")">
+                    <button class="page-link" @onclick="() => LoadProductsAsync(pagination.Page - 1)">Previous</button>
+                </li>
+                <li class="page-item active">
+                    <span class="page-link">
+                        Page @pagination.Page of @pagination.TotalPages
+                    </span>
+                </li>
+                <li class="page-item @(pagination.Page >= pagination.TotalPages ? "disabled" : "")">
+                    <button class="page-link" @onclick="() => LoadProductsAsync(pagination.Page + 1)">Next</button>
+                </li>
+            </ul>
+        </nav>
+    }
+}
+
+@code {
+    private List<ProductDto> products = new();
+    private PaginationInfo? pagination;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProductsAsync(1);
+    }
+
+    private async Task LoadProductsAsync(int page = 1)
+    {
+        try
+        {
+            errorMessage = null;
+            
+            // Configure HttpClient to use the API Gateway
+            var response = await HttpClient.GetAsync($"/api/products?page={page}&pageSize=10");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                
+                var result = JsonSerializer.Deserialize<ProductPageResult>(json, options);
+                
+                if (result != null)
+                {
+                    products = result.Products ?? new List<ProductDto>();
+                    pagination = new PaginationInfo
+                    {
+                        Page = result.Page,
+                        PageSize = result.PageSize,
+                        TotalCount = result.TotalCount,
+                        TotalPages = result.TotalPages
+                    };
+                }
+            }
+            else
+            {
+                errorMessage = $"Failed to load products: {response.StatusCode}";
+                await JSRuntime.InvokeVoidAsync("console.error", errorMessage);
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading products: {ex.Message}";
+            await JSRuntime.InvokeVoidAsync("console.error", errorMessage);
+        }
+        
+        StateHasChanged();
+    }
+
+    // Helper classes for JSON deserialization
+    public class ProductPageResult
+    {
+        public List<ProductDto>? Products { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public int TotalCount { get; set; }
+        public int TotalPages { get; set; }
+    }
+
+    public class PaginationInfo
+    {
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public int TotalCount { get; set; }
+        public int TotalPages { get; set; }
+    }
+}
