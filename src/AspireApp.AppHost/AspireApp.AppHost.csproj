@@ -14,6 +14,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\AspireApp.BlazorWeb\AspireApp.BlazorWeb.csproj" />
+	  <ProjectReference Include="..\AspireApp.MinimalApi\AspireApp.MinimalApi.csproj" />
 	</ItemGroup>
 
 </Project>
