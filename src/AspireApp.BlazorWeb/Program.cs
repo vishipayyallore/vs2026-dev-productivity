@@ -13,8 +13,12 @@ builder.Services.AddRazorComponents()
 // Configure HttpClient for API Gateway communication
 builder.Services.AddHttpClient("ApiGateway", client =>
 {
-    // This will be configured via service discovery in the Host project
-    client.BaseAddress = new Uri("http://localhost:5000");
+    // Read base address from configuration so the value isn't hard-coded in source
+    var baseAddr = builder.Configuration["ApiGateway:BaseAddress"];
+    if (!string.IsNullOrWhiteSpace(baseAddr) && Uri.TryCreate(baseAddr, UriKind.Absolute, out var parsed))
+    {
+        client.BaseAddress = parsed;
+    }
     client.Timeout = TimeSpan.FromSeconds(30);
 });
 

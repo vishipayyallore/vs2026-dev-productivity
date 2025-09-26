@@ -3,6 +3,7 @@ using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
 using AspireApp.SharedLib.Extensions;
 using AspireApp.ServiceDefaults;
+using AspireApp.SharedLib.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,10 +44,11 @@ app.MapDefaultEndpoints();
 app.MapProductEndpoints();
 
 // Simple health check endpoint
-app.MapGet("/", () => new { 
-    Service = "Aspire.MinimalApi", 
-    Status = "Running", 
-    Timestamp = DateTime.UtcNow 
+app.MapGet("/", () => new
+{
+    Service = "Aspire.MinimalApi",
+    Status = "Running",
+    Timestamp = DateTime.UtcNow
 })
 .WithName("GetApiStatus")
 .WithSummary("Get API status")
@@ -55,13 +57,11 @@ app.MapGet("/", () => new {
 // Weather forecast endpoint (keep as example)
 app.MapGet("/api/weather", () =>
 {
-    var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast(
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
+            DemoHelpers.GetSecureRandomInt(-20, 55),
+            DemoHelpers.Summaries[DemoHelpers.GetSecureRandomInt(0, DemoHelpers.Summaries.Length)]
         ))
         .ToArray();
     return forecast;

@@ -60,12 +60,9 @@ else
     {
         return RandomNumberGenerator.GetInt32(minValue, maxValue);
     }
+}
 
-    private sealed class WeatherForecast
-    {
-        public DateOnly Date { get; set; }
-        public int TemperatureC { get; set; }
-        public string? Summary { get; set; }
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
+@* Use the shared WeatherForecast model from AspireApp.Shared.Models *@
+
+@using AspireApp.SharedLib.Models
 }
