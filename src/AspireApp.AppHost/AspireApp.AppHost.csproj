@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Sdk Name="Aspire.AppHost.Sdk" Version="9.5.0" />
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<UserSecretsId>a2c2a95e-VS2026DevProductivity</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.AppHost" />
+		<PackageReference Include="Aspire.Hosting.PostgreSQL" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AspireApp.ApiGateway\AspireApp.ApiGateway.csproj" />
+		<ProjectReference Include="..\AspireApp.BlazorWeb\AspireApp.BlazorWeb.csproj" />
+		<ProjectReference Include="..\AspireApp.MinimalApi\AspireApp.MinimalApi.csproj" />
+	</ItemGroup>
+
+</Project>

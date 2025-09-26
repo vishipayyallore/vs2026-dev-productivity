@@ -1,0 +1,6 @@
+@AspireApp.MinimalApi_HostAddress = http://localhost:5187
+
+GET {{AspireApp.MinimalApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,6 +1,6 @@
 # VS 2026 Developer Productivity Samples 🚀
 
-This repo showcases **.NET Aspire + Visual Studio 2026 Insiders features** to maximize developer productivity. Comprehensive .NET Aspire starter project and samples demonstrating Visual Studio 2026 Insiders features for building microservice-based cloud-native applications.
+This repo showcases **.NET Aspire + Visual Studio 2026 Insiders features** to maximize developer productivity. The solution has been updated to target .NET 10 and includes a Scalar UI integration (replacing Swagger) for API exploration at /scalar/v1. Comprehensive .NET Aspire starter project and samples demonstrating Visual Studio 2026 Insiders features for building microservice-based cloud-native applications.
 
 ## 🚀 .NET Aspire Starter Project
 
@@ -27,7 +27,7 @@ src/
 
 ## 🛠️ Prerequisites
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (this repo has been updated to target net10.0)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (for PostgreSQL)
 - [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/vs/preview/) or [Visual Studio Code](https://code.visualstudio.com/)
 - **.NET Aspire workload**: `dotnet workload install aspire`
@@ -49,7 +49,7 @@ cd vs2026-dev-productivity
 
 ## Tech stack
 
-- .NET 8 / .NET Aspire
+- .NET Aspire (solution updated to target .NET 10)
 - YARP (API Gateway)
 - Blazor (dashboard)
 - EF Core + PostgreSQL
@@ -57,7 +57,7 @@ cd vs2026-dev-productivity
 
 ## Prerequisites
 
-- .NET 8 SDK
+- .NET 10 SDK
 - Docker Desktop (for PostgreSQL)
 - Optional: Visual Studio 2026 Insiders or VS Code
 
@@ -90,6 +90,8 @@ Default service URLs (local):
 - API Gateway: <https://localhost:5000>
 - Minimal API: <https://localhost:5001>
 - Blazor Dashboard: <https://localhost:5002>
+
+Note: The Minimal API no longer exposes Swagger. Use the integrated Scalar UI for API exploration at: <https://localhost:5001/scalar/v1> (when Scalar is enabled in configuration).
 
 ## Development notes
 
