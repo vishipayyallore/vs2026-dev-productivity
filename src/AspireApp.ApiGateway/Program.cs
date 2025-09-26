@@ -1,3 +1,4 @@
+using AspireApp.ServiceDefaults;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,4 +31,4 @@ app.MapGet("/", () => new {
     Timestamp = DateTime.UtcNow 
 });
 
-app.Run();
+await app.RunAsync().ConfigureAwait(false);
