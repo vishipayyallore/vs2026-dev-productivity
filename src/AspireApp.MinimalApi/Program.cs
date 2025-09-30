@@ -6,6 +6,7 @@ using AspireApp.SharedLib.Extensions;
 using AspireApp.SharedLib.Models;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using AspireApp.MinimalApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +45,7 @@ if (app.Environment.IsDevelopment())
             {
                 if (string.IsNullOrEmpty(s)) return s;
                 if (s.Length <= 8) return new string('*', s.Length);
-                return s.Substring(0, 4) + new string('*', Math.Min(8, s.Length - 8)) + s.Substring(s.Length - 4);
+                return string.Concat(s.AsSpan(0, 4), new string('*', Math.Min(8, s.Length - 8)), s.AsSpan(s.Length - 4));
             }
 
             // Attempt to mask the password parameter if present
@@ -55,11 +56,11 @@ if (app.Environment.IsDevelopment())
                 for (int i = 0; i < parts.Length; i++)
                 {
                     var p = parts[i];
-                    var idx = p.IndexOf('=');
+                    var idx = p.IndexOf('=', StringComparison.Ordinal);
                     if (idx > 0)
                     {
-                        var key = p.Substring(0, idx).Trim();
-                        var val = p.Substring(idx + 1);
+                        var key = p.AsSpan(0, idx).ToString().Trim();
+                        var val = p.AsSpan(idx + 1).ToString();
                         if (key.Equals("Password", StringComparison.OrdinalIgnoreCase) || key.Equals("Pwd", StringComparison.OrdinalIgnoreCase))
                         {
                             parts[i] = key + "=" + Mask(val);
@@ -68,24 +69,45 @@ if (app.Environment.IsDevelopment())
                 }
                 masked = string.Join(';', parts);
             }
-            catch
+            catch (ArgumentException)
+            {
+                masked = Mask(conn);
+            }
+            catch (InvalidOperationException)
             {
                 masked = Mask(conn);
             }
 
             var logger = app.Services.GetService<ILogger<Program>>();
-            logger?.LogInformation("[DevOnly] Resolved ConnectionStrings:productdb = {Conn}", masked);
+            if (logger != null)
+            {
+                LogMessages.LogConnectionStringResolved(logger, masked);
+            }
         }
         else
         {
             var logger = app.Services.GetService<ILogger<Program>>();
-            logger?.LogInformation("[DevOnly] No ConnectionStrings:productdb found in configuration");
+            if (logger != null)
+            {
+                LogMessages.LogConnectionStringNotFound(logger);
+            }
         }
     }
-    catch (Exception ex)
+    catch (ArgumentException ex)
     {
         var logger = app.Services.GetService<ILogger<Program>>();
-        logger?.LogWarning(ex, "[DevOnly] Failed to resolve/mask productdb connection string");
+        if (logger != null)
+        {
+            LogMessages.LogConnectionStringError(logger, ex);
+        }
+    }
+    catch (InvalidOperationException ex)
+    {
+        var logger = app.Services.GetService<ILogger<Program>>();
+        if (logger != null)
+        {
+            LogMessages.LogConnectionStringError(logger, ex);
+        }
     }
 }
 

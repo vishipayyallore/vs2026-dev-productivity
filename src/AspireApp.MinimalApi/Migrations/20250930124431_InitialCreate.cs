@@ -10,9 +10,19 @@ namespace AspireApp.MinimalApi.Migrations
     /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
+        // Use static readonly fields for repeated array arguments (CA1861)
+        private static readonly string[] ProductColumns = ["Id", "CreatedAt", "Description", "Name", "Price", "Stock", "UpdatedAt"];
+        private static readonly object[,] ProductValues = new object[,]
+        {
+            { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "A sample product for testing", "Sample Product 1", 29.99m, 100, null },
+            { 2, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Another sample product", "Sample Product 2", 49.99m, 50, null }
+        };
+
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            ArgumentNullException.ThrowIfNull(migrationBuilder);
+
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
@@ -33,12 +43,8 @@ namespace AspireApp.MinimalApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "CreatedAt", "Description", "Name", "Price", "Stock", "UpdatedAt" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "A sample product for testing", "Sample Product 1", 29.99m, 100, null },
-                    { 2, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Another sample product", "Sample Product 2", 49.99m, 50, null }
-                });
+                columns: ProductColumns,
+                values: ProductValues);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_Name",
@@ -49,6 +55,8 @@ namespace AspireApp.MinimalApi.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            ArgumentNullException.ThrowIfNull(migrationBuilder);
+
             migrationBuilder.DropTable(
                 name: "Products");
         }
