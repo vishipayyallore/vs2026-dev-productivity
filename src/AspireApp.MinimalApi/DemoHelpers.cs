@@ -1,4 +1,3 @@
-using AspireApp.SharedLib.Models;
 using System.Security.Cryptography;
 
 namespace Aspire.MinimalApi;

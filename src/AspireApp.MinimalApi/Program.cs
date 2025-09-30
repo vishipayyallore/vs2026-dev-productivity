@@ -1,12 +1,12 @@
 using Aspire.MinimalApi; // for DemoHelpers
 using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
+using AspireApp.MinimalApi;
 using AspireApp.ServiceDefaults;
 using AspireApp.SharedLib.Extensions;
 using AspireApp.SharedLib.Models;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using AspireApp.MinimalApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
