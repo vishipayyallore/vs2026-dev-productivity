@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
 using AspireApp.SharedLib.Extensions;
@@ -14,7 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 // Add PostgreSQL with Entity Framework Core
-builder.AddNpgsqlDbContext<ApplicationDbContext>("productdb");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("productdb")));
 
 // Add services to the container
 builder.Services.AddEndpointsApiExplorer();
