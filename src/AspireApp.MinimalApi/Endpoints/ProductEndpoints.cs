@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using Aspire.MinimalApi.Data;
 using AspireApp.SharedLib.DTOs;
 using AspireApp.SharedLib.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aspire.MinimalApi.Endpoints;
 

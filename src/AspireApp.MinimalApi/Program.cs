@@ -1,13 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
+using Aspire.MinimalApi; // for DemoHelpers
 using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
-using AspireApp.SharedLib.Extensions;
 using AspireApp.ServiceDefaults;
+using AspireApp.SharedLib.Extensions;
 using AspireApp.SharedLib.Models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using Aspire.MinimalApi; // for DemoHelpers
 
 var builder = WebApplication.CreateBuilder(args);
 

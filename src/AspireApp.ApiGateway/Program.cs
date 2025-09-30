@@ -1,5 +1,4 @@
 using AspireApp.ServiceDefaults;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,10 +24,11 @@ app.MapDefaultEndpoints();
 app.MapReverseProxy();
 
 // Health check endpoint
-app.MapGet("/", () => new { 
-    Service = "Aspire.ApiGateway", 
-    Status = "Running", 
-    Timestamp = DateTime.UtcNow 
+app.MapGet("/", () => new
+{
+    Service = "Aspire.ApiGateway",
+    Status = "Running",
+    Timestamp = DateTime.UtcNow
 });
 
 await app.RunAsync().ConfigureAwait(false);

@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using AspireApp.SharedLib.Models;
+using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Aspire.MinimalApi.Data;
