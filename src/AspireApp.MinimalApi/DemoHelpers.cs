@@ -13,3 +13,19 @@ internal static class DemoHelpers
 
 
 }
+
+//public class SampleClass
+//{
+//    public int AddNumbers(int a, int b)
+//    {
+//        return a + b;
+//    }
+//}
+
+//public class sampleClass
+//{
+//    public int add_numbers(int a, int b)
+//    {
+//        return a + b;
+//    }
+//}
