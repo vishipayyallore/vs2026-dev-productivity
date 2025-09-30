@@ -3,6 +3,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 // Add PostgreSQL database
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
+    .WithImage("postgres:17.2")
     .WithPgAdmin();
 
 var productDb = postgres.AddDatabase("productdb");

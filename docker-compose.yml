@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
   postgres:
-    image: postgres:15
-    container_name: vs2026-postgres
+    image: postgres:latest
+    container_name: aspire-postgres
     environment:
       POSTGRES_DB: productdb
       POSTGRES_USER: postgres
@@ -18,17 +16,19 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d productdb"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: vs2026-pgadmin
+    image: dpage/pgadmin4:8.12
+    container_name: aspire-pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
     ports:
       - "8080:80"
     volumes:
@@ -36,10 +36,10 @@ services:
       - ./pgadmin-servers.json:/pgadmin4/servers.json:ro
     networks:
       - aspire-network
+    restart: unless-stopped
     depends_on:
       postgres:
         condition: service_healthy
-    restart: unless-stopped
 
 volumes:
   postgres_data:

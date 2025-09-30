@@ -145,12 +145,7 @@ app.MapGet("/api/weather", () =>
 .WithSummary("Get weather forecast")
 .WithTags("Weather");
 
-// Apply database migrations on startup in development
-if (app.Environment.IsDevelopment())
-{
-    using var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
-}
+// Database is set up via migrations - see DATABASE-README.md for setup instructions
+// Run: dotnet ef database update --project src/AspireApp.MinimalApi
 
 await app.RunAsync().ConfigureAwait(false);
