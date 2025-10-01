@@ -1,19 +1,174 @@
 ﻿@page "/counter"
 @rendermode InteractiveServer
 
-<PageTitle>Counter</PageTitle>
+<PageTitle>Counter - VS2026 Dev Productivity</PageTitle>
 
-<h1>Counter</h1>
+<div class="counter-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold text-primary mb-3">
+                    <i class="bi bi-plus-square-fill me-3"></i>
+                    Interactive Counter
+                </h1>
+                <p class="lead text-muted">
+                    Demonstrates Blazor Server's real-time interactivity and state management
+                </p>
+            </div>
 
-<p role="status">Current count: @currentCount</p>
+            <div class="counter-display text-center mb-5">
+                <div class="counter-card">
+                    <div class="counter-label">
+                        <i class="bi bi-calculator text-primary me-2"></i>
+                        Current Count
+                    </div>
+                    <div class="counter-value">
+                        @currentCount.ToString("N0")
+                    </div>
+                    <div class="counter-progress">
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" 
+                                 role="progressbar" 
+                                 style="width: @(GetProgressPercentage())%">
+                            </div>
+                        </div>
+                        <small class="text-muted mt-2 d-block">
+                            Progress: @GetProgressPercentage()% to next milestone
+                        </small>
+                    </div>
+                </div>
+            </div>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+            <div class="counter-controls text-center mb-4">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-outline-danger btn-lg" @onclick="DecrementCount" disabled="@(currentCount <= 0)">
+                        <i class="bi bi-dash-circle me-2"></i>
+                        Decrement
+                    </button>
+                    <button class="btn btn-primary btn-lg px-4" @onclick="IncrementCount">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        Increment
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg" @onclick="IncrementByTen">
+                        <i class="bi bi-skip-forward me-2"></i>
+                        +10
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <button class="btn btn-outline-warning" @onclick="ResetCount" disabled="@(currentCount == 0)">
+                    <i class="bi bi-arrow-counterclockwise me-2"></i>
+                    Reset Counter
+                </button>
+            </div>
+
+            <div class="counter-stats">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="bi bi-trophy text-warning"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">@GetMilestone()</div>
+                                <div class="stat-label">Next Milestone</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="bi bi-graph-up text-success"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">@totalClicks</div>
+                                <div class="stat-label">Total Clicks</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="bi bi-speedometer2 text-info"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">@GetCategory()</div>
+                                <div class="stat-label">Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (currentCount >= 100)
+            {
+                <div class="achievement-banner">
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <i class="bi bi-award-fill me-2" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>Achievement Unlocked!</strong> You've reached the century mark! 🎉
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 @code {
     private int currentCount = 0;
+    private int totalClicks = 0;
 
     private void IncrementCount()
     {
         currentCount++;
+        totalClicks++;
+    }
+
+    private void DecrementCount()
+    {
+        if (currentCount > 0)
+        {
+            currentCount--;
+            totalClicks++;
+        }
+    }
+
+    private void IncrementByTen()
+    {
+        currentCount += 10;
+        totalClicks++;
+    }
+
+    private void ResetCount()
+    {
+        currentCount = 0;
+        totalClicks++;
+    }
+
+    private int GetProgressPercentage()
+    {
+        return (currentCount % 25) * 4; // 25 * 4 = 100%
+    }
+
+    private int GetMilestone()
+    {
+        return ((currentCount / 25) + 1) * 25;
+    }
+
+    private string GetCategory()
+    {
+        return currentCount switch
+        {
+            0 => "Starter",
+            < 10 => "Beginner",
+            < 25 => "Novice",
+            < 50 => "Intermediate",
+            < 100 => "Advanced",
+            < 250 => "Expert",
+            < 500 => "Master",
+            _ => "Legend"
+        };
     }
 }
