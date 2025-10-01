@@ -10,15 +10,10 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Configure HttpClient for API Gateway communication
+// Configure HttpClient for API Gateway communication using Aspire service discovery
 builder.Services.AddHttpClient("ApiGateway", client =>
 {
-    // Read base address from configuration so the value isn't hard-coded in source
-    var baseAddr = builder.Configuration["ApiGateway:BaseAddress"];
-    if (!string.IsNullOrWhiteSpace(baseAddr) && Uri.TryCreate(baseAddr, UriKind.Absolute, out var parsed))
-    {
-        client.BaseAddress = parsed;
-    }
+    client.BaseAddress = new Uri("https://aspireapp-apigateway");
     client.Timeout = TimeSpan.FromSeconds(30);
 });
 
