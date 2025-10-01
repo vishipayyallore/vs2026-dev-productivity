@@ -1,0 +1,15 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "VS2026 PostgreSQL",
+            "Group": "Development",
+            "Host": "postgres",
+            "Port": 5432,
+            "MaintenanceDB": "productdb",
+            "Username": "postgres",
+            "Password": "postgres",
+            "SSLMode": "prefer",
+            "Comment": "Auto-configured PostgreSQL server for VS2026 development"
+        }
+    }
+}

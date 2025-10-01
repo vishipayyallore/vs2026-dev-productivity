@@ -1,6 +1,6 @@
+using AspireApp.SharedLib.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
-using AspireApp.SharedLib.Models;
 
 namespace AspireApp.MinimalApi.Controllers;
 

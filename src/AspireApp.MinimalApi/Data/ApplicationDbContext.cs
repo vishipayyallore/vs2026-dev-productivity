@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using AspireApp.SharedLib.Models;
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Aspire.MinimalApi.Data;
 
@@ -24,10 +25,19 @@ public class ApplicationDbContext : DbContext
 
         base.OnModelCreating(modelBuilder);
 
+        // Configure PostgreSQL value generation strategy to use Identity instead of HiLo
+        // This avoids the NullButNotEmpty sequence name issue
+        modelBuilder.HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
         // Configure Product entity
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.Id);
+
+            // Explicitly configure Id to use Identity generation (not HiLo)
+            entity.Property(e => e.Id)
+                  .UseIdentityByDefaultColumn();
+
             entity.Property(e => e.Name)
                   .IsRequired()
                   .HasMaxLength(200);

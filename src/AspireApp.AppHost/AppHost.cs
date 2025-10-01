@@ -3,6 +3,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 // Add PostgreSQL database
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
+    .WithImage("postgres:17.2")
     .WithPgAdmin();
 
 var productDb = postgres.AddDatabase("productdb");
@@ -16,7 +17,7 @@ var gateway = builder.AddProject<Projects.AspireApp_ApiGateway>("aspireapp-apiga
     .WithReference(api);
 
 // Add the Blazor dashboard app
-var blazorApp = builder.AddProject<Projects.AspireApp_BlazorWeb>("aspireapp-blazorweb")
+_ = builder.AddProject<Projects.AspireApp_BlazorWeb>("aspireapp-blazorweb")
     .WithReference(gateway);
 
 await builder.Build().RunAsync().ConfigureAwait(false);

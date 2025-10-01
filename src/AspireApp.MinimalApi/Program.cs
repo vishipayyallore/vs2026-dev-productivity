@@ -1,12 +1,12 @@
-using Microsoft.EntityFrameworkCore;
+using Aspire.MinimalApi; // for DemoHelpers
 using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
-using AspireApp.SharedLib.Extensions;
+using AspireApp.MinimalApi;
 using AspireApp.ServiceDefaults;
+using AspireApp.SharedLib.Extensions;
 using AspireApp.SharedLib.Models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using Aspire.MinimalApi; // for DemoHelpers
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 // Add PostgreSQL with Entity Framework Core
-builder.AddNpgsqlDbContext<ApplicationDbContext>("productdb");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("productdb")));
 
 // Add services to the container
 builder.Services.AddEndpointsApiExplorer();
@@ -44,7 +45,7 @@ if (app.Environment.IsDevelopment())
             {
                 if (string.IsNullOrEmpty(s)) return s;
                 if (s.Length <= 8) return new string('*', s.Length);
-                return s.Substring(0, 4) + new string('*', Math.Min(8, s.Length - 8)) + s.Substring(s.Length - 4);
+                return string.Concat(s.AsSpan(0, 4), new string('*', Math.Min(8, s.Length - 8)), s.AsSpan(s.Length - 4));
             }
 
             // Attempt to mask the password parameter if present
@@ -55,11 +56,11 @@ if (app.Environment.IsDevelopment())
                 for (int i = 0; i < parts.Length; i++)
                 {
                     var p = parts[i];
-                    var idx = p.IndexOf('=');
+                    var idx = p.IndexOf('=', StringComparison.Ordinal);
                     if (idx > 0)
                     {
-                        var key = p.Substring(0, idx).Trim();
-                        var val = p.Substring(idx + 1);
+                        var key = p.AsSpan(0, idx).ToString().Trim();
+                        var val = p.AsSpan(idx + 1).ToString();
                         if (key.Equals("Password", StringComparison.OrdinalIgnoreCase) || key.Equals("Pwd", StringComparison.OrdinalIgnoreCase))
                         {
                             parts[i] = key + "=" + Mask(val);
@@ -68,24 +69,45 @@ if (app.Environment.IsDevelopment())
                 }
                 masked = string.Join(';', parts);
             }
-            catch
+            catch (ArgumentException)
+            {
+                masked = Mask(conn);
+            }
+            catch (InvalidOperationException)
             {
                 masked = Mask(conn);
             }
 
             var logger = app.Services.GetService<ILogger<Program>>();
-            logger?.LogInformation("[DevOnly] Resolved ConnectionStrings:productdb = {Conn}", masked);
+            if (logger != null)
+            {
+                LogMessages.LogConnectionStringResolved(logger, masked);
+            }
         }
         else
         {
             var logger = app.Services.GetService<ILogger<Program>>();
-            logger?.LogInformation("[DevOnly] No ConnectionStrings:productdb found in configuration");
+            if (logger != null)
+            {
+                LogMessages.LogConnectionStringNotFound(logger);
+            }
         }
     }
-    catch (Exception ex)
+    catch (ArgumentException ex)
     {
         var logger = app.Services.GetService<ILogger<Program>>();
-        logger?.LogWarning(ex, "[DevOnly] Failed to resolve/mask productdb connection string");
+        if (logger != null)
+        {
+            LogMessages.LogConnectionStringError(logger, ex);
+        }
+    }
+    catch (InvalidOperationException ex)
+    {
+        var logger = app.Services.GetService<ILogger<Program>>();
+        if (logger != null)
+        {
+            LogMessages.LogConnectionStringError(logger, ex);
+        }
     }
 }
 
@@ -143,12 +165,7 @@ app.MapGet("/api/weather", () =>
 .WithSummary("Get weather forecast")
 .WithTags("Weather");
 
-// Apply database migrations on startup in development
-if (app.Environment.IsDevelopment())
-{
-    using var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
-}
+// Database is set up via migrations - see DATABASE-README.md for setup instructions
+// Run: dotnet ef database update --project src/AspireApp.MinimalApi
 
 await app.RunAsync().ConfigureAwait(false);

@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using AspireApp.SharedLib.Models;
 
 namespace Aspire.MinimalApi;
 
@@ -11,4 +10,22 @@ internal static class DemoHelpers
     {
         return RandomNumberGenerator.GetInt32(minValue, maxValue);
     }
+
+
 }
+
+//public class SampleClass
+//{
+//    public int AddNumbers(int a, int b)
+//    {
+//        return a + b;
+//    }
+//}
+
+//public class sampleClass
+//{
+//    public int add_numbers(int a, int b)
+//    {
+//        return a + b;
+//    }
+//}
