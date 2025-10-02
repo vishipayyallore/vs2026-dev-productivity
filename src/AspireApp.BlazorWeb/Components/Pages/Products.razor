@@ -2,79 +2,227 @@
 @using AspireApp.SharedLib.DTOs
 @using System.Text.Json
 @inject HttpClient HttpClient
-@inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
 
-<PageTitle>Products</PageTitle>
+<PageTitle>Products - VS2026 Dev Productivity</PageTitle>
 
-<h1>Product Management</h1>
+<div class="products-header mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="display-6 fw-bold text-primary mb-2">
+                <i class="bi bi-box-seam me-3"></i>
+                Product Management
+            </h1>
+            <p class="text-muted mb-0">Manage your product catalog through the API Gateway</p>
+        </div>
+        <div class="d-flex align-items-center">
+            @if (pagination != null)
+            {
+                <span class="badge bg-info fs-6 me-3">
+                    <i class="bi bi-collection me-1"></i>
+                    @pagination.TotalCount products
+                </span>
+            }
+            <button class="btn btn-primary" @onclick="() => LoadProductsAsync(1)" disabled="@isLoading">
+                <i class="bi bi-arrow-clockwise me-2"></i>
+                @if (isLoading)
+                {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                }
+                Refresh
+            </button>
+        </div>
+    </div>
+</div>
 
-<p>This component demonstrates managing products through the API Gateway.</p>
-
-@if (products == null)
+@if (!string.IsNullOrEmpty(errorMessage))
 {
-    <p><em>Loading...</em></p>
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>
+            <strong>Error:</strong> @errorMessage
+            <button class="btn btn-sm btn-outline-danger ms-3" @onclick="() => LoadProductsAsync(1)">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Retry
+            </button>
+        </div>
+    </div>
 }
-else if (products.Count == 0)
+
+@if (isLoading && products.Count == 0)
 {
-    <p><em>No products found.</em></p>
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="text-muted">Loading products...</p>
+    </div>
+}
+else if (products.Count == 0 && !isLoading)
+{
+    <div class="text-center py-5">
+        <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+        <h3 class="text-muted mt-3">No products found</h3>
+        <p class="text-muted">There are no products in the catalog yet.</p>
+        <button class="btn btn-primary" @onclick="() => LoadProductsAsync(1)">
+            <i class="bi bi-arrow-clockwise me-2"></i>
+            Reload
+        </button>
+    </div>
 }
 else
 {
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Created At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var product in products)
-                    {
-                        <tr>
-                            <td>@product.Id</td>
-                            <td>@product.Name</td>
-                            <td>@product.Description</td>
-                            <td>@product.Price.ToString("C")</td>
-                            <td>@product.Stock</td>
-                            <td>@product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div class="products-grid">
+        <div class="row g-4 mb-4">
+            @foreach (var product in products)
+            {
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="card h-100 product-card">
+                        <div class="card-header bg-transparent border-bottom-0">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h5 class="card-title mb-1 text-primary">@product.Name</h5>
+                                    <small class="text-muted">ID: @product.Id</small>
+                                </div>
+                                <span class="badge @(product.Stock > 0 ? "bg-success" : "bg-danger")">
+                                    @(product.Stock > 0 ? "In Stock" : "Out of Stock")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <p class="card-text text-muted mb-3">
+                                @(string.IsNullOrEmpty(product.Description) ? "No description available" : product.Description)
+                            </p>
+                            <div class="product-details">
+                                <div class="row g-2 mb-3">
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-currency-dollar text-success me-2"></i>
+                                            <div>
+                                                <div class="fw-bold text-success">@product.Price.ToString("C")</div>
+                                                <small class="text-muted">Price</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-box text-info me-2"></i>
+                                            <div>
+                                                <div class="fw-bold">@product.Stock</div>
+                                                <small class="text-muted">Stock</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-meta">
+                                    <small class="text-muted d-flex align-items-center">
+                                        <i class="bi bi-calendar me-1"></i>
+                                        Created: @product.CreatedAt.ToString("MMM dd, yyyy")
+                                    </small>
+                                    @if (product.UpdatedAt.HasValue)
+                                    {
+                                        <small class="text-muted d-flex align-items-center mt-1">
+                                            <i class="bi bi-pencil me-1"></i>
+                                            Updated: @product.UpdatedAt.Value.ToString("MMM dd, yyyy")
+                                        </small>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
     
-    @if (pagination != null)
+    @if (pagination != null && pagination.TotalPages > 1)
     {
-        <nav aria-label="Product pagination">
-            <ul class="pagination">
-                <li class="page-item @(pagination.Page <= 1 ? "disabled" : "")">
-                    <button class="page-link" @onclick="() => LoadProductsAsync(pagination.Page - 1)">Previous</button>
-                </li>
-                <li class="page-item active">
-                    <span class="page-link">
-                        Page @pagination.Page of @pagination.TotalPages
-                    </span>
-                </li>
-                <li class="page-item @(pagination.Page >= pagination.TotalPages ? "disabled" : "")">
-                    <button class="page-link" @onclick="() => LoadProductsAsync(pagination.Page + 1)">Next</button>
-                </li>
-            </ul>
-        </nav>
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Product pagination">
+                <ul class="pagination pagination-lg">
+                    <li class="page-item @(pagination.Page <= 1 ? "disabled" : "")">
+                        <button class="page-link" @onclick="() => LoadProductsAsync(1)" disabled="@(pagination.Page <= 1 || isLoading)">
+                            <i class="bi bi-chevron-double-left"></i>
+                        </button>
+                    </li>
+                    <li class="page-item @(pagination.Page <= 1 ? "disabled" : "")">
+                        <button class="page-link" @onclick="() => LoadProductsAsync(pagination.Page - 1)" disabled="@(pagination.Page <= 1 || isLoading)">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                    </li>
+                    
+                    @for (int i = Math.Max(1, pagination.Page - 2); i <= Math.Min(pagination.TotalPages, pagination.Page + 2); i++)
+                    {
+                        var pageNumber = i;
+                        <li class="page-item @(pagination.Page == pageNumber ? "active" : "")">
+                            <button class="page-link" @onclick="() => LoadProductsAsync(pageNumber)" disabled="@isLoading">
+                                @pageNumber
+                            </button>
+                        </li>
+                    }
+                    
+                    <li class="page-item @(pagination.Page >= pagination.TotalPages ? "disabled" : "")">
+                        <button class="page-link" @onclick="() => LoadProductsAsync(pagination.Page + 1)" disabled="@(pagination.Page >= pagination.TotalPages || isLoading)">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </li>
+                    <li class="page-item @(pagination.Page >= pagination.TotalPages ? "disabled" : "")">
+                        <button class="page-link" @onclick="() => LoadProductsAsync(pagination.TotalPages)" disabled="@(pagination.Page >= pagination.TotalPages || isLoading)">
+                            <i class="bi bi-chevron-double-right"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="text-center mt-3">
+            <small class="text-muted">
+                Showing page @pagination.Page of @pagination.TotalPages 
+                (@((pagination.Page - 1) * pagination.PageSize + 1) - @Math.Min(pagination.Page * pagination.PageSize, pagination.TotalCount) of @pagination.TotalCount products)
+            </small>
+        </div>
     }
 }
+
+<style>
+    .product-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-color: rgba(13, 110, 253, 0.2);
+    }
+    
+    .products-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border: 1px solid #e9ecef;
+    }
+    
+    .product-details {
+        border-top: 1px solid #f1f3f4;
+        padding-top: 1rem;
+    }
+    
+    .pagination {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        background: white;
+    }
+</style>
 
 @code {
     private List<ProductDto> products = new();
     private PaginationInfo? pagination;
     private string? errorMessage;
+    private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -85,10 +233,12 @@ else
     {
         try
         {
+            isLoading = true;
             errorMessage = null;
+            StateHasChanged();
             
             // Configure HttpClient to use the API Gateway
-            var response = await HttpClient.GetAsync($"/api/products?page={page}&pageSize=10");
+            var response = await HttpClient.GetAsync($"/api/products?page={page}&pageSize=9");
             
             if (response.IsSuccessStatusCode)
             {
@@ -114,17 +264,26 @@ else
             }
             else
             {
-                errorMessage = $"Failed to load products: {response.StatusCode}";
-                await JSRuntime.InvokeVoidAsync("console.error", errorMessage);
+                errorMessage = $"Failed to load products: {response.StatusCode} - {response.ReasonPhrase}";
             }
+        }
+        catch (HttpRequestException ex)
+        {
+            errorMessage = $"Network error: {ex.Message}";
+        }
+        catch (TaskCanceledException)
+        {
+            errorMessage = "Request timeout. Please try again.";
         }
         catch (Exception ex)
         {
             errorMessage = $"Error loading products: {ex.Message}";
-            await JSRuntime.InvokeVoidAsync("console.error", errorMessage);
         }
-        
-        StateHasChanged();
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
     }
 
     // Helper classes for JSON deserialization
