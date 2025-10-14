@@ -106,6 +106,56 @@ flowchart TD
 
 To use this feature, simply write Mermaid syntax in code blocks and view the rendered output through the preview panel. Copilot can assist by generating diagram syntax based on your descriptions.
 
+### Mermaid Chart for the src
+
+Visual representation of the project architecture within the `src` directory, showcasing the relationship between different components in the .NET Aspire application:
+
+```mermaid
+---
+config:
+  layout: elk
+---
+flowchart TB
+ subgraph subGraph0["AspireApp Solution Architecture"]
+        AH["AspireApp.AppHost<br>🏠 Orchestration"]
+        AG["AspireApp.ApiGateway<br>🌐 API Gateway"]
+        MA["AspireApp.MinimalApi<br>⚡ Web API"]
+        BW["AspireApp.BlazorWeb<br>🎨 Frontend"]
+        SD["AspireApp.ServiceDefaults<br>⚙️ Shared Config"]
+        SH["AspireApp.Shared<br>📦 Common Models"]
+  end
+ subgraph subGraph1["External Services"]
+        DB[("PostgreSQL<br>🗄️ Database")]
+        REDIS[("Redis Cache<br>⚡ Caching")]
+  end
+    AH --> AG & MA & BW & DB & REDIS
+    AG --> MA
+    BW --> AG
+    MA --> DB & REDIS
+    AG -.-> SD & SH
+    MA -.-> SD & SH
+    BW -.-> SD & SH
+     AH:::appHost
+     AG:::services
+     MA:::services
+     BW:::services
+     SD:::shared
+     SH:::shared
+     DB:::external
+     REDIS:::external
+    classDef appHost fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+    classDef services fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef shared fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef external fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+```
+
+This diagram illustrates:
+
+- **AppHost**: Central orchestration service managing all components
+- **Service Layer**: API Gateway, Minimal API, and Blazor Web frontend
+- **Shared Components**: Service defaults and common models used across services
+- **External Dependencies**: PostgreSQL database and Redis cache integration
+
 ### Code Actions at Your Fingertips
 
 Visual Studio 2026 enhances developer workflow by providing instant access to Copilot code actions directly from the context menu. This streamlined approach eliminates the need for manual prompt typing and accelerates common development tasks.
