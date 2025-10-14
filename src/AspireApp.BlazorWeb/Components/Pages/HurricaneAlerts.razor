@@ -1,0 +1,254 @@
+@page "/hurricane-alerts"
+@using AspireApp.SharedLib.Dtos
+@using AspireApp.SharedLib.Models
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Hurricane Alerts</PageTitle>
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4 text-danger">🌪️ Hurricane Alerts</h1>
+            <p class="lead">Monitor active hurricane threats and emergency weather warnings</p>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary" @onclick="CreateNewAlert">
+                <i class="fas fa-plus"></i> Create Alert
+            </button>
+            <button class="btn btn-outline-secondary ms-2" @onclick="RefreshAlerts">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading hurricane alerts...</p>
+        </div>
+    }
+    else if (errorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Error:</strong> @errorMessage
+            <button type="button" class="btn-close" @onclick="() => errorMessage = null"></button>
+        </div>
+    }
+    else
+    {
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="showActiveOnly" 
+                           checked="@showActiveOnly" @onchange="OnShowActiveOnlyChanged">
+                    <label class="form-check-label" for="showActiveOnly">
+                        Show Active Alerts Only
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6 text-end">
+                <small class="text-muted">
+                    @filteredAlerts.Count() alert(s) displayed
+                </small>
+            </div>
+        </div>
+
+        @if (!filteredAlerts.Any())
+        {
+            <div class="alert alert-info text-center" role="alert">
+                <i class="fas fa-info-circle fa-2x mb-2"></i>
+                <h4>No Hurricane Alerts</h4>
+                <p>There are currently no @(showActiveOnly ? "active " : "")hurricane alerts to display.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var alert in filteredAlerts.OrderByDescending(a => a.Severity).ThenByDescending(a => a.Category))
+                {
+                    <div class="col-lg-6 col-xl-4 mb-4">
+                        <div class="card h-100 @(alert.IsActive ? "border-danger" : "border-secondary")">
+                            <div class="card-header d-flex justify-content-between align-items-center 
+                                        @(alert.IsActive ? "bg-danger text-white" : "bg-light")">
+                                <div>
+                                    <h5 class="card-title mb-0">@alert.Name</h5>
+                                    <small>Category @alert.Category Hurricane</small>
+                                </div>
+                                <div>
+                                    <span class="badge @alert.SeverityBadgeClass">@alert.Severity</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                    <strong>Location:</strong> @alert.Location
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-wind text-info"></i>
+                                    <strong>Wind Speed:</strong> @alert.WindSpeedMph mph (@alert.WindSpeedKmh.ToString("F1") km/h)
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-clock text-warning"></i>
+                                    <strong>Created:</strong> @alert.CreatedAt.ToString("MMM dd, yyyy HH:mm UTC")
+                                </div>
+                                @if (alert.ExpectedLandfall.HasValue)
+                                {
+                                    <div class="mb-2">
+                                        <i class="fas fa-calendar-alt text-danger"></i>
+                                        <strong>Expected Landfall:</strong> @alert.ExpectedLandfall.Value.ToString("MMM dd, yyyy HH:mm UTC")
+                                    </div>
+                                }
+                                <p class="card-text">@alert.Description</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group w-100" role="group">
+                                    <button class="btn btn-outline-primary btn-sm" @onclick="() => ViewAlert(alert.Id)">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-sm" @onclick="() => EditAlert(alert.Id)">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    @if (alert.IsActive)
+                                    {
+                                        <button class="btn btn-outline-warning btn-sm" @onclick="() => DeactivateAlert(alert.Id)">
+                                            <i class="fas fa-pause"></i> Deactivate
+                                        </button>
+                                    }
+                                    <button class="btn btn-outline-danger btn-sm" @onclick="() => DeleteAlert(alert.Id)">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private List<HurricaneAlertResponseDto> alerts = new();
+    private bool isLoading = true;
+    private string? errorMessage;
+    private bool showActiveOnly = true;
+
+    private IEnumerable<HurricaneAlertResponseDto> filteredAlerts =>
+        showActiveOnly ? alerts.Where(a => a.IsActive) : alerts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAlerts();
+    }
+
+    private async Task LoadAlerts()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            var response = await Http.GetFromJsonAsync<List<HurricaneAlertResponseDto>>("/api/hurricane-alerts");
+            alerts = response ?? new List<HurricaneAlertResponseDto>();
+        }
+        catch (HttpRequestException ex)
+        {
+            errorMessage = $"Failed to load hurricane alerts: {ex.Message}";
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An unexpected error occurred: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task RefreshAlerts()
+    {
+        await LoadAlerts();
+    }
+
+    private async Task OnShowActiveOnlyChanged(ChangeEventArgs e)
+    {
+        showActiveOnly = (bool)(e.Value ?? false);
+        StateHasChanged();
+    }
+
+    private void CreateNewAlert()
+    {
+        Navigation.NavigateTo("/hurricane-alerts/create");
+    }
+
+    private void ViewAlert(int id)
+    {
+        Navigation.NavigateTo($"/hurricane-alerts/{id}");
+    }
+
+    private void EditAlert(int id)
+    {
+        Navigation.NavigateTo($"/hurricane-alerts/{id}/edit");
+    }
+
+    private async Task DeactivateAlert(int id)
+    {
+        var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", 
+            "Are you sure you want to deactivate this hurricane alert?");
+        
+        if (confirmed)
+        {
+            try
+            {
+                var response = await Http.PatchAsync($"/api/hurricane-alerts/{id}/deactivate", null);
+                if (response.IsSuccessStatusCode)
+                {
+                    await LoadAlerts();
+                }
+                else
+                {
+                    errorMessage = "Failed to deactivate alert";
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Error deactivating alert: {ex.Message}";
+            }
+        }
+    }
+
+    private async Task DeleteAlert(int id)
+    {
+        var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", 
+            "Are you sure you want to delete this hurricane alert? This action cannot be undone.");
+        
+        if (confirmed)
+        {
+            try
+            {
+                var response = await Http.DeleteAsync($"/api/hurricane-alerts/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    await LoadAlerts();
+                }
+                else
+                {
+                    errorMessage = "Failed to delete alert";
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Error deleting alert: {ex.Message}";
+            }
+        }
+    }
+}
