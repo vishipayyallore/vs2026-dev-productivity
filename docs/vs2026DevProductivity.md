@@ -25,24 +25,49 @@ You can trigger Adaptive Paste by:
 
 ### Mermaid Chart Rendering
 
-We are excited to announce that Visual Studio now supports rendering Mermaid charts in the Markdown editor, where you can provide your own Mermaid syntax or have Copilot generate it for you! This new feature lets you visualize complex data structures and workflows directly within your code editor.
+Visual Studio 2026 introduces native Mermaid diagram support within Markdown files. This enhancement allows developers to create visual representations of system architectures, workflows, and data flows directly in documentation.
 
-For example, you can write a flowchart in your Markdown file:
+Key capabilities include:
+
+- Real-time rendering in the Markdown preview pane
+- Integration with GitHub Copilot for diagram generation
+- Support for multiple diagram types (flowcharts, sequence diagrams, class diagrams, etc.)
+
+Example workflow diagram for a CI/CD pipeline:
 
 ```mermaid
-graph LR
-  A[Start] --> B{Decision}
-  B -->|Yes| C[Outcome A]
-  B -->|No| D[Outcome B]
-  C --> E[End]
-  D --> E[End]
+---
+config:
+  layout: elk
+---
+flowchart TD
+    A["Code Commit"] --> B["Build & Test"]
+    B --> C{"Tests Pass?"}
+    C -- Yes --> D["Deploy to Staging"]
+    C -- No --> E["Notify Developer"]
+    D --> F["Run Integration Tests"]
+    F --> G{"Ready for Prod?"}
+    G -- Yes --> H["Deploy to Production"]
+    G -- No --> I["Rollback"]
+    E --> A
+     A:::code
+     B:::build
+     C:::decision
+     D:::deploy
+     E:::notify
+     F:::deploy
+     G:::decision
+     H:::deploy
+     I:::rollback
+    classDef code fill:#bfdbfe,stroke:#60a5fa,color:#1e3a8a           %% Soft Blue
+    classDef build fill:#a7f3d0,stroke:#34d399,color:#065f46          %% Soft Green
+    classDef decision fill:#fde68a,stroke:#facc15,color:#78350f       %% Soft Yellow
+    classDef deploy fill:#c7d2fe,stroke:#818cf8,color:#312e81         %% Soft Indigo
+    classDef notify fill:#fecaca,stroke:#f87171,color:#7f1d1d         %% Soft Red
+    classDef rollback fill:#fed7aa,stroke:#fb923c,color:#7c2d12       %% Soft Orange
 ```
 
-When you click the **Preview** button (top-left of the editor), your Mermaid chart will be rendered in the preview pane, allowing you to see the visual representation of your data.
-
-You can also ask Copilot Chat to generate diagrams for you. Just describe what you need, and Copilot will provide the appropriate Mermaid syntax, which you can then preview immediately.
-
-Please give it a try and share your feedback or suggestions to help us improve this feature!
+To use this feature, simply write Mermaid syntax in code blocks and view the rendered output through the preview panel. Copilot can assist by generating diagram syntax based on your descriptions.
 
 ### Code Coverage
 
