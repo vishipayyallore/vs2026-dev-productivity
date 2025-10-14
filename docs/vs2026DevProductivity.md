@@ -148,6 +148,41 @@ A new context menu provides comprehensive control over bottom margin information
 **Configuration Options:**
 Access these settings through **Tools > Options > Text Editor > General > Display > Show editing context in the editor**. For immediate adjustments, right-click the bottom margin to open the context menu and modify displayed information without disrupting your workflow.
 
+### File Exclusions in Search
+
+Visual Studio 2026 enhances search functionality by allowing developers to exclude specific file types from search results, reducing clutter and improving focus on relevant code files.
+
+**Key Benefits:**
+
+- **Cleaner Search Results**: Eliminate build artifacts, minified scripts, and generated files from search output
+- **Improved Performance**: Faster search execution by skipping unnecessary files
+- **Better Focus**: Concentrate on source code and relevant documentation only
+
+**Configuration Process:**
+
+1. Navigate to **Tools > Options > Environment > Search**
+2. Locate the **Exclude files from search results** section
+3. Add, edit, or remove glob patterns to control file exclusions
+4. Apply settings to customize your search experience
+
+**Search Behavior:**
+
+- **Quick Find**: Exclusions are automatically applied to streamline results
+- **Find in Files**: Exclusions work in addition to existing file type selections
+- **Toggle Control**: Use the toggle button next to file types to easily enable/disable exclusions
+
+**Common Exclusion Patterns:**
+
+- `*.min.js` - Minified JavaScript files
+- `bin/**` - Build output directories
+- `obj/**` - Compilation artifacts
+- `node_modules/**` - Package dependencies
+- `*.generated.*` - Auto-generated code files
+
+This feature significantly improves developer productivity by ensuring search operations focus on the files that matter most to your development workflow.
+
+## Next Demo
+
 ### Code Coverage
 
 Code coverage is now available in Visual Studio Community and Professional editions for the first time – ensuring your code is well-tested has never been easier! (Yet to explore)
