@@ -12,6 +12,43 @@
 
 ## 14 October 2025
 
+### Comment Driven Development (CDD)
+
+Visual Studio 2026 revolutionizes the development workflow with Comment Driven Development (CDD), enabling developers to write descriptive comments that GitHub Copilot transforms into production-ready code. This approach promotes better documentation while accelerating development cycles.
+
+**Core Benefits:**
+
+- **Documentation-First Approach**: Write clear, descriptive comments before implementing functionality
+- **Intelligent Code Generation**: Copilot interprets comment intent and generates appropriate code
+- **Reduced Development Time**: Skip boilerplate coding and focus on business logic
+- **Enhanced Code Maintainability**: Self-documenting code through meaningful comments
+
+**How It Works:**
+
+1. **Write Descriptive Comments**: Start with detailed comments explaining what you want to accomplish
+2. **Trigger Copilot**: Use `Ctrl+I` or the Copilot inline chat to generate code from comments
+3. **Review and Refine**: Evaluate generated code and provide additional context if needed
+4. **Iterate**: Add more comments and let Copilot build upon existing implementations
+
+**Example Workflow:**
+
+```csharp
+// Create a method that validates user email addresses
+// Check for proper format, domain existence, and length constraints
+// Return detailed validation results with specific error messages
+// TODO: Implement email validation logic here
+```
+
+After writing this comment, Copilot can generate a comprehensive email validation method with proper error handling, format checking, and domain validation logic.
+
+**Best Practices:**
+
+- Use specific, actionable language in comments
+- Include expected inputs, outputs, and edge cases
+- Mention relevant design patterns or architectural considerations
+- Specify error handling requirements and validation rules
+- Regularly review and refine generated code for accuracy and performance
+
 ### Adaptive Pasting
 
 > Let Copilot intelligently adjust your pasted code to seamlessly fit the context of your existing code – no more manual tweaking required!
