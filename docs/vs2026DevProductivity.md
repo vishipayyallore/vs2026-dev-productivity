@@ -69,6 +69,48 @@ flowchart TD
 
 To use this feature, simply write Mermaid syntax in code blocks and view the rendered output through the preview panel. Copilot can assist by generating diagram syntax based on your descriptions.
 
+### Code Actions at Your Fingertips
+
+Visual Studio 2026 enhances developer workflow by providing instant access to Copilot code actions directly from the context menu. This streamlined approach eliminates the need for manual prompt typing and accelerates common development tasks.
+
+**Available Actions:**
+
+- **Explain Code**: Get detailed explanations of selected code segments
+- **Generate Tests**: Automatically create unit tests for functions and classes
+- **Optimize Performance**: Receive suggestions for code optimization
+- **Fix Issues**: Apply automated fixes for common coding problems
+- **Add Documentation**: Generate comprehensive code comments and documentation
+
+**How to Use:**
+
+1. Right-click on any code selection in the editor
+2. Navigate to the **Copilot** submenu in the context menu
+3. Choose from the five available actions based on your current needs
+4. Review and apply the generated suggestions
+
+This feature significantly reduces development time by providing contextual assistance without interrupting your coding flow.
+
+### Enhanced Editor Controls
+
+Visual Studio 2026 introduces significant improvements to editor controls, particularly focusing on the bottom margin area that developers interact with frequently during coding sessions.
+
+**Unified Status Display:**
+The bottom margin now consolidates line, column, and character position into a single, comprehensive display. Clicking this unified display opens the "Go To Line" dialog for rapid navigation. When working with multiple selections, you'll see aggregate counts for selections, characters, and lines, with detailed information available by hovering over the selection margin.
+
+**Enhanced File Encoding Management:**
+File encoding information is now prominently displayed in the margin for quick reference. This feature supports:
+
+- Quick encoding identification for better file compatibility
+- Save/reopen functionality with specific encoding options
+- Multi-language support with consistent readability across systems
+- Context menu access for encoding selection with dropdown options
+
+**Customizable Context Menu:**
+A new context menu provides comprehensive control over bottom margin information display. This menu encompasses all editor margins, from zoom controls to the new encoding margin, allowing developers to customize their workspace according to their preferences.
+
+**Configuration Options:**
+Access these settings through **Tools > Options > Text Editor > General > Display > Show editing context in the editor**. For immediate adjustments, right-click the bottom margin to open the context menu and modify displayed information without disrupting your workflow.
+
 ### Code Coverage
 
 Code coverage is now available in Visual Studio Community and Professional editions for the first time – ensuring your code is well-tested has never been easier! (Yet to explore)
