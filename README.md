@@ -98,6 +98,215 @@ Note: The Minimal API no longer exposes Swagger. Use the integrated Scalar UI fo
 - New services live in `src/` and should reference `Aspire.ServiceDefaults` when appropriate.
 - Use the Aspire Host to run and debug multiple services at once.
 
+
+### **5-20 minutes: ReAct Search Agent** 🔥 **SHOWCASE**
+
+**The Challenge**: Build an intelligent web search agent that can reason through complex queries
+
+**Why This Matters**:
+
+- **Real-world utility** - Everyone needs better search capabilities
+- **ReAct Pattern** - Shows the reasoning + acting paradigm that powers all modern agents
+- **Immediate value** - Works with any topic, any query, right now
+
+#### **Technology Stack**
+
+| Component                | Purpose                               | Our Implementation                           |
+| ------------------------ | ------------------------------------- | -------------------------------------------- |
+| **🤖 Agent**             | ReAct reasoning system                | `create_react_agent()` with Azure OpenAI    |
+| **🔍 Web Search**        | Real-time information retrieval      | `TavilySearch()` with max_results=5          |
+| **⚡ Agent Executor**     | Orchestrates reasoning & actions      | `AgentExecutor()` with tools & verbose mode |
+| **🧠 LLM**               | Language model for reasoning          | Azure OpenAI GPT-4 deployment               |
+| **📝 Prompt Template**   | Guides agent behavior                 | ReAct prompts with format instructions      |
+| **📊 Response Schema**   | Structured output format              | Custom schemas with sources & confidence    |
+| **🌐 Web Interface**     | Professional UI                       | Streamlit with query templates & progress   |
+| **📈 Monitoring**        | Production observability             | LangSmith tracing for debugging & analytics |
+| **🔧 Tool Integration**  | External service connections          | LangChain tool ecosystem                     |
+| **⏱️ Error Handling**    | Production reliability               | Timeouts, retries, structured error responses |
+
+#### **LangChain & LangSmith Components**
+
+**🔗 LangChain Framework** - The foundation of our agent system:
+
+| Component | Purpose | Our Implementation |
+|-----------|---------|-------------------|
+| **🤖 Agent** | Core reasoning system | `create_react_agent()` with GPT-4 |
+| **🔧 Tools** | External capabilities | `TavilySearch()` for web search |
+| **⚡ Executor** | Orchestrates agent + tools | `AgentExecutor()` manages ReAct loop |
+| **📝 Prompts** | Guide agent behavior | ReAct prompts with format instructions |
+| **🔗 Chains** | Sequence operations | Tool calling → Response formatting |
+| **💾 Memory** | Conversation context | Built-in message history |
+| **📊 Callbacks** | Monitor execution | LangSmith integration for tracing |
+
+**📈 LangSmith Observability** - Production monitoring and debugging:
+
+| Feature | Benefit | Demo Value |
+|---------|---------|------------|
+| **🔍 Trace Visualization** | See every step of reasoning | Watch Think → Act → Observe cycle |
+| **⏱️ Performance Metrics** | Monitor response times | Track search latency and accuracy |
+| **🐛 Error Tracking** | Debug failed searches | Handle API timeouts and retries |
+| **📊 Analytics Dashboard** | Usage patterns and costs | Production deployment insights |
+| **🔄 Feedback Loops** | Improve agent responses | Human feedback integration |
+
+**🎯 Why This Tech Stack?**
+
+- **🏢 Enterprise Ready**: Azure OpenAI + LangSmith = production-grade security and monitoring
+- **🔄 Iterative Design**: ReAct pattern enables complex, multi-step reasoning
+- **🛠️ Extensible**: LangChain's tool ecosystem supports any API or service
+- **📈 Observable**: LangSmith provides the debugging and monitoring essential for production
+
+#### **ReAct Search Agent Architecture**
+
+```mermaid
+graph TB
+    %% User Input
+    USER[("👤 User Query<br/>'Latest AI developments 2025'")]
+    
+    %% Streamlit Interface
+    subgraph "🌐 Streamlit Web Interface"
+        UI[("Web Interface<br/>src/01-react-search-agent/app.py")]
+        TEMPLATES[("Query Templates<br/>Common Search Patterns")]
+        PROGRESS[("Progress Indicators<br/>Real-time Updates")]
+    end
+    
+    %% ReAct Agent Core
+    subgraph "🧠 ReAct Agent Engine"
+        AGENT[("ReactSearchAgent<br/>main.py")]
+        EXECUTOR[("Agent Executor<br/>LangChain Orchestration")]
+        
+        subgraph "🔄 ReAct Loop"
+            THINK1[("💭 THINK<br/>Analyze Query")]
+            ACT1[("🔍 ACT<br/>Search Web")]
+            OBSERVE1[("👀 OBSERVE<br/>Process Results")]
+            THINK2[("💭 THINK<br/>Need More Info?")]
+            ACT2[("🔍 ACT<br/>Refine Search")]
+            FINAL[("✅ CONCLUDE<br/>Synthesize Answer")]
+        end
+    end
+    
+    %% AI Services
+    subgraph "🤖 AI Services"
+        AZURE_LLM[("Azure OpenAI<br/>GPT-4 Reasoning")]
+        TAVILY_API[("Tavily Search<br/>Real-time Web Data")]
+    end
+    
+    %% Response Processing
+    subgraph "📄 Response System"
+        SCHEMA[("Response Schema<br/>schemas.py")]
+        SOURCES[("Source Citations<br/>URLs + Relevance")]
+        FORMAT[("Structured Output<br/>JSON + Markdown")]
+    end
+    
+    %% Monitoring
+    subgraph "📊 Production Monitoring"
+        LANGSMITH[("LangSmith Tracing<br/>Debug & Analytics")]
+        LOGS[("Error Handling<br/>Timeouts & Retries")]
+    end
+    
+    %% Flow Connections
+    USER --> UI
+    UI --> AGENT
+    AGENT --> EXECUTOR
+    
+    %% ReAct Flow
+    EXECUTOR --> THINK1
+    THINK1 --> ACT1
+    ACT1 --> OBSERVE1
+    OBSERVE1 --> THINK2
+    THINK2 -->|Need More Info| ACT2
+    THINK2 -->|Sufficient Info| FINAL
+    ACT2 --> OBSERVE1
+    
+    %% AI Service Connections
+    THINK1 --> AZURE_LLM
+    THINK2 --> AZURE_LLM
+    FINAL --> AZURE_LLM
+    ACT1 --> TAVILY_API
+    ACT2 --> TAVILY_API
+    
+    %% Response Processing
+    FINAL --> SCHEMA
+    SCHEMA --> SOURCES
+    SOURCES --> FORMAT
+    FORMAT --> UI
+    
+    %% Monitoring
+    EXECUTOR --> LANGSMITH
+    AGENT --> LOGS
+    
+    %% UI Features
+    UI --> TEMPLATES
+    UI --> PROGRESS
+    
+    %% Styling
+    classDef reactClass fill:#e3f2fd,stroke:#0277bd,stroke-width:3px
+    classDef aiClass fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef uiClass fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef dataClass fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef monitorClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    
+    class THINK1,THINK2,ACT1,ACT2,OBSERVE1,FINAL,AGENT,EXECUTOR reactClass
+    class AZURE_LLM,TAVILY_API aiClass
+    class UI,TEMPLATES,PROGRESS uiClass
+    class SCHEMA,SOURCES,FORMAT dataClass
+    class LANGSMITH,LOGS monitorClass
+```
+
+**Key ReAct Components Demonstrated:**
+
+- **🔄 Reasoning Loop**: Think → Act → Observe → Think cycle
+- **🧠 LLM Integration**: Azure OpenAI for intelligent reasoning
+- **🔍 Tool Integration**: Tavily for real-time web search
+- **📊 Production Features**: Error handling, monitoring, structured responses
+
+**Live Coding Demo**: `src/01-react-search-agent/` - **PRODUCTION-READY IMPLEMENTATION**
+
+#### **Key Demonstrations** (15 minutes)
+
+1. **ReAct Pattern in Action** (5 min) 🔥
+
+   ```bash
+   # Launch web interface for immediate impact
+   python run_project.py search-web
+   
+   # Show reasoning process:
+   # Query: "What are the latest developments in AI agents for 2025?"
+   # Watch the agent: Think → Search → Think → Search → Conclude
+   ```
+
+2. **Web Search Integration** (4 min)
+
+   ```python
+   # Core agent setup
+   from langchain_tavily import TavilySearch
+   from langchain.agents.react.agent import create_react_agent
+   
+   tools = [TavilySearch(max_results=5)]
+   agent = create_react_agent(llm, tools, react_prompt)
+   
+   # Demo: Live search with source verification
+   ```
+
+3. **Streamlit Interface** (3 min) ✅
+
+   ```python
+   # Professional web interface with:
+   # - Query templates for common searches
+   # - Real-time progress indicators  
+   # - Source verification and citations
+   # - Search history and analytics
+   ```
+
+4. **Production Patterns** (3 min)
+
+   ```bash
+   # Error handling, timeouts, retries
+   # Structured responses with confidence scores
+   # LangSmith tracing for debugging
+   ```
+
+**Demo Checkpoint**: Search for current tech news and show reasoning steps
+
 ## Contributing
 
 1. Fork and create a branch

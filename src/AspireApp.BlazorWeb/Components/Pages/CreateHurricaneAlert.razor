@@ -1,0 +1,178 @@
+@page "/hurricane-alerts/create"
+@using AspireApp.SharedLib.Dtos
+@using AspireApp.SharedLib.Models
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h1>Create Hurricane Alert</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">⚠️ New Hurricane Alert</h4>
+                </div>
+                <div class="card-body">
+                    @if (errorMessage != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Error:</strong> @errorMessage
+                        </div>
+                    }
+
+                    <EditForm Model="createDto" OnValidSubmit="SaveAlert" FormName="CreateHurricaneAlert">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary class="alert alert-danger" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Hurricane Name *</label>
+                                <InputText id="name" class="form-control" @bind-Value="createDto.Name" 
+                                          placeholder="e.g., Hurricane Milton" />
+                                <ValidationMessage For="() => createDto.Name" class="text-danger" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="category" class="form-label">Category *</label>
+                                <InputNumber id="category" class="form-control" @bind-Value="createDto.Category" 
+                                           min="1" max="5" />
+                                <small class="form-text text-muted">Saffir-Simpson scale (1-5)</small>
+                                <ValidationMessage For="() => createDto.Category" class="text-danger" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="windSpeed" class="form-label">Wind Speed (mph) *</label>
+                                <InputNumber id="windSpeed" class="form-control" @bind-Value="createDto.WindSpeedMph" 
+                                           step="0.1" min="0" />
+                                <ValidationMessage For="() => createDto.WindSpeedMph" class="text-danger" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="severity" class="form-label">Severity Level *</label>
+                                <InputSelect id="severity" class="form-select" @bind-Value="createDto.Severity">
+                                    <option value="@SeverityLevel.Low">Low</option>
+                                    <option value="@SeverityLevel.Medium">Medium</option>
+                                    <option value="@SeverityLevel.High">High</option>
+                                    <option value="@SeverityLevel.Critical">Critical</option>
+                                </InputSelect>
+                                <ValidationMessage For="() => createDto.Severity" class="text-danger" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location *</label>
+                            <InputText id="location" class="form-control" @bind-Value="createDto.Location" 
+                                      placeholder="e.g., Gulf of Mexico, approaching Florida West Coast" />
+                            <ValidationMessage For="() => createDto.Location" class="text-danger" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="expectedLandfall" class="form-label">Expected Landfall (UTC)</label>
+                            <InputDate id="expectedLandfall" class="form-control" @bind-Value="expectedLandfallDate" 
+                                      Type="InputDateType.DateTimeLocal" />
+                            <small class="form-text text-muted">Leave empty if not applicable</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description *</label>
+                            <InputTextArea id="description" class="form-control" @bind-Value="createDto.Description" 
+                                          rows="4" placeholder="Detailed description of the hurricane threat and safety instructions" />
+                            <ValidationMessage For="() => createDto.Description" class="text-danger" />
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary" @onclick="Cancel">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn btn-danger" disabled="@isSaving">
+                                @if (isSaving)
+                                {
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                }
+                                <i class="fas fa-save"></i> Create Alert
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">📊 Preview</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h6>@(string.IsNullOrEmpty(createDto.Name) ? "Hurricane Name" : createDto.Name)</h6>
+                        <p><strong>Category:</strong> @createDto.Category</p>
+                        <p><strong>Wind Speed:</strong> @createDto.WindSpeedMph mph</p>
+                        <p><strong>Severity:</strong> <span class="badge @GetSeverityBadgeClass(createDto.Severity)">@createDto.Severity</span></p>
+                        <p><strong>Location:</strong> @(string.IsNullOrEmpty(createDto.Location) ? "Location not specified" : createDto.Location)</p>
+                        @if (expectedLandfallDate.HasValue)
+                        {
+                            <p><strong>Expected Landfall:</strong> @expectedLandfallDate.Value.ToString("MMM dd, yyyy HH:mm")</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateHurricaneAlertDto createDto = new();
+    private DateTime? expectedLandfallDate;
+    private bool isSaving = false;
+    private string? errorMessage;
+
+    private async Task SaveAlert()
+    {
+        try
+        {
+            isSaving = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            // Convert local datetime to UTC for the DTO
+            createDto.ExpectedLandfall = expectedLandfallDate?.ToUniversalTime();
+
+            var response = await Http.PostAsJsonAsync("/api/hurricane-alerts", createDto);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                Navigation.NavigateTo("/hurricane-alerts");
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                errorMessage = $"Failed to create alert: {errorContent}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occurred: {ex.Message}";
+        }
+        finally
+        {
+            isSaving = false;
+            StateHasChanged();
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/hurricane-alerts");
+    }
+
+    private static string GetSeverityBadgeClass(SeverityLevel severity) => severity switch
+    {
+        SeverityLevel.Low => "badge-success",
+        SeverityLevel.Medium => "badge-warning",
+        SeverityLevel.High => "badge-danger",
+        SeverityLevel.Critical => "badge-dark",
+        _ => "badge-secondary"
+    };
+}

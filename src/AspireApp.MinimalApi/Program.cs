@@ -2,6 +2,7 @@ using Aspire.MinimalApi; // for DemoHelpers
 using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
 using AspireApp.MinimalApi;
+using AspireApp.MinimalApi.Endpoints;
 using AspireApp.ServiceDefaults;
 using AspireApp.SharedLib.Extensions;
 using AspireApp.SharedLib.Models;
@@ -137,6 +138,9 @@ app.MapDefaultEndpoints();
 
 // Map product endpoints
 app.MapProductEndpoints();
+
+// Map hurricane alert endpoints
+app.MapHurricaneAlertEndpoints();
 
 // Simple health check endpoint
 app.MapGet("/", () => new
