@@ -233,6 +233,55 @@ This feature significantly improves developer productivity by ensuring search op
 
 ## Next Demo
 
+### Hurricane Alert Feature Implementation
+
+Successfully implemented a comprehensive **Hurricane Alert** feature demonstrating end-to-end development capabilities in Visual Studio 2026 using Comment Driven Development (CDD).
+
+**Implementation Highlights:**
+
+**Backend API (AspireApp.MinimalApi):**
+
+- Complete CRUD operations for hurricane alerts (`/api/hurricane-alerts`)
+- Entity Framework Core integration with PostgreSQL
+- Data validation and error handling
+- RESTful API design with OpenAPI documentation
+
+**API Gateway (AspireApp.ApiGateway):**
+
+- Automatic routing configuration via YARP reverse proxy
+- Seamless request forwarding to MinimalApi service
+
+**Frontend (AspireApp.BlazorWeb):**
+
+- Interactive hurricane alert dashboard with real-time data
+- Create/edit forms with validation
+- Responsive card-based layout with severity indicators
+- Filter functionality (active vs. all alerts)
+
+**Shared Models (AspireApp.Shared):**
+
+- `HurricaneAlert` entity with comprehensive properties
+- Data Transfer Objects (DTOs) for API communication
+- Severity levels and category classifications
+
+**Key Features Demonstrated:**
+
+- 🌐 **Full-Stack Integration**: Blazor → API Gateway → MinimalApi → Database
+- 📊 **Real-Time Data**: Dynamic alert status and severity tracking
+- 🎨 **Rich UI Components**: Bootstrap styling with category colors and badges
+- 🔧 **Database Schema**: EF Core migrations with seed data
+- 🚀 **Modern Architecture**: Clean separation of concerns across projects
+
+**Development Process:**
+
+1. **Comment-First Approach**: Used CDD to outline functionality in comments
+2. **Model Definition**: Created comprehensive Hurricane Alert models
+3. **API Development**: Implemented RESTful endpoints with validation
+4. **UI Implementation**: Built responsive Blazor components
+5. **Integration Testing**: Verified end-to-end functionality
+
+This implementation showcases the power of Visual Studio 2026's productivity features for rapid, full-stack application development.
+
 ### Generate Unit Tests Code
 
 To be done
