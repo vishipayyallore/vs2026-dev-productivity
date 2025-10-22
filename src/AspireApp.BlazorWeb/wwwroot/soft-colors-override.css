@@ -1,0 +1,271 @@
+/* Soft Color Theme Override for VS2026 Dev Productivity */
+
+/* Apply soft colors globally */
+:root {
+    --bs-primary: #a8c8ec;
+    --bs-primary-rgb: 168, 200, 236;
+    --bs-secondary: #e2e8f0;
+    --bs-success: #9ae6b4;
+    --bs-info: #90cdf4;
+    --bs-warning: #faf089;
+    --bs-danger: #feb2b2;
+}
+
+/* Update body and html with soft background */
+html, body {
+    background-color: #fafbfc !important;
+    color: #4a5568 !important;
+}
+
+/* Soft Bootstrap color overrides */
+.bg-primary {
+    background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+}
+
+.bg-success {
+    background: linear-gradient(135deg, #9ae6b4 0%, #68d391 100%) !important;
+}
+
+.bg-info {
+    background: linear-gradient(135deg, #90cdf4 0%, #63b3ed 100%) !important;
+}
+
+.bg-warning {
+    background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%) !important;
+}
+
+.bg-danger {
+    background: linear-gradient(135deg, #feb2b2 0%, #fc8181 100%) !important;
+}
+
+.text-primary {
+    color: #7c9cbf !important;
+}
+
+.text-success {
+  color: #48bb78 !important;
+}
+
+.text-info {
+    color: #4299e1 !important;
+}
+
+.text-warning {
+    color: #ed8936 !important;
+}
+
+.text-danger {
+    color: #e53e3e !important;
+}
+
+/* Soft button styles */
+.btn-primary {
+    background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+ border-color: #a8c8ec !important;
+    color: #2d3748 !important;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #7faddb 0%, #6b9bd2 100%) !important;
+    border-color: #7faddb !important;
+  color: #2d3748 !important;
+    transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(127, 173, 219, 0.25);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #9ae6b4 0%, #68d391 100%) !important;
+    border-color: #9ae6b4 !important;
+    color: #1a202c !important;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #90cdf4 0%, #63b3ed 100%) !important;
+    border-color: #90cdf4 !important;
+    color: #1a202c !important;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%) !important;
+    border-color: #faf089 !important;
+    color: #744210 !important;
+}
+
+.btn-danger {
+background: linear-gradient(135deg, #feb2b2 0%, #fc8181 100%) !important;
+    border-color: #feb2b2 !important;
+    color: #742a2a !important;
+}
+
+/* Update hero section */
+.hero-section {
+ background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%) !important;
+    color: #2d3748 !important;
+}
+
+/* Update sidebar gradient */
+.sidebar {
+    background: linear-gradient(180deg, #a8c8ec 0%, #90cdf4 70%) !important;
+}
+
+/* Soft card styles */
+.card {
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03) !important;
+background-color: white !important;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06) !important;
+    border-color: #cbd5e0 !important;
+}
+
+/* Update top row */
+.top-row {
+    background-color: #f7fafc !important;
+    border-bottom-color: #e2e8f0 !important;
+}
+
+/* Background utility updates */
+.bg-light {
+    background-color: #f7fafc !important;
+}
+
+.bg-secondary {
+    background-color: #edf2f7 !important;
+}
+
+/* Text utilities */
+.text-muted {
+    color: #a0aec0 !important;
+}
+
+/* Badge updates */
+.badge {
+    font-weight: 500 !important;
+}
+
+/* Form controls */
+.form-control {
+    border-color: #e2e8f0 !important;
+  background-color: #fafbfc !important;
+}
+
+.form-control:focus {
+  border-color: #a8c8ec !important;
+    box-shadow: 0 0 0 0.25rem rgba(168, 200, 236, 0.25) !important;
+}
+
+/* Alert updates */
+.alert-primary {
+    background-color: #ebf4ff !important;
+    border-color: #bee3f8 !important;
+    color: #2a69ac !important;
+}
+
+.alert-success {
+    background-color: #f0fff4 !important;
+    border-color: #c6f6d5 !important;
+    color: #276749 !important;
+}
+
+.alert-info {
+    background-color: #ebf8ff !important;
+    border-color: #bee3f8 !important;
+    color: #2c5282 !important;
+}
+
+.alert-warning {
+    background-color: #fffbeb !important;
+    border-color: #faf089 !important;
+    color: #744210 !important;
+}
+
+.alert-danger {
+    background-color: #fed7d7 !important;
+    border-color: #feb2b2 !important;
+    color: #742a2a !important;
+}
+
+/* Focus styles */
+.btn:focus, .btn:active:focus {
+    box-shadow: 0 0 0 0.25rem rgba(168, 200, 236, 0.25) !important;
+}
+
+/* Table styles */
+.table thead th {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
+    color: #4a5568 !important;
+}
+
+/* Pagination */
+.pagination .page-link {
+  color: #7c9cbf !important;
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+    border-color: #a8c8ec !important;
+    color: #2d3748 !important;
+}
+
+.pagination .page-link:hover {
+    background-color: #f7fafc !important;
+    color: #5a7ba7 !important;
+}
+
+/* Navigation styles */
+.nav-link {
+    color: #e2e8f0 !important;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+/* Outline button styles */
+.btn-outline-primary {
+    color: #7c9cbf !important;
+    border-color: #a8c8ec !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #a8c8ec !important;
+    border-color: #a8c8ec !important;
+    color: #2d3748 !important;
+}
+
+.btn-outline-secondary {
+    color: #718096 !important;
+    border-color: #cbd5e0 !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #edf2f7 !important;
+    border-color: #cbd5e0 !important;
+    color: #4a5568 !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #2d3748 !important;
+}
+
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+    color: #2d3748 !important;
+}
+
+/* Lead text */
+.lead {
+ color: #718096 !important;
+}
+
+/* Link styles */
+a {
+    color: #7c9cbf !important;
+}
+
+a:hover {
+    color: #5a7ba7 !important;
+}
