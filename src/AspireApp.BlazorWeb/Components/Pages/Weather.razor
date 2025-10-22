@@ -9,47 +9,47 @@
 <PageTitle>Weather - VS2026 Dev Productivity</PageTitle>
 
 <div class="weather-container">
-    <div class="row justify-content-center">
+ <div class="row justify-content-center">
         <div class="col-lg-10 col-xl-8">
             <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold text-primary mb-3">
-                    <i class="bi bi-cloud-sun me-3"></i>
-                    Weather Forecast
-                </h1>
-                <p class="lead text-muted">
-                    5-day weather forecast with real-time data from our weather service
-                </p>
+    <h1 class="display-4 fw-bold text-soft-primary mb-3">
+  <i class="bi bi-cloud-sun me-3"></i>
+           Weather Forecast
+           </h1>
+         <p class="lead text-muted">
+    5-day weather forecast with real-time data from our weather service
+        </p>
             </div>
 
-            @if (isLoading)
+    @if (isLoading)
             {
-                <div class="text-center py-5">
-                    <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <p class="text-muted">Fetching latest weather data...</p>
-                </div>
+       <div class="text-center py-5">
+        <div class="spinner-border text-soft-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
+             <span class="visually-hidden">Loading...</span>
+   </div>
+           <p class="text-muted">Fetching latest weather data...</p>
+       </div>
             }
-            else if (!string.IsNullOrEmpty(errorMessage))
-            {
-                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <div>
-                        <strong>Weather Service Unavailable:</strong> @errorMessage
-                        <br />
-                        <small class="text-muted">Showing sample data instead.</small>
-                    </div>
-                </div>
-            }
+          else if (!string.IsNullOrEmpty(errorMessage))
+     {
+                <div class="alert alert-soft-warning d-flex align-items-center" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+   <div>
+        <strong>Weather Service Unavailable:</strong> @errorMessage
+  <br />
+    <small class="text-muted">Showing sample data instead.</small>
+  </div>
+     </div>
+      }
 
-            @if (forecasts != null)
-            {
-                <div class="weather-cards">
-                    <div class="row g-4">
-                        @foreach (var (forecast, index) in forecasts.Select((f, i) => (f, i)))
-                        {
-                            <div class="col-lg-4 col-md-6">
-                                <div class="weather-card @(index == 0 ? "today" : "")">
+   @if (forecasts != null)
+      {
+   <div class="weather-cards">
+         <div class="row g-4">
+         @foreach (var (forecast, index) in forecasts.Select((f, i) => (f, i)))
+ {
+         <div class="col-lg-4 col-md-6">
+     <div class="weather-card @(index == 0 ? "today" : "")">
                                     <div class="weather-header">
                                         <div class="date-info">
                                             <div class="day-name">@forecast.Date.ToString("dddd")</div>
@@ -103,7 +103,7 @@
                 </div>
                 
                 <div class="weather-actions text-center mt-5">
-                    <button class="btn btn-primary btn-lg" @onclick="RefreshWeather" disabled="@isLoading">
+                    <button class="btn btn-soft-primary btn-lg" @onclick="RefreshWeather" disabled="@isLoading">
                         <i class="bi bi-arrow-clockwise me-2"></i>
                         @if (isLoading)
                         {
@@ -111,55 +111,56 @@
                         }
                         Refresh Forecast
                     </button>
-                </div>
-            }
+          </div>
+     }
         </div>
     </div>
 </div>
 
 <style>
-    .weather-container {
+  .weather-container {
         padding: 2rem 0;
         min-height: calc(100vh - 3.5rem);
     }
     
-    .weather-card {
-        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-        border-radius: 1.25rem;
+   .weather-card {
+        background: linear-gradient(135deg, #a8c8ec 0%, #90cdf4 100%);
+   border-radius: 1.25rem;
         padding: 1.5rem;
-        color: white;
-        box-shadow: 0 8px 32px rgba(116, 185, 255, 0.3);
-        transition: all 0.3s ease;
+     color: #2d3748;
+        box-shadow: 0 8px 32px rgba(168, 200, 236, 0.2);
+ transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        border: 1px solid rgba(255, 255, 255, 0.2);
+ }
     
     .weather-card.today {
-        background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
-        box-shadow: 0 8px 32px rgba(253, 121, 168, 0.3);
+   background: linear-gradient(135deg, #feb2b2 0%, #fc8181 100%);
+   box-shadow: 0 8px 32px rgba(254, 178, 178, 0.2);
         transform: scale(1.02);
+        color: #742a2a;
     }
     
-    .weather-card::before {
+  .weather-card::before {
         content: '';
-        position: absolute;
+    position: absolute;
         top: 0;
-        left: 0;
-        right: 0;
+   left: 0;
+  right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="weatherPattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23weatherPattern)"/></svg>') repeat;
-        opacity: 0.4;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="softWeatherPattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23softWeatherPattern)"/></svg>') repeat;
+        opacity: 0.3;
         pointer-events: none;
     }
     
     .weather-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 12px 40px rgba(116, 185, 255, 0.4);
+        transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 40px rgba(168, 200, 236, 0.25);
     }
     
     .weather-card.today:hover {
-        box-shadow: 0 12px 40px rgba(253, 121, 168, 0.4);
+        box-shadow: 0 12px 40px rgba(254, 178, 178, 0.25);
     }
     
     .weather-header {
@@ -183,13 +184,13 @@
     }
     
     .today-badge {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.25);
         border-radius: 1rem;
-        padding: 0.25rem 0.75rem;
+     padding: 0.25rem 0.75rem;
         font-size: 0.75rem;
         font-weight: 500;
-        margin-top: 0.5rem;
-        display: inline-block;
+     margin-top: 0.5rem;
+    display: inline-block;
     }
     
     .weather-icon {
@@ -239,9 +240,9 @@
     .weather-details {
         display: flex;
         justify-content: space-around;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        padding-top: 1rem;
-        position: relative;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+ padding-top: 1rem;
+     position: relative;
         z-index: 2;
     }
     

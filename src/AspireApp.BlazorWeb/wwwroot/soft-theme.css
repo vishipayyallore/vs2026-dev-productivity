@@ -1,0 +1,200 @@
+/* Soft Color Theme for Blazor UI */
+:root {
+    /* Soft Color Palette */
+    --soft-primary: #a8c8ec;
+    --soft-primary-dark: #7faddb;
+    --soft-secondary: #e2e8f0;
+    --soft-success: #9ae6b4;
+    --soft-info: #90cdf4;
+    --soft-warning: #faf089;
+    --soft-danger: #feb2b2;
+    
+    /* Text Colors */
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --text-light: #a0aec0;
+    
+    /* Background Colors */
+    --bg-primary: #fafbfc;
+    --bg-secondary: #f7fafc;
+    --bg-tertiary: #edf2f7;
+}
+
+/* Override default color scheme */
+html, body {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+}
+
+/* Soft button styles */
+.btn-soft-primary {
+    background: linear-gradient(135deg, var(--soft-primary) 0%, var(--soft-primary-dark) 100%);
+    border: none;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.btn-soft-primary:hover {
+    background: linear-gradient(135deg, var(--soft-primary-dark) 0%, #6b9bd2 100%);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(127, 173, 219, 0.25);
+}
+
+.btn-soft-success {
+    background: linear-gradient(135deg, var(--soft-success) 0%, #68d391 100%);
+    border: none;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.btn-soft-info {
+    background: linear-gradient(135deg, var(--soft-info) 0%, #63b3ed 100%);
+    border: none;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Soft background utilities */
+.bg-soft-primary {
+    background: linear-gradient(135deg, var(--soft-primary) 0%, var(--soft-primary-dark) 100%) !important;
+}
+
+.bg-soft-success {
+    background: linear-gradient(135deg, var(--soft-success) 0%, #68d391 100%) !important;
+}
+
+.bg-soft-info {
+    background: linear-gradient(135deg, var(--soft-info) 0%, #63b3ed 100%) !important;
+}
+
+.bg-soft-warning {
+    background: linear-gradient(135deg, var(--soft-warning) 0%, #f6e05e 100%) !important;
+}
+
+.bg-soft-danger {
+    background: linear-gradient(135deg, var(--soft-danger) 0%, #fc8181 100%) !important;
+}
+
+/* Soft text colors */
+.text-soft-primary {
+    color: #7c9cbf !important;
+}
+
+.text-soft-success {
+    color: #48bb78 !important;
+}
+
+.text-soft-info {
+    color: #4299e1 !important;
+}
+
+.text-soft-warning {
+    color: #ed8936 !important;
+}
+
+.text-soft-danger {
+    color: #e53e3e !important;
+}
+
+/* Soft card styles */
+.card-soft {
+    border: 1px solid var(--soft-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.card-soft:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e0;
+}
+
+/* Soft hero section */
+.hero-soft {
+    background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+    color: var(--text-primary);
+    position: relative;
+}
+
+.hero-soft::before {
+    content: '';
+    position: absolute;
+    top: 0;
+ left: 0;
+ right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="soft-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="rgba(168,200,236,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23soft-grain)"/></svg>') repeat;
+    opacity: 0.5;
+}
+
+/* Soft badges */
+.badge-soft {
+    background-color: var(--soft-primary);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.badge-soft.badge-success {
+    background-color: var(--soft-success);
+}
+
+.badge-soft.badge-info {
+    background-color: var(--soft-info);
+}
+
+.badge-soft.badge-warning {
+    background-color: var(--soft-warning);
+}
+
+.badge-soft.badge-danger {
+    background-color: var(--soft-danger);
+}
+
+/* Soft navbar override */
+.navbar-soft {
+background: linear-gradient(135deg, var(--soft-primary) 0%, var(--soft-primary-dark) 100%) !important;
+}
+
+/* Soft forms */
+.form-control-soft {
+border-color: var(--soft-secondary);
+    background-color: var(--bg-secondary);
+}
+
+.form-control-soft:focus {
+    border-color: var(--soft-primary);
+    box-shadow: 0 0 0 0.25rem rgba(168, 200, 236, 0.25);
+}
+
+/* Soft alerts */
+.alert-soft-primary {
+    background-color: #ebf4ff;
+    border-color: #bee3f8;
+    color: #2a69ac;
+}
+
+.alert-soft-success {
+    background-color: #f0fff4;
+    border-color: #c6f6d5;
+    color: #276749;
+}
+
+.alert-soft-info {
+    background-color: #ebf8ff;
+    border-color: #bee3f8;
+    color: #2c5282;
+}
+
+.alert-soft-warning {
+    background-color: #fffbeb;
+    border-color: #faf089;
+    color: #744210;
+}
+
+.alert-soft-danger {
+    background-color: #fed7d7;
+    border-color: #feb2b2;
+    color: #742a2a;
+}
