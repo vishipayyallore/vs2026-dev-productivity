@@ -1,0 +1,150 @@
+/* Navigation Visibility Fix for Soft Color Theme */
+
+/* Fix sidebar background with proper soft gradient */
+.sidebar {
+    background: linear-gradient(180deg, #a8c8ec 0%, #90cdf4 70%) !important;
+}
+
+/* Fix navbar brand visibility */
+.navbar-brand,
+.navbar-brand * {
+    color: #1a202c !important;
+    font-weight: 600 !important;
+}
+
+/* Fix ALL navigation text to be dark and visible */
+.nav-item .nav-link,
+.nav-item .nav-link *,
+.nav-item .nav-link span,
+.nav-link,
+.nav-link *,
+.sidebar .nav-link,
+.sidebar .nav-link * {
+    color: #1a202c !important;
+    font-weight: 500 !important;
+}
+
+/* Fix navigation link hover states */
+.nav-item .nav-link:hover,
+.nav-item .nav-link:hover *,
+.nav-link:hover,
+.nav-link:hover *,
+.sidebar .nav-link:hover,
+.sidebar .nav-link:hover * {
+    color: #1a202c !important;
+    background-color: rgba(26, 32, 44, 0.08) !important;
+}
+
+/* Fix active navigation link */
+.nav-item .nav-link.active,
+.nav-item .nav-link.active *,
+.nav-link.active,
+.nav-link.active *,
+.sidebar .nav-link.active,
+.sidebar .nav-link.active * {
+    color: #1a202c !important;
+    background-color: rgba(26, 32, 44, 0.15) !important;
+    font-weight: 600 !important;
+}
+
+/* Fix navigation headers */
+.nav-header,
+.nav-item .nav-header,
+.nav-item .nav-header *,
+.sidebar .nav-header,
+.sidebar .nav-header * {
+    color: #4a5568 !important;
+}
+
+/* Fix muted text in navigation */
+.nav-item .nav-link.text-muted,
+.nav-item .nav-link.text-muted *,
+.nav-item .text-muted,
+.nav-item .text-muted *,
+.sidebar .text-muted,
+.sidebar .text-muted * {
+    color: #718096 !important;
+}
+
+/* Fix small text in navigation */
+.nav-item .nav-link.small,
+.nav-item .nav-link.small *,
+.sidebar .small,
+.sidebar .small * {
+    color: #718096 !important;
+}
+
+/* Fix navigation icons - inherit parent color */
+.nav-item .bi,
+.sidebar .bi,
+.nav-link .bi {
+    color: inherit !important;
+}
+
+/* Ensure navbar top row has proper background and text */
+.navbar .top-row,
+.top-row {
+  background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+}
+
+/* Force all sidebar text to be visible */
+.sidebar,
+.sidebar * {
+    color: #1a202c;
+}
+
+/* Override any inherited text colors in sidebar */
+.sidebar .text-light,
+.sidebar .text-white {
+    color: #1a202c !important;
+}
+
+/* Fix nav-item container */
+.nav-item,
+.nav-item * {
+    color: #1a202c !important;
+}
+
+/* Fix badges in navigation to be visible */
+.nav-item .badge,
+.sidebar .badge {
+    background-color: rgba(26, 32, 44, 0.15) !important;
+    color: #1a202c !important;
+    font-weight: 500 !important;
+}
+
+/* Fix system info section specifically */
+.nav-item .nav-link.small,
+.nav-item .nav-link.small span {
+    color: #718096 !important;
+}
+
+/* Ensure all text in navigation is properly colored */
+.sidebar a,
+.sidebar a *,
+.sidebar span,
+.sidebar div {
+    color: inherit !important;
+}
+
+/* Fix hover transitions */
+.nav-item .nav-link {
+    transition: all 0.15s ease-in-out !important;
+}
+
+.nav-item .nav-link:hover {
+    transform: translateX(4px) !important;
+}
+
+/* Fix Bootstrap overrides specifically for navigation */
+.sidebar .navbar-dark .navbar-brand {
+    color: #1a202c !important;
+}
+
+.sidebar .navbar-dark .nav-link {
+    color: #1a202c !important;
+}
+
+.sidebar .navbar-dark .nav-link:hover {
+    color: #1a202c !important;
+}

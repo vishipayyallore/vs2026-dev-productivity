@@ -17,6 +17,45 @@ html, body {
     color: #4a5568 !important;
 }
 
+/* NAVIGATION FIXES - Ensure text is visible on soft background */
+.sidebar {
+    background: linear-gradient(180deg, #a8c8ec 0%, #90cdf4 70%) !important;
+}
+
+.navbar-brand {
+    color: #1a202c !important;
+    font-weight: 600 !important;
+}
+
+.nav-item .nav-link {
+    color: #1a202c !important;
+    font-weight: 500 !important;
+}
+
+.nav-item .nav-link:hover {
+    color: #1a202c !important;
+    background-color: rgba(26, 32, 44, 0.08) !important;
+}
+
+.nav-item .nav-link.active {
+    color: #1a202c !important;
+    background-color: rgba(26, 32, 44, 0.15) !important;
+    font-weight: 600 !important;
+}
+
+.nav-header {
+    color: #4a5568 !important;
+}
+
+.nav-item .text-muted {
+    color: #718096 !important;
+}
+
+/* Navbar top row update */
+.top-row {
+    background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+}
+
 /* Soft Bootstrap color overrides */
 .bg-primary {
     background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
@@ -67,7 +106,7 @@ html, body {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #7faddb 0%, #6b9bd2 100%) !important;
+  background: linear-gradient(135deg, #7faddb 0%, #6b9bd2 100%) !important;
     border-color: #7faddb !important;
   color: #2d3748 !important;
     transform: translateY(-1px);
@@ -102,11 +141,6 @@ background: linear-gradient(135deg, #feb2b2 0%, #fc8181 100%) !important;
 .hero-section {
  background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%) !important;
     color: #2d3748 !important;
-}
-
-/* Update sidebar gradient */
-.sidebar {
-    background: linear-gradient(180deg, #a8c8ec 0%, #90cdf4 70%) !important;
 }
 
 /* Soft card styles */
@@ -167,7 +201,7 @@ background-color: white !important;
 .alert-success {
     background-color: #f0fff4 !important;
     border-color: #c6f6d5 !important;
-    color: #276749 !important;
+ color: #276749 !important;
 }
 
 .alert-info {
@@ -178,7 +212,7 @@ background-color: white !important;
 
 .alert-warning {
     background-color: #fffbeb !important;
-    border-color: #faf089 !important;
+  border-color: #faf089 !important;
     color: #744210 !important;
 }
 
@@ -195,8 +229,8 @@ background-color: white !important;
 
 /* Table styles */
 .table thead th {
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
-    color: #4a5568 !important;
+background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
+  color: #4a5568 !important;
 }
 
 /* Pagination */
@@ -233,7 +267,7 @@ background-color: white !important;
 .btn-outline-primary:hover {
     background-color: #a8c8ec !important;
     border-color: #a8c8ec !important;
-    color: #2d3748 !important;
+  color: #2d3748 !important;
 }
 
 .btn-outline-secondary {
