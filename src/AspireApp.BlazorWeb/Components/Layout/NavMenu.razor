@@ -135,6 +135,7 @@
         color: #374151 !important;
     }
 
+    /* System info styling - clean and simple */
     .system-info {
         color: #374151 !important;
         font-weight: 500 !important;
@@ -144,18 +145,6 @@
         align-items: center !important;
         border-radius: 0.375rem;
         margin: 0.125rem 0;
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        transition: none !important;
-        cursor: default !important;
-    }
-
-    .system-info:hover {
-        background: transparent !important;
-        transform: none !important;
-        box-shadow: none !important;
-        border: none !important;
     }
 
     .system-info span {
@@ -169,6 +158,21 @@
         width: 1.25rem;
         height: 1.25rem;
         margin-right: 0.75rem !important;
+    }
+
+    .nav-link.system-info {
+        cursor: default !important;
+        pointer-events: none !important;
+    }
+
+    .nav-link.system-info:hover {
+        background-color: transparent !important;
+        transform: none !important;
+        color: #374151 !important;
+    }
+
+    .nav-link.system-info span {
+        color: #374151 !important;
     }
 
     .nav-link i {

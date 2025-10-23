@@ -124,7 +124,7 @@
     min-height: 2rem;
 }
 
-/* System info items - non-interactive styling with proper appearance */
+/* System info items - simple, clean styling */
 .nav-item .system-info,
 .sidebar .system-info {
     color: #374151 !important;
@@ -135,19 +135,6 @@
     min-height: 2rem;
     border-radius: 0.375rem;
     margin: 0.125rem 0;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    transition: none !important;
-    cursor: default !important;
-}
-
-.nav-item .system-info:hover,
-.sidebar .system-info:hover {
-    background: transparent !important;
-    transform: none !important;
-    box-shadow: none !important;
-    border: none !important;
 }
 
 .nav-item .system-info span,
