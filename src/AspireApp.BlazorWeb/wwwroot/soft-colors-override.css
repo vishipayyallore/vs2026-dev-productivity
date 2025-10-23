@@ -1,25 +1,25 @@
 /* Soft Color Theme Override for VS2026 Dev Productivity */
 
-/* Apply soft colors globally */
+/* Apply vibrant soft colors globally */
 :root {
-    --bs-primary: #a8c8ec;
-    --bs-primary-rgb: 168, 200, 236;
-    --bs-secondary: #e2e8f0;
-    --bs-success: #9ae6b4;
-    --bs-info: #90cdf4;
-    --bs-warning: #faf089;
-    --bs-danger: #feb2b2;
+    --bs-primary: #0ea5e9;
+    --bs-primary-rgb: 14, 165, 233;
+    --bs-secondary: #f1f5f9;
+    --bs-success: #22c55e;
+    --bs-info: #06b6d4;
+    --bs-warning: #f59e0b;
+    --bs-danger: #ef4444;
 }
 
-/* Update body and html with soft background */
+/* Update body and html with vibrant soft background */
 html, body {
-    background-color: #fafbfc !important;
-    color: #4a5568 !important;
+    background-color: #ffffff !important;
+    color: #1e293b !important;
 }
 
-/* NAVIGATION FIXES - Ensure text is visible on soft background */
+/* NAVIGATION FIXES - Ensure text is visible on vibrant background */
 .sidebar {
-    background: linear-gradient(180deg, #a8c8ec 0%, #90cdf4 70%) !important;
+    background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 70%) !important;
 }
 
 .navbar-brand {
@@ -97,32 +97,32 @@ html, body {
     color: #e53e3e !important;
 }
 
-/* Soft button styles */
+/* Vibrant button styles */
 .btn-primary {
-    background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
- border-color: #a8c8ec !important;
-    color: #2d3748 !important;
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%) !important;
+ border-color: #0ea5e9 !important;
+    color: white !important;
     font-weight: 500;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #7faddb 0%, #6b9bd2 100%) !important;
-    border-color: #7faddb !important;
-  color: #2d3748 !important;
+  background: linear-gradient(135deg, #0284c7 0%, #0891b2 100%) !important;
+    border-color: #0284c7 !important;
+  color: white !important;
     transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(127, 173, 219, 0.25);
+  box-shadow: 0 4px 8px rgba(14, 165, 233, 0.25);
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #9ae6b4 0%, #68d391 100%) !important;
-    border-color: #9ae6b4 !important;
-    color: #1a202c !important;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    border-color: #22c55e !important;
+    color: white !important;
 }
 
 .btn-info {
-    background: linear-gradient(135deg, #90cdf4 0%, #63b3ed 100%) !important;
-    border-color: #90cdf4 !important;
-    color: #1a202c !important;
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%) !important;
+    border-color: #06b6d4 !important;
+    color: white !important;
 }
 
 .btn-warning {
@@ -139,8 +139,8 @@ background: linear-gradient(135deg, #feb2b2 0%, #fc8181 100%) !important;
 
 /* Update hero section */
 .hero-section {
- background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%) !important;
-    color: #2d3748 !important;
+ background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+    color: #0f172a !important;
 }
 
 /* Soft card styles */
