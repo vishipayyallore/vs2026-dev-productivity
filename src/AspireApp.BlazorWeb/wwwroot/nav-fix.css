@@ -1,18 +1,20 @@
-/* Navigation Visibility Fix for Soft Color Theme */
+/* Navigation Soft Lighter Color Theme */
 
-/* Fix sidebar background with proper soft gradient */
+/* Soft white sidebar background with subtle gradient */
 .sidebar {
-    background: linear-gradient(180deg, #a8c8ec 0%, #90cdf4 70%) !important;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+    border-right: 1px solid rgba(226, 232, 240, 0.6) !important;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Fix navbar brand visibility */
+/* Navbar brand with black font on white background */
 .navbar-brand,
 .navbar-brand * {
     color: #1a202c !important;
     font-weight: 600 !important;
 }
 
-/* Fix ALL navigation text to be dark and visible */
+/* Navigation links with black text on white background */
 .nav-item .nav-link,
 .nav-item .nav-link *,
 .nav-item .nav-link span,
@@ -24,7 +26,7 @@
     font-weight: 500 !important;
 }
 
-/* Fix navigation link hover states */
+/* Soft hover states with light gray background */
 .nav-item .nav-link:hover,
 .nav-item .nav-link:hover *,
 .nav-link:hover,
@@ -32,10 +34,11 @@
 .sidebar .nav-link:hover,
 .sidebar .nav-link:hover * {
     color: #1a202c !important;
-    background-color: rgba(26, 32, 44, 0.08) !important;
+    background-color: rgba(226, 232, 240, 0.3) !important;
+    border-radius: 0.375rem !important;
 }
 
-/* Fix active navigation link */
+/* Active navigation link with subtle highlight */
 .nav-item .nav-link.active,
 .nav-item .nav-link.active *,
 .nav-link.active,
@@ -43,83 +46,88 @@
 .sidebar .nav-link.active,
 .sidebar .nav-link.active * {
     color: #1a202c !important;
-    background-color: rgba(26, 32, 44, 0.15) !important;
+    background-color: rgba(226, 232, 240, 0.5) !important;
     font-weight: 600 !important;
+    border-radius: 0.375rem !important;
 }
 
-/* Fix navigation headers */
+/* Navigation headers with dark gray text */
 .nav-header,
 .nav-item .nav-header,
 .nav-item .nav-header *,
 .sidebar .nav-header,
 .sidebar .nav-header * {
-    color: #4a5568 !important;
+    color: #374151 !important;
+    font-weight: 600 !important;
 }
 
-/* Fix muted text in navigation */
+/* Muted text in navigation - medium gray */
 .nav-item .nav-link.text-muted,
 .nav-item .nav-link.text-muted *,
 .nav-item .text-muted,
 .nav-item .text-muted *,
 .sidebar .text-muted,
 .sidebar .text-muted * {
-    color: #718096 !important;
+    color: #6b7280 !important;
 }
 
-/* Fix small text in navigation */
+/* Small text in navigation - medium gray */
 .nav-item .nav-link.small,
 .nav-item .nav-link.small *,
 .sidebar .small,
 .sidebar .small * {
-    color: #718096 !important;
+    color: #6b7280 !important;
 }
 
-/* Fix navigation icons - inherit parent color */
+/* Navigation icons inherit parent color for consistency */
 .nav-item .bi,
 .sidebar .bi,
 .nav-link .bi {
     color: inherit !important;
 }
 
-/* Ensure navbar top row has proper background and text */
+/* Top navbar with white background and subtle border */
 .navbar .top-row,
 .top-row {
-  background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Force all sidebar text to be visible */
+/* Ensure all sidebar text is black on white background */
 .sidebar,
 .sidebar * {
     color: #1a202c;
 }
 
-/* Override any inherited text colors in sidebar */
+/* Override any inherited light text colors in sidebar */
 .sidebar .text-light,
 .sidebar .text-white {
     color: #1a202c !important;
 }
 
-/* Fix nav-item container */
+/* Nav-item container with black text */
 .nav-item,
 .nav-item * {
     color: #1a202c !important;
 }
 
-/* Fix badges in navigation to be visible */
+/* Badges with subtle background and dark text */
 .nav-item .badge,
 .sidebar .badge {
-    background-color: rgba(26, 32, 44, 0.15) !important;
+    background-color: rgba(226, 232, 240, 0.7) !important;
     color: #1a202c !important;
     font-weight: 500 !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
 }
 
-/* Fix system info section specifically */
+/* System info section with medium gray text */
 .nav-item .nav-link.small,
 .nav-item .nav-link.small span {
-    color: #718096 !important;
+    color: #6b7280 !important;
 }
 
-/* Ensure all text in navigation is properly colored */
+/* All navigation text inherits proper colors */
 .sidebar a,
 .sidebar a *,
 .sidebar span,
@@ -127,16 +135,16 @@
     color: inherit !important;
 }
 
-/* Fix hover transitions */
+/* Smooth hover transitions with subtle movement */
 .nav-item .nav-link {
     transition: all 0.15s ease-in-out !important;
 }
 
 .nav-item .nav-link:hover {
-    transform: translateX(4px) !important;
+    transform: translateX(2px) !important;
 }
 
-/* Fix Bootstrap overrides specifically for navigation */
+/* Bootstrap overrides for clean white navbar */
 .sidebar .navbar-dark .navbar-brand {
     color: #1a202c !important;
 }
@@ -147,4 +155,5 @@
 
 .sidebar .navbar-dark .nav-link:hover {
     color: #1a202c !important;
+    background-color: rgba(226, 232, 240, 0.3) !important;
 }
