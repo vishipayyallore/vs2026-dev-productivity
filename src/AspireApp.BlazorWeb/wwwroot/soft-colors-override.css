@@ -1,59 +1,61 @@
 /* Soft Color Theme Override for VS2026 Dev Productivity */
 
-/* Apply vibrant soft colors globally */
+/* Apply soft colors globally */
 :root {
-    --bs-primary: #0ea5e9;
-    --bs-primary-rgb: 14, 165, 233;
-    --bs-secondary: #f1f5f9;
-    --bs-success: #22c55e;
-    --bs-info: #06b6d4;
-    --bs-warning: #f59e0b;
-    --bs-danger: #ef4444;
+    --bs-primary: #a8c8ec;
+    --bs-primary-rgb: 168, 200, 236;
+    --bs-secondary: #e2e8f0;
+    --bs-success: #9ae6b4;
+    --bs-info: #90cdf4;
+    --bs-warning: #faf089;
+    --bs-danger: #feb2b2;
 }
 
-/* Update body and html with vibrant soft background */
+/* Update body and html with soft background */
 html, body {
-    background-color: #ffffff !important;
-    color: #1e293b !important;
+    background-color: #fafbfc !important;
+    color: #4a5568 !important;
 }
 
-/* NAVIGATION FIXES - Ensure text is visible on vibrant background */
+/* NAVIGATION FIXES - Light soft gray theme */
 .sidebar {
-    background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 70%) !important;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 70%) !important;
+    border-right: 1px solid #e2e8f0;
 }
 
 .navbar-brand {
-    color: #1a202c !important;
+    color: #374151 !important;
     font-weight: 600 !important;
 }
 
 .nav-item .nav-link {
-    color: #1a202c !important;
+    color: #374151 !important;
     font-weight: 500 !important;
 }
 
 .nav-item .nav-link:hover {
-    color: #1a202c !important;
-    background-color: rgba(26, 32, 44, 0.08) !important;
+    color: #1f2937 !important;
+    background-color: #e5e7eb !important;
 }
 
 .nav-item .nav-link.active {
-    color: #1a202c !important;
-    background-color: rgba(26, 32, 44, 0.15) !important;
+    color: #1f2937 !important;
+  background-color: #d1d5db !important;
     font-weight: 600 !important;
 }
 
 .nav-header {
-    color: #4a5568 !important;
+    color: #6b7280 !important;
 }
 
 .nav-item .text-muted {
-    color: #718096 !important;
+    color: #9ca3af !important;
 }
 
-/* Navbar top row update */
+/* Light gray navbar top row */
 .top-row {
-    background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+ background: #f8fafc !important;
+    border-bottom-color: #e2e8f0 !important;
 }
 
 /* Soft Bootstrap color overrides */
@@ -86,7 +88,7 @@ html, body {
 }
 
 .text-info {
-    color: #4299e1 !important;
+ color: #4299e1 !important;
 }
 
 .text-warning {
@@ -97,36 +99,36 @@ html, body {
     color: #e53e3e !important;
 }
 
-/* Vibrant button styles */
+/* Soft button styles */
 .btn-primary {
-    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%) !important;
- border-color: #0ea5e9 !important;
-    color: white !important;
+    background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+ border-color: #a8c8ec !important;
+    color: #2d3748 !important;
     font-weight: 500;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #0284c7 0%, #0891b2 100%) !important;
-    border-color: #0284c7 !important;
-  color: white !important;
+  background: linear-gradient(135deg, #7faddb 0%, #6b9bd2 100%) !important;
+    border-color: #7faddb !important;
+  color: #2d3748 !important;
     transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(14, 165, 233, 0.25);
+  box-shadow: 0 4px 8px rgba(127, 173, 219, 0.25);
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
-    border-color: #22c55e !important;
-    color: white !important;
+    background: linear-gradient(135deg, #9ae6b4 0%, #68d391 100%) !important;
+    border-color: #9ae6b4 !important;
+    color: #1a202c !important;
 }
 
 .btn-info {
-    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%) !important;
-    border-color: #06b6d4 !important;
-    color: white !important;
+    background: linear-gradient(135deg, #90cdf4 0%, #63b3ed 100%) !important;
+    border-color: #90cdf4 !important;
+    color: #1a202c !important;
 }
 
 .btn-warning {
-    background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%) !important;
+  background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%) !important;
     border-color: #faf089 !important;
     color: #744210 !important;
 }
@@ -139,8 +141,8 @@ background: linear-gradient(135deg, #feb2b2 0%, #fc8181 100%) !important;
 
 /* Update hero section */
 .hero-section {
- background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
-    color: #0f172a !important;
+ background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%) !important;
+color: #2d3748 !important;
 }
 
 /* Soft card styles */
@@ -153,12 +155,6 @@ background-color: white !important;
 .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06) !important;
     border-color: #cbd5e0 !important;
-}
-
-/* Update top row */
-.top-row {
-    background-color: #f7fafc !important;
-    border-bottom-color: #e2e8f0 !important;
 }
 
 /* Background utility updates */
@@ -249,13 +245,13 @@ background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
     color: #5a7ba7 !important;
 }
 
-/* Navigation styles */
+/* Navigation styles for light theme */
 .nav-link {
-    color: #e2e8f0 !important;
+    color: #374151 !important;
 }
 
 .nav-link:hover {
-    color: white !important;
+    color: #1f2937 !important;
 }
 
 /* Outline button styles */
@@ -266,7 +262,7 @@ background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
 
 .btn-outline-primary:hover {
     background-color: #a8c8ec !important;
-    border-color: #a8c8ec !important;
+ border-color: #a8c8ec !important;
   color: #2d3748 !important;
 }
 
@@ -278,7 +274,7 @@ background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
 .btn-outline-secondary:hover {
     background-color: #edf2f7 !important;
     border-color: #cbd5e0 !important;
-    color: #4a5568 !important;
+color: #4a5568 !important;
 }
 
 /* Headings */
@@ -301,5 +297,5 @@ a {
 }
 
 a:hover {
-    color: #5a7ba7 !important;
+ color: #5a7ba7 !important;
 }
