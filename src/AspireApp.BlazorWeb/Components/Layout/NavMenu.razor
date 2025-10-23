@@ -22,7 +22,7 @@
             <NavLink class="nav-link d-flex align-items-center text-dark" href="products">
                 <i class="bi bi-box-seam me-2 text-primary"></i>
                 <span>Products</span>
-                <span class="badge bg-soft-success ms-auto">New</span>
+                <span class="badge bg-success ms-auto">New</span>
             </NavLink>
         </div>
 
@@ -43,36 +43,36 @@
         <div class="nav-item px-3">
             <NavLink class="nav-link d-flex align-items-center text-dark" href="hurricane-alerts">
                 <i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>
-                <span>Hurricane Alerts</span>
-                <span class="badge bg-soft-danger ms-auto">Emergency</span>
+                <span>Hurricane</span>
+                <span class="badge bg-danger ms-auto">Emergency</span>
             </NavLink>
         </div>
 
         <hr class="border-secondary mx-3 my-3" />
 
         <div class="nav-item px-3">
-            <h6 class="nav-header text-muted small fw-bold text-uppercase">
+            <h6 class="nav-header small fw-bold text-uppercase">
                 <i class="bi bi-gear me-2 text-primary"></i>
-                System
+                SYSTEM
             </h6>
         </div>
 
         <div class="nav-item px-3">
-            <div class="nav-link text-muted small d-flex align-items-center">
+            <div class="nav-link small d-flex align-items-center">
                 <i class="bi bi-cpu me-2 text-primary"></i>
                 <span>.NET 10</span>
             </div>
         </div>
 
         <div class="nav-item px-3">
-            <div class="nav-link text-muted small d-flex align-items-center">
+            <div class="nav-link small d-flex align-items-center">
                 <i class="bi bi-lightning-fill me-2 text-primary"></i>
                 <span>Blazor Server</span>
             </div>
         </div>
 
         <div class="nav-item px-3">
-            <div class="nav-link text-muted small d-flex align-items-center">
+            <div class="nav-link small d-flex align-items-center">
                 <i class="bi bi-cloud-fill me-2 text-primary"></i>
                 <span>Aspire Platform</span>
             </div>
@@ -90,6 +90,10 @@
         margin: 0.125rem 0;
         transition: all 0.15s ease-in-out;
         position: relative;
+        display: flex !important;
+        align-items: center !important;
+        padding: 0.75rem 1rem !important;
+        min-height: 2.5rem;
     }
 
     .nav-link:hover {
@@ -108,14 +112,59 @@
     .nav-header {
         margin-bottom: 0.5rem;
         margin-top: 0.5rem;
-        color: #374151 !important;
+        color: #1f2937 !important;
         font-weight: 600 !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 0.5rem 1rem !important;
+    }
+
+    .nav-link {
+        color: #1f2937 !important;
+        font-weight: 500 !important;
+    }
+
+    .nav-link.small {
+        color: #374151 !important;
+        font-weight: 500 !important;
+        padding: 0.5rem 1rem !important;
+        min-height: 2rem;
+    }
+
+    .nav-link.small span {
+        color: #374151 !important;
+    }
+
+    .nav-link i {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: 0.75rem !important;
+    }
+
+    .nav-header i {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.5rem !important;
     }
 
     .badge {
         font-size: 0.65rem;
-        background-color: rgba(226, 232, 240, 0.7) !important;
-        color: #1a202c !important;
-        border: 1px solid rgba(226, 232, 240, 0.8) !important;
+        font-weight: 500 !important;
+    }
+
+    .badge.bg-success {
+        background-color: #10b981 !important;
+        color: white !important;
+    }
+
+    .badge.bg-danger {
+        background-color: #ef4444 !important;
+        color: white !important;
     }
 </style>
