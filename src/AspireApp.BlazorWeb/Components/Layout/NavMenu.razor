@@ -1,7 +1,7 @@
-﻿<div class="top-row ps-3 navbar navbar-dark" style="background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);">
+﻿<div class="top-row ps-3 navbar navbar-light" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center text-white" href="">
-            <i class="bi bi-rocket-takeoff me-2"></i>
+        <a class="navbar-brand d-flex align-items-center text-dark" href="">
+            <i class="bi bi-rocket-takeoff me-2 text-primary"></i>
             <span class="fw-bold">VS2026 Dev Productivity</span>
         </a>
     </div>
@@ -12,36 +12,36 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="nav flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link d-flex align-items-center" href="" Match="NavLinkMatch.All">
-                <i class="bi bi-house-door-fill me-2"></i>
+            <NavLink class="nav-link d-flex align-items-center text-dark" href="" Match="NavLinkMatch.All">
+                <i class="bi bi-house-door-fill me-2 text-primary"></i>
                 <span>Home</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link d-flex align-items-center" href="products">
-                <i class="bi bi-box-seam me-2"></i>
+            <NavLink class="nav-link d-flex align-items-center text-dark" href="products">
+                <i class="bi bi-box-seam me-2 text-primary"></i>
                 <span>Products</span>
                 <span class="badge bg-soft-success ms-auto">New</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link d-flex align-items-center" href="counter">
-                <i class="bi bi-plus-square-fill me-2"></i>
+            <NavLink class="nav-link d-flex align-items-center text-dark" href="counter">
+                <i class="bi bi-plus-square-fill me-2 text-primary"></i>
                 <span>Counter</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link d-flex align-items-center" href="weather">
-                <i class="bi bi-cloud-sun me-2"></i>
+            <NavLink class="nav-link d-flex align-items-center text-dark" href="weather">
+                <i class="bi bi-cloud-sun me-2 text-primary"></i>
                 <span>Weather</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link d-flex align-items-center" href="hurricane-alerts">
+            <NavLink class="nav-link d-flex align-items-center text-dark" href="hurricane-alerts">
                 <i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>
                 <span>Hurricane Alerts</span>
                 <span class="badge bg-soft-danger ms-auto">Emergency</span>
@@ -52,28 +52,28 @@
 
         <div class="nav-item px-3">
             <h6 class="nav-header text-muted small fw-bold text-uppercase">
-                <i class="bi bi-gear me-2"></i>
+                <i class="bi bi-gear me-2 text-primary"></i>
                 System
             </h6>
         </div>
 
         <div class="nav-item px-3">
             <div class="nav-link text-muted small d-flex align-items-center">
-                <i class="bi bi-cpu me-2"></i>
+                <i class="bi bi-cpu me-2 text-primary"></i>
                 <span>.NET 10</span>
             </div>
         </div>
 
         <div class="nav-item px-3">
             <div class="nav-link text-muted small d-flex align-items-center">
-                <i class="bi bi-lightning-fill me-2"></i>
+                <i class="bi bi-lightning-fill me-2 text-primary"></i>
                 <span>Blazor Server</span>
             </div>
         </div>
 
         <div class="nav-item px-3">
             <div class="nav-link text-muted small d-flex align-items-center">
-                <i class="bi bi-cloud-fill me-2"></i>
+                <i class="bi bi-cloud-fill me-2 text-primary"></i>
                 <span>Aspire Platform</span>
             </div>
         </div>
@@ -93,14 +93,16 @@
     }
 
     .nav-link:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(14, 165, 233, 0.1);
         transform: translateX(4px);
+        color: #0ea5e9 !important;
     }
 
     .nav-link.active {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-left: 3px solid #fff;
+        background-color: rgba(14, 165, 233, 0.15);
+        border-left: 3px solid #0ea5e9;
         padding-left: calc(1rem - 3px);
+        color: #0ea5e9 !important;
     }
 
     .nav-header {
