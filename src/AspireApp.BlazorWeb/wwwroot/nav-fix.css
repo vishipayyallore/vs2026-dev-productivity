@@ -124,6 +124,48 @@
     min-height: 2rem;
 }
 
+/* System info items - non-interactive styling with proper appearance */
+.nav-item .system-info,
+.sidebar .system-info {
+    color: #374151 !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.5rem 1rem !important;
+    min-height: 2rem;
+    border-radius: 0.375rem;
+    margin: 0.125rem 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: none !important;
+    cursor: default !important;
+}
+
+.nav-item .system-info:hover,
+.sidebar .system-info:hover {
+    background: transparent !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.nav-item .system-info span,
+.sidebar .system-info span {
+    color: #374151 !important;
+}
+
+.nav-item .system-info i,
+.sidebar .system-info i {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem !important;
+    color: inherit !important;
+}
+
 /* Top navbar with white background and subtle border */
 .navbar .top-row,
 .top-row {
