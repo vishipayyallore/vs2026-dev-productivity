@@ -1,18 +1,20 @@
-/* Navigation Visibility Fix for Soft Color Theme */
+/* Navigation Soft Lighter Color Theme */
 
-/* Fix sidebar background with proper soft gradient */
+/* Soft white sidebar background with subtle gradient */
 .sidebar {
-    background: linear-gradient(180deg, #a8c8ec 0%, #90cdf4 70%) !important;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 70%) !important;
+    border-right: 1px solid #e2e8f0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Fix navbar brand visibility */
+/* Navbar brand with black font on white background */
 .navbar-brand,
 .navbar-brand * {
-    color: #1a202c !important;
+    color: #1f2937 !important;
     font-weight: 600 !important;
 }
 
-/* Fix ALL navigation text to be dark and visible */
+/* Navigation links with black text and proper alignment */
 .nav-item .nav-link,
 .nav-item .nav-link *,
 .nav-item .nav-link span,
@@ -20,106 +22,193 @@
 .nav-link *,
 .sidebar .nav-link,
 .sidebar .nav-link * {
-    color: #1a202c !important;
+    color: #1f2937 !important;
     font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
-/* Fix navigation link hover states */
+/* Badge alignment within nav links */
+.nav-item .nav-link .badge,
+.sidebar .nav-link .badge {
+    margin-left: auto !important;
+    flex-shrink: 0;
+}
+
+/* Soft hover states with light gray background */
 .nav-item .nav-link:hover,
 .nav-item .nav-link:hover *,
 .nav-link:hover,
 .nav-link:hover *,
 .sidebar .nav-link:hover,
 .sidebar .nav-link:hover * {
-    color: #1a202c !important;
-    background-color: rgba(26, 32, 44, 0.08) !important;
+    color: #1f2937 !important;
+    background-color: #e5e7eb !important;
 }
 
-/* Fix active navigation link */
+/* Active navigation link with subtle highlight */
 .nav-item .nav-link.active,
 .nav-item .nav-link.active *,
 .nav-link.active,
 .nav-link.active *,
 .sidebar .nav-link.active,
 .sidebar .nav-link.active * {
-    color: #1a202c !important;
-    background-color: rgba(26, 32, 44, 0.15) !important;
+    color: #1f2937 !important;
+    background-color: #d1d5db !important;
     font-weight: 600 !important;
+    border-left: 3px solid #6b7280;
+    padding-left: calc(1rem - 3px);
 }
 
-/* Fix navigation headers */
+/* Smooth hover transitions with subtle movement and proper alignment */
+.nav-item .nav-link {
+    transition: all 0.15s ease-in-out !important;
+    border-radius: 0.375rem;
+    margin: 0.125rem 0;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.75rem 1rem !important;
+    min-height: 2.5rem;
+}
+
+.nav-item .nav-link:hover {
+    transform: translateX(2px) !important;
+}
+
+/* Navigation icons with proper alignment */
+.nav-item .bi,
+.sidebar .bi,
+.nav-link .bi {
+    color: inherit !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem !important;
+    flex-shrink: 0;
+}
+
+/* Header icons smaller size */
+.nav-header .bi {
+    width: 1rem !important;
+    height: 1rem !important;
+    margin-right: 0.5rem !important;
+}
+
+/* Navigation headers with proper alignment */
 .nav-header,
 .nav-item .nav-header,
 .nav-item .nav-header *,
 .sidebar .nav-header,
 .sidebar .nav-header * {
-    color: #4a5568 !important;
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.5rem 1rem !important;
 }
 
-/* Fix muted text in navigation */
-.nav-item .nav-link.text-muted,
-.nav-item .nav-link.text-muted *,
-.nav-item .text-muted,
-.nav-item .text-muted *,
-.sidebar .text-muted,
-.sidebar .text-muted * {
-    color: #718096 !important;
-}
-
-/* Fix small text in navigation */
+/* System section navigation links with proper alignment */
 .nav-item .nav-link.small,
 .nav-item .nav-link.small *,
-.sidebar .small,
-.sidebar .small * {
-    color: #718096 !important;
+.nav-item .nav-link.small span,
+.sidebar .nav-link.small,
+.sidebar .nav-link.small *,
+.sidebar .nav-link.small span {
+    color: #374151 !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.5rem 1rem !important;
+    min-height: 2rem;
 }
 
-/* Fix navigation icons - inherit parent color */
-.nav-item .bi,
-.sidebar .bi,
-.nav-link .bi {
+/* System info items - simple, clean styling */
+.nav-item .system-info,
+.sidebar .system-info {
+    color: #374151 !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.5rem 1rem !important;
+    min-height: 2rem;
+    border-radius: 0.375rem;
+    margin: 0.125rem 0;
+}
+
+.nav-item .system-info span,
+.sidebar .system-info span {
+    color: #374151 !important;
+}
+
+.nav-item .system-info i,
+.sidebar .system-info i {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem !important;
     color: inherit !important;
 }
 
-/* Ensure navbar top row has proper background and text */
+/* Top navbar with white background and subtle border */
 .navbar .top-row,
 .top-row {
-  background: linear-gradient(135deg, #a8c8ec 0%, #7faddb 100%) !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Force all sidebar text to be visible */
+/* Ensure all sidebar text is black on white background */
 .sidebar,
 .sidebar * {
-    color: #1a202c;
+    color: #1f2937;
 }
 
-/* Override any inherited text colors in sidebar */
+/* Override any inherited light text colors in sidebar */
 .sidebar .text-light,
 .sidebar .text-white {
-    color: #1a202c !important;
+    color: #1f2937 !important;
 }
 
-/* Fix nav-item container */
+/* Nav-item container with black text */
 .nav-item,
 .nav-item * {
-    color: #1a202c !important;
+    color: #1f2937 !important;
 }
 
-/* Fix badges in navigation to be visible */
+/* Badges with subtle background and dark text */
 .nav-item .badge,
 .sidebar .badge {
-    background-color: rgba(26, 32, 44, 0.15) !important;
-    color: #1a202c !important;
+    background-color: #e5e7eb !important;
+    color: #1f2937 !important;
     font-weight: 500 !important;
+    border: 1px solid #d1d5db;
 }
 
-/* Fix system info section specifically */
-.nav-item .nav-link.small,
-.nav-item .nav-link.small span {
-    color: #718096 !important;
+/* Emergency badge with soft warning color */
+.nav-item .badge.bg-danger,
+.nav-item .badge.bg-soft-warning,
+.sidebar .badge.bg-danger,
+.sidebar .badge.bg-soft-warning {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #f59e0b;
 }
 
-/* Ensure all text in navigation is properly colored */
+/* New badge with soft primary color */
+.nav-item .badge.bg-primary,
+.nav-item .badge.bg-soft-primary,
+.sidebar .badge.bg-primary,
+.sidebar .badge.bg-soft-primary {
+    background-color: #dbeafe !important;
+    color: #1e40af !important;
+    border-color: #3b82f6;
+}
+
+/* All navigation text inherits proper dark colors and alignment */
 .sidebar a,
 .sidebar a *,
 .sidebar span,
@@ -127,24 +216,57 @@
     color: inherit !important;
 }
 
-/* Fix hover transitions */
+/* Override any muted text classes in navigation */
+.nav-item .nav-link.text-muted,
+.nav-item .nav-link.text-muted *,
+.nav-item .text-muted,
+.nav-item .text-muted *,
+.sidebar .text-muted,
+.sidebar .text-muted *,
+.sidebar .small,
+.sidebar .small * {
+    color: #374151 !important;
+}
+
+/* Smooth hover transitions with subtle movement */
 .nav-item .nav-link {
     transition: all 0.15s ease-in-out !important;
+    border-radius: 0.375rem;
+    margin: 0.125rem 0;
 }
 
 .nav-item .nav-link:hover {
-    transform: translateX(4px) !important;
+    transform: translateX(2px) !important;
 }
 
-/* Fix Bootstrap overrides specifically for navigation */
-.sidebar .navbar-dark .navbar-brand {
-    color: #1a202c !important;
+/* Bootstrap overrides for clean white navbar */
+.sidebar .navbar-dark .navbar-brand,
+.sidebar .navbar-light .navbar-brand {
+    color: #1f2937 !important;
 }
 
-.sidebar .navbar-dark .nav-link {
-    color: #1a202c !important;
+.sidebar .navbar-dark .nav-link,
+.sidebar .navbar-light .nav-link {
+    color: #1f2937 !important;
 }
 
-.sidebar .navbar-dark .nav-link:hover {
-    color: #1a202c !important;
+.sidebar .navbar-dark .nav-link:hover,
+.sidebar .navbar-light .nav-link:hover {
+    color: #1f2937 !important;
+}
+
+/* Update navbar toggler for light theme */
+.navbar-toggler {
+    border: 1px solid #d1d5db !important;
+    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2855, 65, 81, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center/1.75rem #f9fafb !important;
+}
+
+.navbar-toggler:checked {
+    background-color: #e5e7eb !important;
+}
+
+/* Fix hr separator */
+.sidebar hr {
+    border-color: #d1d5db !important;
+    opacity: 0.5;
 }

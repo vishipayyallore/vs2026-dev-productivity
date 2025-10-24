@@ -1,32 +1,33 @@
 /* Modern Soft Color Theme for Blazor UI */
 :root {
-    /* Modern Soft Color Palette */
-    --soft-primary: #6366f1;
-    --soft-primary-light: #818cf8;
-    --soft-primary-dark: #4f46e5;
-    --soft-secondary: #e2e8f0;
-    --soft-success: #10b981;
-    --soft-info: #06b6d4;
+    /* Vibrant Color Palette from User's Palette */
+    --soft-primary: #0ea5e9; /* Vibrant Sky Blue */
+    --soft-primary-light: #38bdf8;
+    --soft-primary-dark: #0284c7;
+    --soft-secondary: #f1f5f9;
+    --soft-success: #22c55e; /* Vibrant Green */
+    --soft-info: #06b6d4; /* Vibrant Cyan */
     --soft-warning: #f59e0b;
     --soft-danger: #ef4444;
     
-    /* Text Colors */
-    --text-primary: #1e293b;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-    --text-light: #94a3b8;
+    /* Text Colors - Better Contrast */
+    --text-primary: #0f172a;
+    --text-secondary: #1e293b;
+    --text-muted: #475569;
+    --text-light: #64748b;
     
     /* Background Colors */
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
-    --bg-tertiary: #e2e8f0;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
     
-    /* Modern Gradients */
-    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    /* Vibrant Modern Gradients */
+    --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    --gradient-success: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
     --gradient-info: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
     --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    --gradient-navbar: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
 }
 
 /* Override default color scheme */
@@ -144,14 +145,14 @@ html, body {
 }
 
 .card-soft:hover {
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.1);
     transform: translateY(-2px);
-    border-color: rgba(99, 102, 241, 0.2);
+    border-color: rgba(14, 165, 233, 0.2);
 }
 
 /* Modern Soft hero section */
 .hero-soft {
-    background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
     color: var(--text-primary);
     position: relative;
     border-radius: 1rem;
@@ -165,7 +166,7 @@ html, body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="soft-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="rgba(99,102,241,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23soft-grain)"/></svg>') repeat;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="soft-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="rgba(14,165,233,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23soft-grain)"/></svg>') repeat;
     opacity: 0.3;
     border-radius: 1rem;
 }
@@ -312,13 +313,13 @@ border-color: var(--soft-secondary);
 
 /* Modern shadow utilities */
 .shadow-soft {
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.1);
 }
 
 .shadow-medium {
-    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.15);
 }
 
 .shadow-strong {
-    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 12px 40px rgba(14, 165, 233, 0.2);
 }
