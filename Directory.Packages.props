@@ -19,6 +19,7 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0-rc.1.25451.107" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-rc.1.25451.107" />
     <!-- Npgsql packages for .NET 10 compatibility -->
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="9.5.2" />
     <PackageVersion Include="Npgsql" Version="9.0.3" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0-rc.1" />
     <!-- OpenTelemetry -->
