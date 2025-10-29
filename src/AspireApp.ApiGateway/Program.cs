@@ -5,12 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add Aspire service defaults
 builder.AddServiceDefaults();
 
-// Add YARP reverse proxy
+// Add YARP reverse proxy and integrate with Aspire service discovery
 builder.Services.AddReverseProxy()
- .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
-
-// Add service discovery for YARP
-builder.Services.AddServiceDiscovery();
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
 var app = builder.Build();
 
