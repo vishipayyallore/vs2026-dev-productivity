@@ -2,15 +2,20 @@ using AspireApp.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Aspire service defaults
+// Add Aspire service defaults (includes service discovery)
 builder.AddServiceDefaults();
 
-// Add YARP reverse proxy
-builder.Services.AddReverseProxy()
- .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+// Configure HttpClient with service discovery for YARP
+builder.Services.ConfigureHttpClientDefaults(http =>
+{
+    http.AddStandardResilienceHandler();
+    http.AddServiceDiscovery();
+});
 
-// Add service discovery for YARP
-builder.Services.AddServiceDiscovery();
+// Configure YARP reverse proxy
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+    .AddServiceDiscoveryDestinationResolver();
 
 var app = builder.Build();
 
