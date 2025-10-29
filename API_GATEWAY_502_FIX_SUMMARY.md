@@ -1,6 +1,7 @@
 # API Gateway 502 Error Fix - Summary
 
 ## Problem Analysis
+
 The 502 Bad Gateway error was occurring when calling `/api/weather` from the API Gateway due to several configuration issues:
 
 1. **Protocol Mismatch**: Services were configured with HTTPS but running on HTTP
@@ -10,16 +11,19 @@ The 502 Bad Gateway error was occurring when calling `/api/weather` from the API
 ## Root Causes Identified
 
 ### 1. **API Gateway Configuration (appsettings.json)**
-- **Issue**: Destination address was `"https://aspireapp-minimalapi/"` 
+
+- **Issue**: Destination address was `"https://aspireapp-minimalapi/"`
 - **Problem**: Using HTTPS protocol and trailing slash
 - **Solution**: Changed to `"http://aspireapp-minimalapi"`
 
 ### 2. **BlazorWeb HTTP Client Configuration**
+
 - **Issue**: API Gateway URL was `"https://aspireapp-apigateway"`
 - **Problem**: Using HTTPS for internal service communication
 - **Solution**: Changed to `"http://aspireapp-apigateway"`
 
 ### 3. **Service Discovery in API Gateway**
+
 - **Issue**: Missing service discovery configuration
 - **Problem**: YARP couldn't resolve service addresses properly
 - **Solution**: Added `builder.Services.AddServiceDiscovery();`
@@ -27,6 +31,7 @@ The 502 Bad Gateway error was occurring when calling `/api/weather` from the API
 ## Changes Made
 
 ### 1. **src/AspireApp.ApiGateway/appsettings.json**
+
 ```json
 "Clusters": {
   "api-cluster": {
@@ -40,6 +45,7 @@ The 502 Bad Gateway error was occurring when calling `/api/weather` from the API
 ```
 
 ### 2. **src/AspireApp.ApiGateway/Program.cs**
+
 ```csharp
 // Add YARP reverse proxy
 builder.Services.AddReverseProxy()
@@ -50,6 +56,7 @@ builder.Services.AddServiceDiscovery();  // Added this line
 ```
 
 ### 3. **src/AspireApp.BlazorWeb/Program.cs**
+
 ```csharp
 builder.Services.AddHttpClient("ApiGateway", client =>
 {
@@ -61,17 +68,21 @@ builder.Services.AddHttpClient("ApiGateway", client =>
 ## Technical Explanation
 
 ### Service Discovery in .NET Aspire
+
 - Aspire uses service discovery to resolve service names to actual endpoints
 - Services communicate internally using HTTP, not HTTPS
 - Service names match those defined in the AppHost configuration
 
 ### YARP Configuration
+
 - YARP (Yet Another Reverse Proxy) routes requests from API Gateway to backend services
 - Service discovery integration allows YARP to dynamically resolve service endpoints
 - The `http://aspireapp-minimalapi` address gets resolved to the actual running instance
 
 ### AppHost Service Registration
+
 From `AppHost.cs`:
+
 ```csharp
 var api = builder.AddProject<Projects.AspireApp_MinimalApi>("aspireapp-minimalapi")
 var gateway = builder.AddProject<Projects.AspireApp_ApiGateway>("aspireapp-apigateway")
@@ -85,6 +96,7 @@ var gateway = builder.AddProject<Projects.AspireApp_ApiGateway>("aspireapp-apiga
 4. **Response** ? Flows back through the chain
 
 ## Build Status
+
 ? **Build Successful** - All changes compile without errors
 
 ## Testing Recommendations
