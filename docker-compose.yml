@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres
+    image: postgres:16
     restart: always
     environment:
       POSTGRES_PASSWORD: example
@@ -13,10 +13,14 @@ services:
       - aspire-network
 
   adminer:
-    image: adminer
+    image: dpage/pgadmin4:9.7.0
     restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
     ports:
-      - 8080:8080
+      - 8080:80
     networks:
       - aspire-network
 
