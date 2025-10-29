@@ -7,7 +7,10 @@ builder.AddServiceDefaults();
 
 // Add YARP reverse proxy
 builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+ .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+
+// Add service discovery for YARP
+builder.Services.AddServiceDiscovery();
 
 var app = builder.Build();
 
