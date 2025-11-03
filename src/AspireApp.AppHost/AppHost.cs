@@ -1,8 +1,8 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-// Add PostgreSQL database
+// Add PostgreSQL database with named volume for persistence
 var postgres = builder.AddPostgres("postgres")
-    .WithDataVolume()
+    .WithDataVolume("aspireapp-postgres-data")
     .WithImage("postgres:16")
     .WithPgAdmin();
 
