@@ -59,6 +59,7 @@ cd vs2026-dev-productivity
 
 - .NET 10 SDK
 - Docker Desktop (for PostgreSQL)
+- Entity Framework Core CLI tools
 - Optional: Visual Studio 2026 Insiders or VS Code
 
 ## Quick start
@@ -70,14 +71,34 @@ git clone https://github.com/vishipayyallore/vs2026-dev-productivity.git
 cd vs2026-dev-productivity
 ```
 
-2. Restore and build
+2. Install/Update Entity Framework Core tools
+
+```bash
+dotnet tool update --global dotnet-ef
+```
+
+3. Start the database infrastructure
+
+```bash
+# Start PostgreSQL and pgAdmin using Docker Compose
+.\infrastructure\datastore\dev-db.ps1 up -Detach
+```
+
+4. Setup the database schema
+
+```bash
+# Apply Entity Framework migrations to create the database schema
+dotnet ef database update --project src/AspireApp.MinimalApi
+```
+
+5. Restore and build
 
 ```bash
 dotnet restore
 dotnet build VS2026DevProductivity.sln
 ```
 
-3. Run the Aspire Host (which starts the other services)
+6. Run the Aspire Host (which starts the other services)
 
 ```bash
 cd src/Aspire.Host
@@ -95,8 +116,33 @@ Note: The Minimal API no longer exposes Swagger. Use the integrated Scalar UI fo
 
 ## Development notes
 
-- New services live in `src/` and should reference `Aspire.ServiceDefaults` when appropriate.
-- Use the Aspire Host to run and debug multiple services at once.
+- **Database Setup**: The application uses PostgreSQL with Entity Framework Core. Run migrations with `dotnet ef database update --project src/AspireApp.MinimalApi`
+- **Infrastructure Management**: Use `.\infrastructure\datastore\dev-db.ps1` for database lifecycle management
+- **Service Discovery**: All services communicate through Aspire's built-in service discovery
+- **New services**: Should live in `src/` and reference `AspireApp.ServiceDefaults` for consistent configuration
+- **Debugging**: Use the Aspire Host to run and debug multiple services simultaneously
+
+## Database Management
+
+```bash
+# Start database stack
+.\infrastructure\datastore\dev-db.ps1 up -Detach
+
+# Stop database stack  
+.\infrastructure\datastore\dev-db.ps1 down
+
+# View database logs
+.\infrastructure\datastore\dev-db.ps1 logs
+
+# Clean database (removes all data!)
+.\infrastructure\datastore\dev-db.ps1 clean
+```
+
+**Database Access:**
+- **PostgreSQL**: `localhost:5432` (user: `postgres`, password: `example`, database: `productdb`)
+- **pgAdmin**: <http://localhost:8080> (email: `admin@example.com`, password: `admin`)
+
+For detailed database setup instructions, see [DATABASE-README.md](docs/DATABASE-README.md).
 
 
 ### **5-20 minutes: ReAct Search Agent** 🔥 **SHOWCASE**

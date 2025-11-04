@@ -29,6 +29,17 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
+// Apply pending migrations automatically in Development
+// For Production, migrations should be run as part of deployment pipeline
+if (app.Environment.IsDevelopment())
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await db.Database.MigrateAsync();
+    }
+}
+
 // Configure the HTTP request pipeline
 // Swagger has been removed; user prefers Scalar UI instead
 
