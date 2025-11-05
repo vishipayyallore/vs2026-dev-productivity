@@ -7,17 +7,20 @@ This project contains comprehensive unit tests for the AspireApp.SharedLib proje
 **Total Tests: 118** | **All Passing ?** | **Code Coverage: 95%+**
 
 ### Models (42 tests)
+
 - **Product**: Tests for property initialization, validation, and default values (12 tests)
 - **WeatherForecast**: Tests for temperature conversion, constructors, and property handling (9 tests)
 - **HurricaneAlert**: Tests for hurricane tracking, severity levels, wind speed conversions, and calculated properties (21 tests) ? **NEW**
 
 ### DTOs (69 tests)
+
 - **ProductDto**: Tests for record equality, property mapping, and immutability (5 tests)
 - **CreateProductDto**: Tests for creation scenarios and validation (7 tests)
 - **UpdateProductDto**: Tests for partial updates and null handling (3 tests)
 - **HurricaneAlertDtos**: Tests for create, update, response, and summary DTOs including entity conversion (9 tests) ? **NEW**
 
 ### Extensions (7 tests)
+
 - **ServiceCollectionExtensions**: Tests for dependency injection configuration (7 tests)
 
 ## Test Framework
@@ -31,11 +34,13 @@ This project contains comprehensive unit tests for the AspireApp.SharedLib proje
 ## Running Tests
 
 ### From Visual Studio
+
 1. Open Test Explorer (Test > Test Explorer)
 2. Build the solution
 3. Run all tests or select specific tests
 
 ### From Command Line
+
 ```bash
 # Run all tests
 dotnet test
@@ -54,15 +59,18 @@ dotnet test --verbosity normal
 ```
 
 ### Code Coverage Configuration
+
 The test project is configured to be **excluded from code coverage** to ensure only production code coverage is measured:
+
 - ? Test assembly excluded via `ExcludeFromCodeCoverage` property
 - ? Custom `.runsettings` file configures Coverlet exclusions
 - ? Assembly-level `ExcludeFromCodeCoverageAttribute` applied
 
 **Coverage Reports:**
+
 - Generated in `./TestResults` directory
 - Formats: Cobertura and OpenCover
-- Excludes: Test assemblies, generated files (*.g.cs, *.Designer.cs)
+- Excludes: Test assemblies, generated files (*.g.cs,*.Designer.cs)
 
 ## Test Organization
 
@@ -85,21 +93,25 @@ AspireApp.SharedLib.UnitTests/
 ## Test Categories
 
 ### ? Constructor Tests
+
 - Default and parameterized constructor validation
 - Initialization with various parameter combinations
 
 ### ? Property Tests
+
 - Property setting and getting
 - Theory tests for edge cases and boundary values
 - Null and empty string handling
 
 ### ? Calculated Property Tests
+
 - Temperature conversions (Fahrenheit/Celsius)
 - Wind speed conversions (MPH/KMH)
 - Category color mappings
 - Severity badge class mappings
 
 ### ? Edge Case Tests
+
 - Null value handling
 - Empty string scenarios
 - Boundary conditions
@@ -107,12 +119,14 @@ AspireApp.SharedLib.UnitTests/
 - Boolean flag toggling
 
 ### ? DTO Tests
+
 - Record equality validation
 - Immutability verification
 - Entity to DTO conversion
 - Null argument handling
 
 ### ? Real-World Scenario Tests
+
 - Realistic hurricane data (Category 5)
 - Tropical storm scenarios
 - Production-ready test data
@@ -136,6 +150,7 @@ AspireApp.SharedLib.UnitTests/
 ## Recent Additions (Nov 2025)
 
 ### HurricaneAlert Model Tests (21 tests)
+
 - Default and parameterized constructors
 - All property validations
 - Wind speed conversion (MPH to KMH)
@@ -147,6 +162,7 @@ AspireApp.SharedLib.UnitTests/
 - SeverityLevel enum validation
 
 ### HurricaneAlert DTO Tests (9 tests)
+
 - CreateHurricaneAlertDto initialization and properties
 - UpdateHurricaneAlertDto initialization and properties
 - HurricaneAlertResponseDto entity conversion
