@@ -139,11 +139,11 @@ Note: The Minimal API no longer exposes Swagger. Use the integrated Scalar UI fo
 ```
 
 **Database Access:**
+
 - **PostgreSQL**: `localhost:5432` (user: `postgres`, password: `example`, database: `productdb`)
 - **pgAdmin**: <http://localhost:8080> (email: `admin@example.com`, password: `admin`)
 
 For detailed database setup instructions, see [DATABASE-README.md](docs/DATABASE-README.md).
-
 
 ### **5-20 minutes: ReAct Search Agent** 🔥 **SHOWCASE**
 
