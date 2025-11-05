@@ -104,8 +104,8 @@
 
     .nav-link.active {
         background-color: rgba(226, 232, 240, 0.5);
-        border-left: 3px solid #0ea5e9;
-        padding-left: calc(1rem - 3px);
+        border-left: none !important;
+        padding-left: 1rem !important;
         color: #1a202c !important;
     }
 
@@ -145,6 +145,13 @@
         align-items: center !important;
         border-radius: 0.375rem;
         margin: 0.125rem 0;
+        cursor: default;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .system-info:hover {
+        background-color: rgba(226, 232, 240, 0.3);
+        transform: translateX(2px);
     }
 
     .system-info span {
@@ -165,17 +172,7 @@
         pointer-events: none !important;
     }
 
-    .nav-link.system-info:hover {
-        background-color: transparent !important;
-        transform: none !important;
-        color: #374151 !important;
-    }
-
-    .nav-link.system-info span {
-        color: #374151 !important;
-    }
-
-    .nav-link i {
+    .nav-link.i {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;

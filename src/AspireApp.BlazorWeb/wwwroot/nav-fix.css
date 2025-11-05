@@ -46,7 +46,7 @@
     background-color: #e5e7eb !important;
 }
 
-/* Active navigation link with subtle highlight */
+/* Active navigation link with subtle highlight - No vertical line */
 .nav-item .nav-link.active,
 .nav-item .nav-link.active *,
 .nav-link.active,
@@ -56,8 +56,8 @@
     color: #1f2937 !important;
     background-color: #d1d5db !important;
     font-weight: 600 !important;
-    border-left: 3px solid #6b7280;
-    padding-left: calc(1rem - 3px);
+    border-left: none !important;
+    padding-left: 1rem !important;
 }
 
 /* Smooth hover transitions with subtle movement and proper alignment */
