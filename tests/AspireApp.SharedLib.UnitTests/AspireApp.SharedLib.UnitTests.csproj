@@ -7,6 +7,9 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    
+    <!-- Exclude test assembly from code coverage -->
+    <ExcludeFromCodeCoverage>true</ExcludeFromCodeCoverage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +29,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\AspireApp.Shared\AspireApp.SharedLib.csproj" />
+  </ItemGroup>
+
+  <!-- Coverlet Configuration to exclude this test project -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
   </ItemGroup>
 
 </Project>

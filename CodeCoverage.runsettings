@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura,opencover</Format>
+          <Exclude>[AspireApp.SharedLib.UnitTests]*</Exclude>
+          <ExcludeByFile>**/*.g.cs,**/*.Designer.cs</ExcludeByFile>
+          <IncludeDirectory>../src/**</IncludeDirectory>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+
+  <RunConfiguration>
+    <ResultsDirectory>./TestResults</ResultsDirectory>
+  </RunConfiguration>
+
+  <!-- Logging configuration -->
+  <LoggerRunSettings>
+    <Loggers>
+      <Logger friendlyName="console" enabled="True">
+        <Configuration>
+          <Verbosity>normal</Verbosity>
+        </Configuration>
+      </Logger>
+    </Loggers>
+  </LoggerRunSettings>
+</RunSettings>
