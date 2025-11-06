@@ -3,6 +3,7 @@ using AspireApp.SharedLib.DTOs;
 using AspireApp.SharedLib.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspireApp.MinimalApi.UnitTests.Endpoints;
 
@@ -53,10 +54,9 @@ public class ProductEndpointsTests : IDisposable
 
         // Assert
         result.Should().NotBeNull();
-        var okResult = result as Ok<object>;
-        okResult.Should().NotBeNull();
         
-        var value = okResult!.Value;
+        var valueProperty = result.GetType().GetProperty("Value");
+        var value = valueProperty!.GetValue(result);
         value.Should().NotBeNull();
         
         var productsProperty = value!.GetType().GetProperty("Products");
@@ -76,10 +76,11 @@ public class ProductEndpointsTests : IDisposable
 
         // Assert
         result.Should().NotBeNull();
-        var okResult = result as Ok<object>;
-        okResult.Should().NotBeNull();
         
-        var value = okResult!.Value;
+        var valueProperty = result.GetType().GetProperty("Value");
+        var value = valueProperty!.GetValue(result);
+        value.Should().NotBeNull();
+        
         var productsProperty = value!.GetType().GetProperty("Products");
         var products = productsProperty!.GetValue(value) as List<ProductDto>;
         products.Should().HaveCount(3);
@@ -96,8 +97,9 @@ public class ProductEndpointsTests : IDisposable
         var result = await GetProductsInternal(_context, page, pageSize);
 
         // Assert
-        var okResult = result as Ok<object>;
-        var value = okResult!.Value;
+        var valueProperty = result.GetType().GetProperty("Value");
+        var value = valueProperty!.GetValue(result);
+        value.Should().NotBeNull();
         
         var totalPagesProperty = value!.GetType().GetProperty("TotalPages");
         var totalPages = (int)totalPagesProperty!.GetValue(value)!;
@@ -115,8 +117,8 @@ public class ProductEndpointsTests : IDisposable
 
         // Assert
         result.Should().NotBeNull();
-        var okResult = result as Ok<object>;
-        okResult.Should().NotBeNull();
+        var valueProperty = result.GetType().GetProperty("Value");
+        valueProperty.Should().NotBeNull();
     }
 
     #endregion
