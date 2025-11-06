@@ -3,7 +3,6 @@
 ## Reference(s)
 
 > 1. <https://learn.microsoft.com/en-us/visualstudio/releases/vs18/release-notes-insiders>
-> 1. <>
 
 ## 30 September 2025
 
