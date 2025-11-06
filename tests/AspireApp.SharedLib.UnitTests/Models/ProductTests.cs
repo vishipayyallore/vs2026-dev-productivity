@@ -74,10 +74,10 @@ public class ProductTests
     public void Product_Should_Accept_Any_Stock_Value(int stock)
     {
         // Arrange & Act
-        var product = new Product 
-        { 
+        var product = new Product
+        {
             Name = "Test Product",
-            Stock = stock 
+            Stock = stock
         };
 
         // Assert
@@ -92,10 +92,10 @@ public class ProductTests
     public void Product_Should_Accept_Valid_Prices(decimal price)
     {
         // Arrange & Act
-        var product = new Product 
-        { 
+        var product = new Product
+        {
             Name = "Test Product",
-            Price = price 
+            Price = price
         };
 
         // Assert
@@ -106,10 +106,10 @@ public class ProductTests
     public void Product_Should_Allow_Null_Description()
     {
         // Arrange & Act
-        var product = new Product 
-        { 
+        var product = new Product
+        {
             Name = "Test Product",
-            Description = null 
+            Description = null
         };
 
         // Assert
@@ -120,10 +120,10 @@ public class ProductTests
     public void Product_Should_Allow_Empty_Description()
     {
         // Arrange & Act
-        var product = new Product 
-        { 
+        var product = new Product
+        {
             Name = "Test Product",
-            Description = "" 
+            Description = ""
         };
 
         // Assert

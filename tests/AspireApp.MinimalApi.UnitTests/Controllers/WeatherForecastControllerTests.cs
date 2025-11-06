@@ -111,10 +111,10 @@ public class WeatherForecastControllerTests
 
         // Assert
         // Due to randomization, it's extremely unlikely to get identical results
-        var identicalCount = result1.Zip(result2, (f1, f2) => 
+        var identicalCount = result1.Zip(result2, (f1, f2) =>
             f1.TemperatureC == f2.TemperatureC && f1.Summary == f2.Summary)
             .Count(match => match);
-        
+
         // At least one should be different
         identicalCount.Should().BeLessThan(5);
     }

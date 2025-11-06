@@ -3,7 +3,6 @@ using AspireApp.SharedLib.DTOs;
 using AspireApp.SharedLib.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
 
 namespace AspireApp.MinimalApi.UnitTests.Endpoints;
 
@@ -22,7 +21,7 @@ public class ProductEndpointsTests : IDisposable
             .Options;
 
         _context = new ApplicationDbContext(options);
-        
+
         // Seed test data
         SeedTestData();
     }
@@ -54,15 +53,15 @@ public class ProductEndpointsTests : IDisposable
 
         // Assert
         result.Should().NotBeNull();
-        
+
         var valueProperty = result.GetType().GetProperty("Value");
         var value = valueProperty!.GetValue(result);
         value.Should().NotBeNull();
-        
+
         var productsProperty = value!.GetType().GetProperty("Products");
         var products = productsProperty!.GetValue(value) as List<ProductDto>;
         products.Should().HaveCount(2);
-        
+
         var totalCountProperty = value.GetType().GetProperty("TotalCount");
         var totalCount = (int)totalCountProperty!.GetValue(value)!;
         totalCount.Should().Be(3);
@@ -76,11 +75,11 @@ public class ProductEndpointsTests : IDisposable
 
         // Assert
         result.Should().NotBeNull();
-        
+
         var valueProperty = result.GetType().GetProperty("Value");
         var value = valueProperty!.GetValue(result);
         value.Should().NotBeNull();
-        
+
         var productsProperty = value!.GetType().GetProperty("Products");
         var products = productsProperty!.GetValue(value) as List<ProductDto>;
         products.Should().HaveCount(3);
@@ -100,7 +99,7 @@ public class ProductEndpointsTests : IDisposable
         var valueProperty = result.GetType().GetProperty("Value");
         var value = valueProperty!.GetValue(result);
         value.Should().NotBeNull();
-        
+
         var totalPagesProperty = value!.GetType().GetProperty("TotalPages");
         var totalPages = (int)totalPagesProperty!.GetValue(value)!;
         totalPages.Should().Be(2); // 3 products / 2 per page = 2 pages
@@ -267,7 +266,7 @@ public class ProductEndpointsTests : IDisposable
         // Assert
         var created1 = result1 as Created<ProductDto>;
         var created2 = result2 as Created<ProductDto>;
-        
+
         created1!.Value!.Id.Should().NotBe(0);
         created2!.Value!.Id.Should().NotBe(0);
         created1.Value.Id.Should().NotBe(created2.Value.Id);

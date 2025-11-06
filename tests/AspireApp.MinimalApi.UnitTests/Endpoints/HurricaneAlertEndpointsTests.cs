@@ -21,7 +21,7 @@ public class HurricaneAlertEndpointsTests : IDisposable
             .Options;
 
         _context = new ApplicationDbContext(options);
-        
+
         // Seed test data
         SeedTestData();
     }
@@ -109,7 +109,7 @@ public class HurricaneAlertEndpointsTests : IDisposable
         // Assert
         var okResult = result as Ok<List<HurricaneAlertResponseDto>>;
         var alerts = okResult!.Value;
-        
+
         alerts[0].Name.Should().Be("Hurricane Beta");
         alerts[1].Name.Should().Be("Hurricane Alpha");
         alerts[2].Name.Should().Be("Tropical Storm Gamma");
@@ -141,7 +141,7 @@ public class HurricaneAlertEndpointsTests : IDisposable
         // Assert
         var okResult = result as Ok<List<HurricaneAlertResponseDto>>;
         var alerts = okResult!.Value;
-        
+
         // Critical severity (Beta) should come before High severity (Alpha)
         alerts[0].Severity.Should().Be(SeverityLevel.Critical);
         alerts[1].Severity.Should().Be(SeverityLevel.High);
@@ -422,7 +422,7 @@ public class HurricaneAlertEndpointsTests : IDisposable
         // Assert
         var noContentResult = result as NoContent;
         noContentResult.Should().NotBeNull();
-        
+
         // Verify deletion
         var deletedAlert = await _context.HurricaneAlerts.FindAsync(1);
         deletedAlert.Should().BeNull();
