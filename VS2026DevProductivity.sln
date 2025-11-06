@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FCE67AAE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireApp.SharedLib.UnitTests", "tests\AspireApp.SharedLib.UnitTests\AspireApp.SharedLib.UnitTests.csproj", "{4A6E250A-FDF0-1A12-C4B4-B9A6124DD348}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireApp.MinimalApi.UnitTests", "tests\AspireApp.MinimalApi.UnitTests\AspireApp.MinimalApi.UnitTests.csproj", "{F4D05748-88D5-487D-AE1A-C7D25B1AB056}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{4A6E250A-FDF0-1A12-C4B4-B9A6124DD348}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A6E250A-FDF0-1A12-C4B4-B9A6124DD348}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A6E250A-FDF0-1A12-C4B4-B9A6124DD348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D05748-88D5-487D-AE1A-C7D25B1AB056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D05748-88D5-487D-AE1A-C7D25B1AB056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D05748-88D5-487D-AE1A-C7D25B1AB056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D05748-88D5-487D-AE1A-C7D25B1AB056}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{8A6F9A0F-4338-50B9-4FDA-0E3531943BB3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{C02BA160-D493-73E3-44C1-745312235B5C} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{4A6E250A-FDF0-1A12-C4B4-B9A6124DD348} = {FCE67AAE-7F35-4EB3-BDAC-D844D6A2306B}
+		{F4D05748-88D5-487D-AE1A-C7D25B1AB056} = {FCE67AAE-7F35-4EB3-BDAC-D844D6A2306B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1835D3A2-5ED1-4261-A502-4AE056427BC7}
