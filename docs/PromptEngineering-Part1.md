@@ -1,4 +1,37 @@
-# Prompt Engineering Masterclass - Demo Notes
+# Prompt Engineering - Part 1 - Duration 30 minutes
+
+> **🎯 DEMO IN 15 MINUTES?** Jump to:
+> - [⚡ Demo Flow at a Glance](#-demo-flow-at-a-glance-30-minutes) - Your roadmap
+> - [📋 Copy-Paste Prompts](#-demo-ready-prompts-copy-paste) - Ready prompts (lines 150-220)
+> - [🚨 Last-Minute Prep](#-last-minute-prep-5-min-before-demo) - Final checklist
+
+---
+
+## 🧭 QUICK NAVIGATION (Jump to Section)
+- [🚨 Last-Minute Prep](#-last-minute-prep-5-min-before-demo) - Start here!
+- [📋 Demo Script](#-one-page-demo-script) - Your 30-min roadmap
+- [📋 Copy-Paste Prompts](#-demo-ready-prompts-copy-paste) - Ready-to-use prompts
+- [🆘 Emergency Backup](#-emergency-backup-plan) - If things go wrong
+- [💡 Quick Wins](#-quick-wins-to-demonstrate) - Key talking points
+- [🎯 Closing & Q&A](#-closing-strong-last-3-minutes) - Wrap-up section
+
+---
+
+## ⚡ DEMO FLOW AT A GLANCE (30 Minutes)
+
+| Time | Section | Key Action |
+|------|---------|------------|
+| 0-2 min | Opening | Hook audience, show of hands |
+| 2-7 min | Demo 1 | Bad vs Good Prompt (LIVE) |
+| 7-12 min | Demo 2 | Zero-Shot vs Few-Shot |
+| 12-17 min | Demo 3 | Chain of Thought |
+| 17-25 min | Demo 4 | Code Generation (C#) |
+| 25-28 min | Takeaways | 3 Rules to Remember |
+| 28-30 min | Q&A | Questions & Resources |
+
+**💡 Pro Tip:** Keep this table visible on a second screen or printout!
+
+---
 
 ## 🚨 LAST-MINUTE PREP (5 MIN BEFORE DEMO)
 
@@ -857,6 +890,196 @@ All details in Microsoft docs."
 
 ---
 
+## 🎓 ADVANCED TECHNIQUES (If You Have Extra Time)
+
+### Iterative Refinement Process
+
+**Show the Evolution:**
+
+**❌ Version 1 (Too Vague):**
+```text
+Please complete the following:
+Dosa is
+```
+
+**⚠️ Version 2 (Better, but still unclear):**
+```text
+Please complete the following:
+1. Dosa is
+
+Answer:
+```
+
+**✅ Version 3 (Clear and Specific):**
+```text
+Instructions: Please answer the following questions in detail
+
+Inputs:
+1. What is a Dosa? (Indian cuisine context)
+2. List 5 popular types of Dosas
+
+Answers:
+```
+
+**💡 Talking Point:** "Notice how each iteration adds more clarity - that's the iterative refinement process!"
+
+---
+
+### Multiple Inputs Pattern
+
+```text
+Instructions:
+Please complete the below mentioned questions
+
+Inputs:
+1. What is Prompt Engineering in Azure OpenAI?
+2. What is a Dosa? Which humans will eat. Provide step-by-step recipe.
+3. What are the benefits of using Chain of Thought prompting?
+
+Answers:
+```
+
+**💬 Say:** "You can batch multiple related queries - the model maintains context across them!"
+
+---
+
+### Parameters Deep Dive (Quick Demo)
+
+#### Temperature Control
+
+**Cool (0.1-0.3):** Consistent, predictable
+```text
+Tell me the capital of France
+→ Always: "The capital of France is Paris."
+```
+
+**Warm (0.5-0.7):** Balanced creativity
+```text
+Write a tagline for a coffee shop
+→ Varies: "Where every cup tells a story" / "Brew happiness daily"
+```
+
+**Hot (0.8-1.0):** Creative, unpredictable
+```text
+Tell me a joke about programmers
+→ Very different each time!
+```
+
+---
+
+### Best_Of and N Parameters
+
+```json
+{
+  "prompt": "Tell me a joke about Software Engineers",
+  "temperature": 1,
+  "n": 3,
+  "best_of": 5
+}
+```
+
+**💡 What this does:**
+- Generates 5 completions internally
+- Returns the best 3 based on log probability
+- Useful when you need multiple high-quality options
+
+**💬 Say:** "This is like asking for 3 options after reviewing 5 candidates!"
+
+---
+
+### Max Tokens Control
+
+**Short Response (max_tokens: 50):**
+```text
+Explain artificial intelligence
+→ "AI is computer systems that can perform tasks requiring human intelligence..."
+```
+
+**Medium Response (max_tokens: 150):**
+```text
+Explain artificial intelligence
+→ More detailed explanation with examples
+```
+
+**💬 Say:** "Control response length based on your use case - tweets vs articles!"
+
+---
+
+## 🎯 BONUS: Real-World Marketing Examples
+
+### Example 1: Social Media Evolution
+
+**❌ Basic:**
+```text
+Write a social media post about my Dosa Center
+```
+
+**✅ Engineered:**
+```text
+Craft a playful and mouthwatering Twitter post (280 chars max) for "101 Dosa Center"
+
+Highlights:
+- 100+ varieties of dosas
+- Homemade spices and generous butter
+- Family recipes passed down generations
+- Warm, inviting tone with 2-3 emojis
+
+Target: Food lovers aged 25-45
+```
+
+**Output Example:**
+```text
+🤤 100+ varieties of dosas made with love, homemade spices, and lots of butter! 
+Try family recipes perfected over generations. Your taste buds will thank you! 
+🧈✨ Visit 101 Dosa Center today! #DosaLove #FoodieHeaven #AuthenticFlavors
+```
+
+---
+
+### Example 2: Content Variations
+
+**Show 3 versions for different platforms:**
+
+**Version 1 (Twitter - 280 chars):**
+```text
+Platform: Twitter
+Tone: Playful, energetic
+Length: Under 280 characters
+Emojis: Yes (2-3)
+CTA: Visit today
+
+"Craving authentic dosas? 🍽️ We make 100+ varieties with homemade spices & 
+generous butter! Come taste tradition. 🧈✨ #DosaCenter #FoodieLife"
+```
+
+**Version 2 (Instagram Caption - Longer):**
+```text
+Platform: Instagram
+Tone: Warm, storytelling
+Length: 150-200 words
+Hashtags: 5-7 relevant ones
+CTA: Tag a friend
+
+"There's something magical about the sizzle of dosa batter on a hot griddle... ✨
+[Full story-driven caption]
+📍 Visit us at 101 Dosa Center
+👉 Tag a friend who needs this!
+#DosaLove #FoodieHeaven #AuthenticIndian #HomemadeGoodness..."
+```
+
+**Version 3 (LinkedIn - Professional):**
+```text
+Platform: LinkedIn
+Tone: Professional, business-focused
+Angle: Entrepreneurship story
+Length: 200-250 words
+
+"Building a food business on authenticity and tradition... 
+[Professional narrative about the business journey]"
+```
+
+---
+
 ## ✅ FINAL CHECKLIST
 
 ### Before You Go Live
@@ -1071,8 +1294,8 @@ Example:
 "Craving something delicious? 🍽️ At 101 Dosa Center, we bring you dosas made with love, home-made spices, and lots of butter! 🧈✨ Taste the tradition in every bite. ❤️ #DosaLovers #FoodieHeaven"
 ```
 
-````texts
-#Example: 11 Blog Post Generation Prompt
+```text
+# Example 11: Blog Post Generation Prompt
 
 Generate a detailed blog post about '{topic}'.
 Include an introduction, multiple main sections, optional code snippets, and a conclusion.
@@ -1099,15 +1322,16 @@ Ordered List
 3. Third item
 
 Blockquote
-> “Experience is simply the name we give our mistakes.”
+> "Experience is simply the name we give our mistakes."
 > — Oscar Wilde
 
 Code Block (JavaScript example)
 ```js
 function helloWorld() {
-  console.log(""Hello, world!"");
+  console.log("Hello, world!");
 }
-````
+```
+```
 
 ---
 
@@ -1196,3 +1420,4 @@ How can they interact with it at Contoso?
 > 3. Follow-up queries will be addressed via meetup chat or Twitter.
 
 ---
+
