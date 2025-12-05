@@ -1,0 +1,280 @@
+@page "/stocks"
+@attribute [StreamRendering]
+@inject HttpClient HttpClient
+@inject IConfiguration Configuration
+@using AspireApp.SharedLib.DTOs
+@using System.Text.Json
+@implements IDisposable
+
+<PageTitle>Stock Prices - VS2026 Dev Productivity</PageTitle>
+
+<div class="stocks-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold text-soft-primary mb-3">
+                    <i class="bi bi-graph-up-arrow me-3"></i>
+                    Stock Prices
+                </h1>
+                <p class="lead text-muted">
+                    Real-time stock market data with automatic refresh
+                </p>
+            </div>
+
+            @if (isLoading && stockPrices == null)
+            {
+                <div class="text-center py-5">
+                    <div class="spinner-border text-soft-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="text-muted">Fetching latest stock data...</p>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-soft-warning d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <div>
+                        <strong>Stock data temporarily unavailable:</strong> @errorMessage
+                        <br />
+                        <small class="text-muted">Retrying on next refresh cycle...</small>
+                    </div>
+                </div>
+            }
+
+            @if (stockPrices != null && stockPrices.Any())
+            {
+                <div class="stock-grid">
+                    @foreach (var stock in stockPrices)
+                    {
+                        <div class="stock-card @(stock.DailyChange >= 0 ? "positive" : "negative")">
+                            <div class="stock-header">
+                                <div class="symbol">@stock.Symbol</div>
+                                <div class="change-indicator">
+                                    <i class="bi @(stock.DailyChange >= 0 ? "bi-arrow-up-circle-fill" : "bi-arrow-down-circle-fill")"></i>
+                                </div>
+                            </div>
+
+                            <div class="price-display">
+                                <div class="current-price">$@stock.CurrentPrice.ToString("N2")</div>
+                                <div class="price-change">
+                                    <span class="change-amount">@(stock.DailyChange >= 0 ? "+" : "")@stock.DailyChange.ToString("N2")</span>
+                                    <span class="change-percent">(@(stock.DailyChangePercent >= 0 ? "+" : "")@stock.DailyChangePercent.ToString("N2")%)</span>
+                                </div>
+                            </div>
+
+                            <div class="stock-footer">
+                                <small class="text-muted">
+                                    <i class="bi bi-clock"></i>
+                                    Updated @GetTimeAgo(stock.LastUpdated)
+                                </small>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="refresh-info text-center mt-4">
+                    <p class="text-muted mb-2">
+                        <i class="bi bi-arrow-clockwise @(isLoading ? "spinning" : "")"></i>
+                        Auto-refresh every @refreshIntervalSeconds seconds
+                        @if (isLoading)
+                        {
+                            <span class="ms-2"><small>Updating...</small></span>
+                        }
+                    </p>
+                    <button class="btn btn-sm btn-soft-primary" @onclick="RefreshStockPrices" disabled="@isLoading">
+                        <i class="bi bi-arrow-clockwise me-1"></i>
+                        Refresh Now
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .stocks-container {
+        padding: 2rem 0;
+        min-height: calc(100vh - 3.5rem);
+    }
+
+    .stock-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stock-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .stock-card.positive {
+        border-color: rgba(16, 185, 129, 0.2);
+        background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+    }
+
+    .stock-card.negative {
+        border-color: rgba(239, 68, 68, 0.2);
+        background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+    }
+
+    .stock-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .stock-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .symbol {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .change-indicator {
+        font-size: 1.75rem;
+    }
+
+    .positive .change-indicator {
+        color: #10b981;
+    }
+
+    .negative .change-indicator {
+        color: #ef4444;
+    }
+
+    .price-display {
+        text-align: center;
+        margin-bottom: 1rem;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .current-price {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+
+    .price-change {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .positive .price-change {
+        color: #10b981;
+    }
+
+    .negative .price-change {
+        color: #ef4444;
+    }
+
+    .change-amount {
+        margin-right: 0.5rem;
+    }
+
+    .stock-footer {
+        text-align: center;
+    }
+
+    .refresh-info {
+        padding: 1rem;
+        background: rgba(226, 232, 240, 0.3);
+        border-radius: 0.5rem;
+    }
+
+    @@keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .spinning {
+        animation: spin 1s linear infinite;
+        display: inline-block;
+    }
+</style>
+
+@code {
+    private List<StockPriceDto>? stockPrices;
+    private bool isLoading = true;
+    private string? errorMessage;
+    private System.Threading.Timer? refreshTimer;
+    private int refreshIntervalSeconds = 60;
+    private string[] stockSymbols = Array.Empty<string>();
+
+    protected override void OnInitialized()
+    {
+        // Load configuration
+        var stockConfig = Configuration.GetSection("StockPrices");
+        refreshIntervalSeconds = stockConfig.GetValue<int>("RefreshIntervalSeconds", 60);
+        stockSymbols = stockConfig.GetSection("DefaultSymbols").Get<string[]>() ?? new[] { "AAPL", "MSFT", "GOOG" };
+
+        // Start refresh timer
+        refreshTimer = new System.Threading.Timer(async _ => await RefreshStockPrices(), null, TimeSpan.Zero, TimeSpan.FromSeconds(refreshIntervalSeconds));
+    }
+
+    private async Task RefreshStockPrices()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            await InvokeAsync(StateHasChanged);
+
+            var symbolsQuery = string.Join(",", stockSymbols);
+            var response = await HttpClient.GetAsync($"/api/stocks?symbols={symbolsQuery}").ConfigureAwait(false);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                stockPrices = JsonSerializer.Deserialize<List<StockPriceDto>>(json, options);
+            }
+            else
+            {
+                errorMessage = $"API returned {response.StatusCode}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private static string GetTimeAgo(DateTime dateTime)
+    {
+        var timeSpan = DateTime.UtcNow - dateTime;
+        
+        if (timeSpan.TotalSeconds < 60)
+            return "just now";
+        if (timeSpan.TotalMinutes < 60)
+            return $"{(int)timeSpan.TotalMinutes}m ago";
+        if (timeSpan.TotalHours < 24)
+            return $"{(int)timeSpan.TotalHours}h ago";
+        
+        return dateTime.ToLocalTime().ToString("MMM dd, HH:mm");
+    }
+
+    public void Dispose()
+    {
+        refreshTimer?.Dispose();
+    }
+}

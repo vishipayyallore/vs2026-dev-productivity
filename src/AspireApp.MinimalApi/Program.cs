@@ -3,6 +3,7 @@ using Aspire.MinimalApi.Data;
 using Aspire.MinimalApi.Endpoints;
 using AspireApp.MinimalApi;
 using AspireApp.MinimalApi.Endpoints;
+using AspireApp.MinimalApi.Services;
 using AspireApp.ServiceDefaults;
 using AspireApp.SharedLib.Extensions;
 using AspireApp.SharedLib.Models;
@@ -23,6 +24,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 // Add shared services
 builder.Services.AddSharedServices();
+
+// Add stock price service
+builder.Services.AddScoped<IStockPriceService, MockStockPriceService>();
 
 // Add problem details for better error handling
 builder.Services.AddProblemDetails();
@@ -152,6 +156,9 @@ app.MapProductEndpoints();
 
 // Map hurricane alert endpoints
 app.MapHurricaneAlertEndpoints();
+
+// Map stock price endpoints
+app.MapStockPriceEndpoints();
 
 // Simple health check endpoint
 app.MapGet("/", () => new

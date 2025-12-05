@@ -124,6 +124,57 @@ Query Parameters:
 ]
 ```
 
+## Stock Prices API
+
+### Get Stock Prices
+
+**GET** `/api/stocks?symbols={comma-separated-symbols}`
+
+Retrieve current stock prices for the specified symbols.
+
+**Query Parameters:**
+- `symbols` (required): Comma-separated list of stock symbols (e.g., "AAPL,MSFT,GOOG")
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "symbol": "AAPL",
+    "currentPrice": 177.25,
+    "dailyChange": 2.50,
+    "dailyChangePercent": 1.43,
+    "lastUpdated": "2024-12-05T08:00:00Z"
+  },
+  {
+    "symbol": "MSFT",
+    "currentPrice": 375.25,
+    "dailyChange": -3.00,
+    "dailyChangePercent": -0.79,
+    "lastUpdated": "2024-12-05T08:00:00Z"
+  }
+]
+```
+
+**Error Response (400 Bad Request):**
+
+```json
+{
+  "error": "At least one stock symbol must be provided"
+}
+```
+
+**Error Response (503 Service Unavailable):**
+
+```json
+{
+  "type": "about:blank",
+  "title": "Stock data temporarily unavailable",
+  "status": 503,
+  "detail": "Service unavailable"
+}
+```
+
 ## System Endpoints
 
 ### Health Check
@@ -204,6 +255,10 @@ curl -X POST "https://localhost:5001/api/products" \
     "price": 25.99,
     "stock": 75
   }'
+
+# Get stock prices
+curl -X GET "https://localhost:5001/api/stocks?symbols=AAPL,MSFT,GOOG" \
+  -H "accept: application/json"
 ```
 
 ### PowerShell Examples
@@ -221,4 +276,7 @@ $body = @{
 } | ConvertTo-Json
 
 Invoke-RestMethod -Uri "https://localhost:5001/api/products" -Method Post -Body $body -ContentType "application/json"
+
+# Get stock prices
+Invoke-RestMethod -Uri "https://localhost:5001/api/stocks?symbols=AAPL,MSFT,GOOG" -Method Get
 ```
