@@ -112,15 +112,53 @@ Include a list of the current animals we have at our rescue after the signature,
 ### Single Turn
 
 > 1. Discussion and Demo
+> 1. One clear request, answered in a single response.
+
+**Example prompt (single turn):**
+
+```text
+You are a helpful assistant.
+
+Explain the difference between synchronous and asynchronous programming in simple terms,
+using one short paragraph and one real-world analogy.
+```
 
 ### Iterative
 
 > 1. Discussion and Demo
+> 1. Refine the answer over multiple turns based on feedback.
+
+**Example prompts (iterative):**
+
+```text
+User (step 1):
+Summarize the benefits of using cloud computing for a small retail business.
+
+User (step 2):
+Great. Now shorten that summary to 3 bullet points.
+
+User (step 3):
+Nice. Rewrite the bullets so they are suitable for an executive slide.
+```
 
 ### Conversational
 
 > 1. Discussion and Demo
 > 1. Memory / context between completions vs. chat
+
+**Example prompts (conversational):**
+
+```text
+User:
+I am planning to learn data engineering. Can you suggest a learning roadmap?
+
+User (later in the same chat):
+Thanks. Based on that roadmap, can you create a 4-week study plan for me?
+
+User (later):
+This is great. Now generate a short motivational message I can read every morning
+to stay committed to this 4-week plan.
+```
 
 ### Role play
 
@@ -131,14 +169,61 @@ Include a list of the current animals we have at our rescue after the signature,
 ### Zero Shot
 
 > 1. Discussion and Demo
+> 1. No examples are given in the prompt.
+
+**Example prompt (zero-shot):**
+
+```text
+You are an expert travel guide.
+
+Suggest a 3-day itinerary for a family visiting Singapore for the first time. Include:
+- Sightseeing recommendations
+- Local food suggestions
+- Tips for getting around the city
+```
 
 ### Single Shot
 
 > 1. Discussion and Demo
+> 1. Exactly one example is given before the real question.
+
+**Example prompt (single-shot):**
+
+```text
+Example:
+Input: List the top 3 programming languages for web development.
+Output:
+1. JavaScript
+2. TypeScript
+3. Python
+
+Now you:
+Input: List the top 3 programming languages for data science.
+Output:
+```
 
 ### Few Shots
 
 > 1. Discussion and Demo
+> 1. A few input/output examples are shown to set the pattern.
+
+**Example prompt (few-shot):**
+
+```text
+Convert each user request into a short, friendly email subject line.
+
+Example 1
+Request: Please confirm your attendance for the quarterly review meeting.
+Subject: Confirmation needed: Quarterly review meeting
+
+Example 2
+Request: We are launching our new analytics dashboard next week.
+Subject: Get ready for our new analytics dashboard
+
+Now you:
+Request: We have scheduled maintenance this weekend that may cause brief downtime.
+Subject:
+```
 
 ### CoT
 
