@@ -80,6 +80,31 @@ Regularly monitor the outputs and adjust your prompts to address any inaccuracie
 
 > In the context of Azure OpenAI, prompt engineering is about using these techniques to maximize the efficiency and effectiveness of AI-driven text generation, making it a powerful tool for developers and content creators alike.
 
+## 6. Example prompts for hands-on practice
+
+Use these prompts when trying out completions in Azure AI Studio, Postman, or your own code.
+
+```text
+Input: Please write a Happy Birthday wish for my mother.
+
+Input: Give the top 5 food items from South India.
+
+Input: Give the top 5 populated states in India.
+
+Inputs:
+1. Which is the tallest building in the world?
+2. Which is the tallest building in Hyderabad?
+
+Input: Tell me two jokes about simple people.
+
+Input: Write a promotional email for a new wildlife rescue, including the following:
+- Rescue name is Contoso
+- It specializes in elephants, as well as zebras and giraffes
+- Call for donations to be given at our website
+
+Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+```
+
 ## Prompt Engineering Techniques
 
 > 1. Discussion and Demo
