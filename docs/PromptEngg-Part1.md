@@ -164,22 +164,22 @@ to stay committed to this 4-week plan.
 
 ```json
 [
-	{
-		"role": "system",
-		"content": "You are a helpful assistant, teaching people about AI."
-	},
-	{
-		"role": "user",
-		"content": "Does Azure OpenAI support multiple languages?"
-	},
-	{
-		"role": "assistant",
-		"content": "Yes, Azure OpenAI supports several languages, and can translate between them."
-	},
-	{
-		"role": "user",
-		"content": "Do other Azure AI Services support translation too?"
-	}
+ {
+  "role": "system",
+  "content": "You are a helpful assistant, teaching people about AI."
+ },
+ {
+  "role": "user",
+  "content": "Does Azure OpenAI support multiple languages?"
+ },
+ {
+  "role": "assistant",
+  "content": "Yes, Azure OpenAI supports several languages, and can translate between them."
+ },
+ {
+  "role": "user",
+  "content": "Do other Azure AI Services support translation too?"
+ }
 ]
 ```
 
@@ -193,14 +193,14 @@ to stay committed to this 4-week plan.
 
 ```json
 [
-	{
-		"role": "system",
-		"content": "You are an assistant designed to write intriguing job descriptions. "
-	},
-	{
-		"role": "user",
-		"content": "Write a job description for the following job title: 'Business Intelligence Analyst'. It should include responsibilities, required qualifications, and highlight benefits like time off and flexible hours."
-	}
+ {
+  "role": "system",
+  "content": "You are an assistant designed to write intriguing job descriptions. "
+ },
+ {
+  "role": "user",
+  "content": "Write a job description for the following job title: 'Business Intelligence Analyst'. It should include responsibilities, required qualifications, and highlight benefits like time off and flexible hours."
+ }
 ]
 ```
 
