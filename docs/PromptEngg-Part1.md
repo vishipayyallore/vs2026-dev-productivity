@@ -160,11 +160,49 @@ This is great. Now generate a short motivational message I can read every mornin
 to stay committed to this 4-week plan.
 ```
 
+**Another example (conversational, JSON chat format):**
+
+```json
+[
+	{
+		"role": "system",
+		"content": "You are a helpful assistant, teaching people about AI."
+	},
+	{
+		"role": "user",
+		"content": "Does Azure OpenAI support multiple languages?"
+	},
+	{
+		"role": "assistant",
+		"content": "Yes, Azure OpenAI supports several languages, and can translate between them."
+	},
+	{
+		"role": "user",
+		"content": "Do other Azure AI Services support translation too?"
+	}
+]
+```
+
 ### Role play
 
 > 1. Discussion and Demo
 > 1. `Cardiologist` versus `Assistant`
 > 1. Prompt: What is `TV`?
+
+**Example prompt (role play with system message):**
+
+```json
+[
+	{
+		"role": "system",
+		"content": "You are an assistant designed to write intriguing job descriptions. "
+	},
+	{
+		"role": "user",
+		"content": "Write a job description for the following job title: 'Business Intelligence Analyst'. It should include responsibilities, required qualifications, and highlight benefits like time off and flexible hours."
+	}
+]
+```
 
 ### Zero Shot
 
@@ -223,6 +261,19 @@ Subject: Get ready for our new analytics dashboard
 Now you:
 Request: We have scheduled maintenance this weekend that may cause brief downtime.
 Subject:
+```
+
+**Another example (few-shot classification):**
+
+```text
+Classify the following news headline into 1 of the following categories:
+Business, Tech, Politics, Sport, Entertainment
+
+Headline 1: Donna Steffensen Is Cooking Up a New Kind of Perfection. The Internet’s most beloved cooking guru has a buzzy new book and a fresh new perspective
+Category: Entertainment
+
+Headline 2: Major Retailer Announces Plans to Close Over 100 Stores
+Category:
 ```
 
 ### CoT
