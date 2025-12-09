@@ -91,7 +91,7 @@ Input: Give the top 5 food items from South India.
 
 Input: Give the top 5 populated states in India.
 
-Inputs:
+Input:
 1. Which is the tallest building in the world?
 2. Which is the tallest building in Hyderabad?
 
@@ -186,8 +186,8 @@ to stay committed to this 4-week plan.
 ### Role play
 
 > 1. Discussion and Demo
-> 1. `Cardiologist` versus `Assistant`
-> 1. Prompt: What is `TV`?
+> 1. Assigning a specific role to the model (e.g., `Cardiologist` versus generic `Assistant`) changes how it interprets and responds to prompts.
+> 1. Example: Asking "What is `TV`?" to a Cardiologist vs. a general Assistant will yield different responses based on the role's context.
 
 **Example prompt (role play with system message):**
 
@@ -276,41 +276,67 @@ Headline 2: Major Retailer Announces Plans to Close Over 100 Stores
 Category:
 ```
 
-### CoT
+### CoT (Chain of Thought)
 
+> 1. Discussion and Demo
 > 1. Chain of Thought (CoT) is a problem-solving approach that involves breaking down a complex problem into a series of smaller, logical steps or intermediate reasoning points. This method helps ensure a clear and systematic progression from the initial conditions to the final solution, enhancing accuracy and understanding by explicitly documenting the thought process at each stage.
-> 1. Prompt designed to encourage the use of Chain of Thought (CoT) reasoning.
+> 1. Prompts designed to encourage Chain of Thought (CoT) reasoning explicitly ask the model to show its work step-by-step.
+
+**Example prompt (Chain of Thought):**
 
 ```text
-"Please solve the following problem using a Chain of Thought (CoT) approach, which involves breaking the problem down into smaller, logical steps to ensure a clear and systematic progression to the solution. Show each intermediate step and explain your reasoning."
+Please solve the following problem using a Chain of Thought (CoT) approach, which involves breaking the problem down into smaller, logical steps to ensure a clear and systematic progression to the solution. Show each intermediate step and explain your reasoning.
 
-Example Problem: "A bakery had 50 cupcakes. They sold 15 in the morning and then baked 20 more in the afternoon. How many cupcakes do they have now?"
+Problem: A bakery had 50 cupcakes. They sold 15 in the morning and then baked 20 more in the afternoon. How many cupcakes do they have now?
+```
 
 **Expected CoT Response:**
 
 1. Start with the initial number of cupcakes: 50.
-2. Subtract the number of cupcakes sold in the morning: \( 50 - 15 = 35 \).
-3. Add the number of cupcakes baked in the afternoon: \( 35 + 20 = 55 \).
+2. Subtract the number of cupcakes sold in the morning: 50 - 15 = 35.
+3. Add the number of cupcakes baked in the afternoon: 35 + 20 = 55.
 4. The bakery now has 55 cupcakes.
-```
+
+**Another example (few-shot Chain of Thought):**
 
 ```text
-Q: Roger has 5 tennis balls. He buys 2 more cans of
-tennis balls. Each can has 3 tennis balls. How many
-tennis balls does he have now?
+Solve each problem step-by-step, showing your work.
 
-A: Roger started with 5 balls. 2 cans of 3 tennis balls
-each is 6 tennis balls. 5 + 6 = 11. The answer is 11.
+Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now?
 
-Q: The cafeteria had 23 apples. If they used 20 to
-make lunch and bought 6 more, how many apples
-do they have?
+A: Roger started with 5 balls. 2 cans of 3 tennis balls each is 6 tennis balls. 5 + 6 = 11. The answer is 11.
+
+Q: The cafeteria had 23 apples. If they used 20 to make lunch and bought 6 more, how many apples do they have?
 ```
 
 ---
 
 ## SUMMARY / RECAP / Q&A
 
-> 1. SUMMARY / RECAP / Q&A
+### Key Takeaways
+
+1. **Clarity and Specificity**: Clear, detailed prompts produce better results than vague requests.
+2. **Context Matters**: Providing relevant context helps the model understand nuances and generate appropriate responses.
+3. **Technique Selection**: Choose the right technique for your task:
+   - **Single Turn**: Simple, one-time requests
+   - **Iterative**: Refining outputs through multiple interactions
+   - **Conversational**: Building on previous context in a chat
+   - **Role Play**: Assigning specific roles for specialized responses
+   - **Zero Shot**: No examples needed for straightforward tasks
+   - **Single/Few Shot**: Providing examples to guide the model's output format
+   - **Chain of Thought**: Breaking down complex problems into steps for better accuracy
+
+4. **Best Practices**:
+   - Be explicit about what you want
+   - Test and iterate on your prompts
+   - Leverage context whenever possible
+   - Monitor outputs and adjust as needed
+
+### Next Steps
+
+- Practice with the example prompts in Azure AI Studio
+- Try implementing completions using Postman
+- Integrate prompt engineering into your C# applications
+- Experiment with different techniques to see which work best for your use cases
 
 ---
